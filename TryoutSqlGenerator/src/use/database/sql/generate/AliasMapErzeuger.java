@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AliasMapErzeuger {
@@ -76,7 +77,7 @@ public class AliasMapErzeuger {
                 eintrag = eintrag.replace("'", "''");
 
                 // DANACH: Doppelte Hochkommata durch einfache ersetzen (z. B. "Max" → 'Max')
-                eintrag = eintrag.replace("\"", "'");
+                // Nein, der CSV Zeilen-Parser braucht doppelte Hochkommata, also nicht:      eintrag = eintrag.replace("\"", "'");
 
                 String[] saEintrag = eintrag.split("\n");
                 for(String sEintrag : saEintrag) {
@@ -209,8 +210,9 @@ public class AliasMapErzeuger {
         Map<String, String> map = new LinkedHashMap<String, String>(); // Reihenfolge bewahren
 
         String[] keys = ueberschrift.split(",");
-        String[] values = eintrag.split(",");  TODOGOON;In den Texten können auch Kommata stehen. Darum diese Aufteilung verbessern.
-
+        //String[] values = eintrag.split(","); //TODOGOON;In den Texten können auch Kommata stehen. Darum diese Aufteilung verbessern.                
+        String[] values = parseCsvLine(eintrag);
+        
         int laenge = Math.min(keys.length, values.length);
 
         for (int i = 0; i < laenge; i++) {
@@ -220,5 +222,40 @@ public class AliasMapErzeuger {
         }
 
         return map;
+    }
+    
+    public static List<String> parseCsvLineAsList(String line) {
+        List<String> result = new ArrayList<String>();
+        StringBuilder current = new StringBuilder();
+        boolean inQuotes = false;
+
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+
+            if (c == '"') {
+                // Doppelte Hochkommas im String ("") → ein Hochkomma
+                if (inQuotes && i + 1 < line.length() && line.charAt(i + 1) == '"') {
+                    current.append('"');
+                    i++; // nächste Anführungszeichen überspringen
+                } else {
+                    inQuotes = !inQuotes;
+                }
+            } else if (c == ',' && !inQuotes) {
+                result.add(current.toString());
+                current.setLength(0); // zurücksetzen
+            } else {
+                current.append(c);
+            }
+        }
+        result.add(current.toString()); // letztes Element hinzufügen
+
+        return result;
+    }
+    
+    public static String[] parseCsvLine(String line) {
+        List<String> result = parseCsvLineAsList(line);
+
+        // Rückgabe als Array
+        return result.toArray(new String[result.size()]);
     }
 }
