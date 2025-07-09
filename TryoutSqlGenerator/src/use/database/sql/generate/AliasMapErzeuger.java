@@ -208,7 +208,7 @@ public class AliasMapErzeuger {
     public static Map<String, String> erzeugeAliasMap(String ueberschrift, String eintrag) {
         Map<String, String> map = new LinkedHashMap<String, String>(); // Reihenfolge bewahren
 
-        String[] keys = ueberschrift.split(",");
+        String[] keys = ueberschrift.split(","); TODOGOON;In den Texten können auch Kommata stehen. Darum diese Aufteilung verbessern.
         String[] values = eintrag.split(",");
 
         int laenge = Math.min(keys.length, values.length);
