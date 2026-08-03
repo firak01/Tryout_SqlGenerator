@@ -1,4 +1,4 @@
-package use.database.sql.generate;
+package use.database.sql.generate.keytableAny;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,7 +8,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AliasMapErzeuger {
+import use.database.sql.generate.TextDateiSchreiber;
+import use.database.sql.generate.ZeitstempelErzeuger;
+
+public class SqlGeneratorMain_insertForTableByCsv {
 	
 	public final static String sDIRECTORY_DEFAULT = "c:\\Temp";
 	
@@ -16,7 +19,7 @@ public class AliasMapErzeuger {
     private String sDirectory = null;
     private ArrayList<String> listasInsert = null;
 
-    public AliasMapErzeuger() {
+    public SqlGeneratorMain_insertForTableByCsv() {
     }
     
     // Einstiegspunkt des Programms
@@ -26,21 +29,21 @@ public class AliasMapErzeuger {
         String directory = "";
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        AliasMapErzeuger erzeuger = null;
+        SqlGeneratorMain_insertForTableByCsv erzeuger = null;
 
         try {
         	tabelle = args[0];
         	
         	
-        	erzeuger = new AliasMapErzeuger();
+        	erzeuger = new SqlGeneratorMain_insertForTableByCsv();
         	
         	//Verzeichnisnamen eingeben
-        	System.out.print("Bitte geben Sie den Namen des Verzeichnisse ein (Leerstring verwendet default '" + AliasMapErzeuger.sDIRECTORY_DEFAULT + "'): ");
+        	System.out.print("Bitte geben Sie den Namen des Verzeichnisse ein (Leerstring verwendet default '" + SqlGeneratorMain_insertForTableByCsv.sDIRECTORY_DEFAULT + "'): ");
             directory = reader.readLine();
             if (directory != null && !directory.trim().isEmpty()) {
             	erzeuger.setDirectory(directory);
             }else {
-            	erzeuger.setDirectory(AliasMapErzeuger.sDIRECTORY_DEFAULT);
+            	erzeuger.setDirectory(SqlGeneratorMain_insertForTableByCsv.sDIRECTORY_DEFAULT);
             }
 
         	
@@ -104,7 +107,7 @@ public class AliasMapErzeuger {
     
     
     //### GETTER / SETTER
-    public AliasMapErzeuger(String sDirectory, String sTable) {
+    public SqlGeneratorMain_insertForTableByCsv(String sDirectory, String sTable) {
         this.sTable = sTable;
         this.sDirectory = sDirectory;
     }
