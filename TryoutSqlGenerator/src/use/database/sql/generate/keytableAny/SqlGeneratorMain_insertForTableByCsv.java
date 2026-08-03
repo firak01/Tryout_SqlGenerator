@@ -55,8 +55,8 @@ public class SqlGeneratorMain_insertForTableByCsv {
             }
         	erzeuger.setTable(tabelle);
             
-
-            // Die Überschrift eingeben
+            /* Da wir wir aus dem Gleichen "System" in das gleiche "System" transferieren. */
+            // Die Überschrift eingeben,
             System.out.print("Bitte geben Sie die Tabellenspalten als String ein. (Leerstring zum Abbrechen): ");
             ueberschrift = reader.readLine();
             if (ueberschrift == null || ueberschrift.trim().isEmpty()) return;            
