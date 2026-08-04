@@ -368,7 +368,7 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
         //+++++++++++++++++++
         //+++ Statische Werte wg. Constraints
         sColumn = "position_of_title";
-        iValue = objAcademicDegreeTitle.getK_language_id();
+        iValue = objAcademicDegreeTitle.getPosition_of_title();
         sValue =  SqlUtilZZZ.toSqlValue(iValue);
         mapReturn.put(sColumn, sValue);
         
