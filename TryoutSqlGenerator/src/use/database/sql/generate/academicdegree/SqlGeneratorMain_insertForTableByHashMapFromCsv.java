@@ -10,11 +10,17 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
+import basic.zBasic.ExceptionZZZ;
+import basic.zBasic.IConstantZZZ;
+import basic.zBasic.ReflectCodeZZZ;
+import basic.zBasic.util.datatype.string.StringZZZ;
+import use.database.sql.generate.SqlUtilZZZ;
 import use.database.sql.generate.TextDateiSchreiber;
 import use.database.sql.generate.ZeitstempelErzeuger;
 
-public class SqlGeneratorMain_insertForTableByHashMapFromCsv {
+public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstantZZZ {
 	
 	public final static String sDIRECTORY_DEFAULT = "c:\\temp";
 	
@@ -28,118 +34,156 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv {
     // Einstiegspunkt des Programms
     public static void main(String[] args) {
     	
-    	//TODOGOON20260803: Es müssen hier noch die VERTIEFUNGEN rein in die CSV Datei, dazu natürlich auch das SQL mit der SOSPOS Abfrage erweitern.
-    	//                  Diese kommen dann in den Schlüssel.
-    	//TODOGOON20260803: Als eine Variante die Komplette Datei einlesen und nicht Zeileweise über die Eingabe... 
-    	//                  Beim Bauen der Insertstrings dann darauf achten, dass alle Schlüsselbestandteile vorhanden sind.
-    	
-    	//TODOGOON20260803: Im Main die Klasse aufrufen. Das ist dann eine andere Klasse, ohne Klassennamen ...Main ... 
-    	
-        String ueberschrift = "";
-        String tabelle = "";
-        String directory = "";
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        SqlGeneratorMain_insertForTableByHashMapFromCsv erzeuger = null;
-
-        try {
-        	if(args!=null && args.length>=1) {
-        		tabelle = args[0];
-        	}else {
-        		tabelle = "accademicdegree"; //hard coded zum Entwickeln
-        	}
-        	
-        	erzeuger = new SqlGeneratorMain_insertForTableByHashMapFromCsv();
-        	
-        	//Verzeichnisnamen eingeben
-        	System.out.print("Bitte geben Sie den Namen des Verzeichnisse ein (Leerstring verwendet default '" + SqlGeneratorMain_insertForTableByHashMapFromCsv.sDIRECTORY_DEFAULT + "'): ");
-            directory = reader.readLine();
-            if (directory != null && !directory.trim().isEmpty()) {
-            	erzeuger.setDirectory(directory);
-            }else {
-            	erzeuger.setDirectory(SqlGeneratorMain_insertForTableByHashMapFromCsv.sDIRECTORY_DEFAULT);
-            }
-
-        	
-            // Tabellennamen ggfs. eingeben
-            if(tabelle==null || tabelle.trim().isEmpty()) {
-            	System.out.print("Bitte geben Sie den Tabellennamen als String ein (Leerstring zum Abbrechen): ");
-            	tabelle = reader.readLine();
-            	if (tabelle == null || tabelle.trim().isEmpty()) return;
-            }
-        	erzeuger.setTable(tabelle);
-           
-        	//Wir müssen nun eine HashMap mit dem entsprechenden AcademicDegree-Objekt füllen
-            //ausgehend von der csv-Datei
-            Map<String,AcademicDegreeTitle> hmAcademicDegreeTitle = new LinkedHashMap<String,AcademicDegreeTitle>();
-
-            /* Hier ist die Überschrift egal,
-             * da diese Spaltennamen aus der sospos ausgangstabelle hat.
-             * In HISinone sind das eh andere Tabellenspalten, der Tabellenname wurde oben angegeben. 
-             */
-            /* Nur wenn wir aus dem Gleichen "System" in das gleiche "System" transferieren würden.
-            // Die Überschrift eingeben, 
-            System.out.print("Bitte geben Sie die Tabellenspalten als String ein. (Leerstring zum Abbrechen): ");
-            ueberschrift = reader.readLine();
-            if (ueberschrift == null || ueberschrift.trim().isEmpty()) return;            
-            */
-           
-            // Wiederholt Einträge verarbeiten
-            // z.B. "11","012","Diplom-Archäologe                                           ","Diplom-Archäologin                                          "
-            //      "11","032","Diplom-Chemiker                                             ","Diplom-Chemikerin                                           "
-            String sInsert=null;
-            System.out.print("Bitte geben Sie den Eintrag-String ein (kommagetrennt, auch mehrer Zeilen auf einmal, ggfs. mehrfach ENTER druecken)(Leerstring zum Abbrechen): ");
-            while (true) {                
-                String eintrag = reader.readLine();
-
-                if (eintrag == null || eintrag.trim().isEmpty()) {
-                    System.out.println("Eingabe beendet.");
-                    break;
-                }
-
-                eintrag = eintrag.trim();
-
-                // ZUERST: Escape vorhandener einfacher Hochkommata → SQL-konform (z. B. O'Reilly → O''Reilly)
-                eintrag = eintrag.replace("'", "''");
-                
-	              String[] saEintrag = eintrag.split("\n");
-	              for(String sEintrag : saEintrag) {
-	            	  AcademicDegreeTitle objAcademicDegreeTitle = new AcademicDegreeTitle();
-	            	  String[] saEntry = parseCsvLine(sEintrag);
-	            	  
-	            	  String sKey = saEntry[0] + "|" + saEntry[1];
-	            	  objAcademicDegreeTitle.setDefaulttext(saEntry[2]);
-	            	  objAcademicDegreeTitle.setDefaulttext_female(saEntry[3]);
-	            	  objAcademicDegreeTitle.setLongtext(saEntry[2]);             //Defaulttext = Longtext
-	            	  objAcademicDegreeTitle.setLongtext_female(saEntry[3]);      //dito
-	            	  hmAcademicDegreeTitle.put(sKey, objAcademicDegreeTitle);
-	            	  
-	            	  
-	              	   boolean bTransformed = erzeuger.transformHashMapToDbInsert(hmAcademicDegreeTitle);
-	              	
-	              	   
-	              }          
-            }//end while(true)
-            
-            List<String> listInsert = erzeuger.getListInsert();
-            for(String sInsertTemp : listInsert) {
-                  	System.out.println(sInsertTemp);
-            }    
-            
-            
-            if(!erzeuger.getListInsert().isEmpty()) {
-            	String sDateiname = erzeuger.erstelleDateinamenDefault();
-            	boolean bSuccess = TextDateiSchreiber.schreibeTextdatei(erzeuger.getDirectory(), sDateiname, erzeuger.getListInsert());
-            	if(bSuccess) {
-            		System.out.println("Erzeugte Textdatei kann fuer Inserts verwendet werden.");
-            	}else{
-            		System.out.println("Textdatei nicht erzeugt.");
-            	}
-            }
-            return;
-        } catch (IOException e) {
-            System.out.println("Fehler beim Einlesen: " + e.getMessage());
-        }
+    	main:{
+	    	//TODOGOON20260803: Als eine Variante die Komplette Datei einlesen und nicht Zeileweise über die Eingabe... 
+	    	//                  Beim Bauen der Insertstrings dann darauf achten, dass alle Schlüsselbestandteile vorhanden sind.
+	    	
+	    	//TODOGOON20260803: Im Main die Klasse aufrufen. Das ist dann eine andere Klasse, ohne Klassennamen ...Main ... 
+	    	
+	        String ueberschrift = "";
+	        String tabelle = "";
+	        String directory = "";
+	
+	        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	        SqlGeneratorMain_insertForTableByHashMapFromCsv erzeuger = null;
+	
+	       try {
+	        	if(args!=null && args.length>=1) {
+	        		tabelle = args[0];
+	        	}else {
+	        		tabelle = "academicdegree"; //hard coded zum Entwickeln
+	        	}
+	        	
+	        	erzeuger = new SqlGeneratorMain_insertForTableByHashMapFromCsv();
+	        	
+	        	//Verzeichnisnamen eingeben
+	        	System.out.print("Bitte geben Sie den Namen des Verzeichnisse ein (Leerstring verwendet default '" + SqlGeneratorMain_insertForTableByHashMapFromCsv.sDIRECTORY_DEFAULT + "'): ");
+	            directory = reader.readLine();
+	            if (directory != null && !directory.trim().isEmpty()) {
+	            	erzeuger.setDirectory(directory);
+	            }else {
+	            	erzeuger.setDirectory(SqlGeneratorMain_insertForTableByHashMapFromCsv.sDIRECTORY_DEFAULT);
+	            }
+	
+	        	
+	            // Tabellennamen ggfs. eingeben
+	            if(tabelle==null || tabelle.trim().isEmpty()) {
+	            	System.out.print("Bitte geben Sie den Tabellennamen als String ein (Leerstring zum Abbrechen): ");
+	            	tabelle = reader.readLine();
+	            	if (tabelle == null || tabelle.trim().isEmpty()) return;
+	            }
+	        	erzeuger.setTable(tabelle);
+	           
+	        	//Wir müssen nun eine HashMap mit dem entsprechenden AcademicDegree-Objekt füllen
+	            //ausgehend von der csv-Datei
+	            Map<String,AcademicDegreeTitle> hmAcademicDegreeTitle = new LinkedHashMap<String,AcademicDegreeTitle>();
+	
+	            /* Hier ist die Überschrift egal,
+	             * da diese Spaltennamen aus der sospos ausgangstabelle hat.
+	             * In HISinone sind das eh andere Tabellenspalten, der Tabellenname wurde oben angegeben. 
+	             */
+	            /* Nur wenn wir aus dem Gleichen "System" in das gleiche "System" transferieren würden.
+	            // Die Überschrift eingeben, 
+	            System.out.print("Bitte geben Sie die Tabellenspalten als String ein. (Leerstring zum Abbrechen): ");
+	            ueberschrift = reader.readLine();
+	            if (ueberschrift == null || ueberschrift.trim().isEmpty()) return;            
+	            */
+	           
+	            // Wiederholt Einträge verarbeiten
+	            // z.B. "11","012","Diplom-Archäologe                                           ","Diplom-Archäologin                                          "
+	            //      "11","021","Diplom-Kaufmann                                             ","Diplom-Kauffrau                                             "
+	            //		"11","030","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+	            //		"11","032","Diplom-Chemiker                                             ","Diplom-Chemikerin                                           "
+	
+	            List<String> listEintrag = new ArrayList<String>();
+	            String sEintragOld="";
+	            System.out.print("Bitte geben Sie den Eintrag-String ein (kommagetrennt, auch mehrer Zeilen auf einmal, ggfs. mehrfach ENTER druecken)(Leerstring zum Abbrechen): ");
+	            while (true) {                
+	                String eintrag = reader.readLine();
+	
+	                //erst beim 2ten "ENTER" die Eingabe beenden
+	                if ((eintrag == null || eintrag.trim().isEmpty()) && (sEintragOld == null || sEintragOld.trim().isEmpty())) {
+	                    System.out.println("Eingabe beendet.");
+	                    break;
+	                }else {
+	                	 eintrag = eintrag.trim();
+	
+	                     // ZUERST: Escape vorhandener einfacher Hochkommata → SQL-konform (z. B. O'Reilly → O''Reilly)
+	                     eintrag = eintrag.replace("'", "''");
+	                                         
+	                     String[] saEintrag = eintrag.split("\n");
+	                     for(String sEintragTemp : saEintrag) {
+	                     	listEintrag.add(sEintragTemp);
+	                     }
+	                     
+	                     sEintragOld = eintrag;
+	                }                                       
+	            }//end while(true)
+	            
+	            //++++++++++++++++
+	            //Hier als Alternative, das Einlesen der Eintragsliste per Datei
+	            //........
+	        
+	            
+		        for(String sEintragTemp : listEintrag) {
+		        	if(sEintragTemp != null && sEintragTemp.trim() != "") {
+				      	  AcademicDegreeTitle objAcademicDegreeTitle = new AcademicDegreeTitle();
+				      	  
+				      	  String[] saEntry = parseCsvLine(sEintragTemp);
+				      	  
+				      	  //Datensatz übernehmen, nur wenn überhaupt ein Wert existiert
+				      	  if(saEntry.length>=5) {
+				      		  System.out.println(sEintragTemp);
+		      			  
+				      		  if(!StringZZZ.isEmpty(saEntry[3]) && !StringZZZ.isEmpty(saEntry[4])
+				      				  && !saEntry[3].equalsIgnoreCase("null") && !saEntry[4].equalsIgnoreCase("null")) {
+				      			
+				      			  boolean bSuccess = addStaticCustomValues(objAcademicDegreeTitle, saEntry);
+				      			  if(!bSuccess) {
+				      				  System.out.println("Fehler: Statische Werte nicht erfolgreich hinzugefügt.");
+				      				  break main;
+				      			  }
+				      			  
+						      	  //Schlüssel besteht aus Abschluss | Studiengang | Vertiefunge
+						      	  String sKey = saEntry[0] + "|" + saEntry[1] + "|" + saEntry[2];
+						      	  objAcademicDegreeTitle.setDefaulttext(saEntry[3]);
+						      	  objAcademicDegreeTitle.setDefaulttext_female(saEntry[4]);
+						      	  objAcademicDegreeTitle.setLongtext(saEntry[3]);             //Defaulttext = Longtext
+						      	  objAcademicDegreeTitle.setLongtext_female(saEntry[4]);      //dito
+						      	  hmAcademicDegreeTitle.put(sKey, objAcademicDegreeTitle);
+				      	        	  
+						      	  boolean bTransformed = erzeuger.transformHashMapToDbInsert(hmAcademicDegreeTitle);
+				      		  }
+		        		}
+		        	}
+		        }//end for ... listEintrag	
+	            
+	            
+	            
+	            List<String> listInsert = erzeuger.getListInsert();
+	            for(String sInsertTemp : listInsert) {
+	                  	System.out.println(sInsertTemp);
+	            }    
+	            
+	            
+	            if(!erzeuger.getListInsert().isEmpty()) {
+	            	String sDateiname = erzeuger.erstelleDateinamenDefault();
+	            	boolean bSuccess = TextDateiSchreiber.schreibeTextdatei(erzeuger.getDirectory(), sDateiname, erzeuger.getListInsert());
+	            	if(bSuccess) {
+	            		System.out.println("Erzeugte Textdatei kann fuer Inserts verwendet werden.");
+	            	}else{
+	            		System.out.println("Textdatei nicht erzeugt.");
+	            	}
+	            }
+	            
+	            System.out.println("Verarbeitung beendet.");
+	       } catch (IOException e) {
+	           System.out.println("Fehler beim Einlesen: " + e.getMessage());
+	       } catch (ExceptionZZZ ez){
+	    	   System.out.println("Fehler: " + ez.getMessageLast());
+	       }
+    	}//end main:
+       	return;     
     }
     
     
@@ -177,6 +221,32 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv {
     }
     
     
+    //######################################
+    public static boolean addStaticCustomValues(AcademicDegreeTitle objAcademicDegreeTitle, String[] saValue) throws ExceptionZZZ {
+    	boolean bReturn = false;
+    	main:{
+    		if(objAcademicDegreeTitle==null) {
+    			ExceptionZZZ ez = new ExceptionZZZ("objAcademicDegreeTitle", iERROR_PARAMETER_MISSING, SqlGeneratorMain_insertForTableByHashMapFromCsv.class, ReflectCodeZZZ.getPositionCurrent());
+				throw ez;
+    		};
+
+    		objAcademicDegreeTitle.setK_language_id(12);
+    		objAcademicDegreeTitle.setPosition_of_title(0);
+    		    		
+    		UUID uuid = UUID.randomUUID();
+    		String sObj_guid =  uuid.toString();
+    		objAcademicDegreeTitle.setObj_guid(sObj_guid);
+    		
+    		//nun einen uniquename errechnen.
+    		String sValue = saValue[4];
+    		String sUniquename = StringZZZ.toShorten(sValue, null, 3, "x"); //Abkürzung per Default Delimiter erstellen
+    		sUniquename = sUniquename.toLowerCase();
+    		objAcademicDegreeTitle.setUniquename(sUniquename);
+    		bReturn = true;
+    	}//end main:
+    	return bReturn;
+    }
+    
     //### Hilfsfunktionen / Komfortfunktionen
     public void addInsert(String sInsert) {
     	this.getListInsert().add(sInsert);
@@ -188,7 +258,7 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv {
     }
     
      
-    public boolean transformHashMapToDbInsert(Map<String, AcademicDegreeTitle> mapAcademicDegreeTitle) {
+    public boolean transformHashMapToDbInsert(Map<String, AcademicDegreeTitle> mapAcademicDegreeTitle) throws ExceptionZZZ {
     	boolean bReturn = false;
     	main:{
     
@@ -207,7 +277,7 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv {
     	return bReturn;
     }
     
-    public String transformAcademicDegreeTitleToDbInsert(AcademicDegreeTitle objAcademicDegreeTitle) {
+    public String transformAcademicDegreeTitleToDbInsert(AcademicDegreeTitle objAcademicDegreeTitle) throws ExceptionZZZ {
     	String sReturn = null;
     	main:{
     		
@@ -220,52 +290,19 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv {
 	        }*/
 	
 	        String sTable = this.getTable();
-	        String sColumns = erzeugeColumnsString(aliasMap);
-	        String sValues = erzeugeValuesString(aliasMap);
+	        String sColumns = SqlUtilZZZ.erzeugeColumnsString(aliasMap);
+	        String sValues = SqlUtilZZZ.erzeugeValues(aliasMap);
 	       
-	        sReturn = "INSERT INTO " + sTable + " (" + sColumns + ") VALUES (" + sValues + ") ON CONFLICT DO NOTHING;";
+	        String sColumnUnique = "uniquename";
+	        String sValueUnique = objAcademicDegreeTitle.getUniquename();
+	        sReturn = SqlUtilZZZ.createInsertUnique(sTable, sColumns, sValues, sColumnUnique, sValueUnique);//"INSERT INTO " + sTable + " (" + sColumns + ") VALUES (" + sValues + ") ON CONFLICT DO NOTHING;";
 		
     	}//end main:
     	return sReturn;
     }
 
-    // Erzeugt den Spaltenstring, ignoriere die ggfs. vorhandene ID Spalte
-    public String erzeugeColumnsString(Map<String, String> aliasMap) {
-        StringBuilder sb = new StringBuilder();
-        for (String column : aliasMap.keySet()) {
-        	if(!column.equalsIgnoreCase("\"id\"")) {
-        		if (sb.length() > 0) sb.append(", ");
-        		sb.append(column);
-        	}
-        }
-        return sb.toString();
-    }
-
-    // Erzeugt den Wertstring mit SQL-konformen Hochkommata, ignoriere die ggfs. vorhandene ID Spalte
-    public String erzeugeValuesString(Map<String, String> aliasMap) {
-        StringBuilder sb = new StringBuilder();
-        for (String column : aliasMap.keySet()) {
-        	if(!column.equalsIgnoreCase("\"id\"")) {
-	            String value = aliasMap.get(column);
-	            if (sb.length() > 0) sb.append(", ");
-	
-	            // Wenn Wert schon in einfache Hochkommata eingeschlossen ist, nicht doppelt verpacken
-	            if (value.startsWith("'") && value.endsWith("'")) {
-	                sb.append(value);
-	            } else {
-	            	if(value.equalsIgnoreCase("NULL")) {
-	            		sb.append(value);
-	            	}else {
-	            		sb.append("'").append(value).append("'");
-	            	}
-	            }
-        	}
-        }
-        return sb.toString();
-    }
-
     // Wandelt Überschrift + Eintrag in eine Map um
-    public static Map<String, String> erzeugeAliasMap(AcademicDegreeTitle objAcademicDegreeTitle) {
+    public static Map<String, String> erzeugeAliasMap(AcademicDegreeTitle objAcademicDegreeTitle) throws ExceptionZZZ {
         Map<String, String> mapReturn = new LinkedHashMap<String, String>(); // Reihenfolge bewahren
 
         //TODOGOON20260803 - Hier wird dann aus dem Objekt 
@@ -286,26 +323,56 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv {
 //      }
 
         //sondern ...
-        String sKey = null; String sValue = null;
+        String sColumn = null; //das sind die für den Insert später verwendeten Spaltennamen
+        String sValue = null; int iValue;
         
-        sKey = "defaulttext";
+        sColumn = "defaulttext";
         sValue = objAcademicDegreeTitle.getDefaulttext();
-        mapReturn.put(sKey, sValue);
+        sValue = SqlUtilZZZ.toSqlValue(sValue);
+        mapReturn.put(sColumn, sValue);
         
-        sKey = "defaulttext_female";
+        sColumn = "defaulttext_female";
         sValue = objAcademicDegreeTitle.getDefaulttext_female();
-        mapReturn.put(sKey, sValue);
+        sValue = SqlUtilZZZ.toSqlValue(sValue);
+        mapReturn.put(sColumn, sValue);
         
         //++++++++++++++++++
-        sKey = "longtext";
+        sColumn = "longtext";
         sValue = objAcademicDegreeTitle.getLongtext();
-        mapReturn.put(sKey, sValue);
+        sValue = SqlUtilZZZ.toSqlValue(sValue);
+        mapReturn.put(sColumn, sValue);
         
-        sKey = "longtext_female";
+        sColumn = "longtext_female";
         sValue = objAcademicDegreeTitle.getLongtext_female();
-        mapReturn.put(sKey, sValue);
-
-        return mapReturn;
+        sValue = SqlUtilZZZ.toSqlValue(sValue);
+        mapReturn.put(sColumn, sValue);
+        
+        //+++++++++++++++++++
+        //+++ Statische Werte
+        sColumn = "k_language_id";
+        iValue = objAcademicDegreeTitle.getK_language_id();
+        sValue =  SqlUtilZZZ.toSqlValue(iValue);
+        mapReturn.put(sColumn, sValue);
+        
+        sColumn = "uniquename";
+        sValue = objAcademicDegreeTitle.getUniquename();
+        sValue = SqlUtilZZZ.toSqlValue(sValue);
+        mapReturn.put(sColumn, sValue);
+        
+        
+        sColumn = "obj_guid";
+        sValue = objAcademicDegreeTitle.getObj_guid();
+        sValue = SqlUtilZZZ.toSqlValue(sValue);
+        mapReturn.put(sColumn, sValue);
+        
+        //+++++++++++++++++++
+        //+++ Statische Werte wg. Constraints
+        sColumn = "position_of_title";
+        iValue = objAcademicDegreeTitle.getK_language_id();
+        sValue =  SqlUtilZZZ.toSqlValue(iValue);
+        mapReturn.put(sColumn, sValue);
+        
+        return mapReturn;        
     }
     
     public static List<String> parseCsvLineAsList(String line) {
@@ -341,5 +408,5 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv {
 
         // Rückgabe als Array
         return result.toArray(new String[result.size()]);
-    }
+    } 
 }

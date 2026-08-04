@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import use.database.sql.generate.SqlUtilZZZ;
 import use.database.sql.generate.TextDateiSchreiber;
 import use.database.sql.generate.ZeitstempelErzeuger;
 
@@ -164,8 +165,8 @@ public class SqlGeneratorMain_insertForTableByCsv {
 	        }*/
 	
 	        String sTable = this.getTable();
-	        String sColumns = erzeugeColumnsString(aliasMap);
-	        String sValues = erzeugeValuesString(aliasMap);
+	        String sColumns = SqlUtilZZZ.erzeugeColumnsString(aliasMap);
+	        String sValues = SqlUtilZZZ.erzeugeValuesString(aliasMap);
 	       
 	        sReturn = "INSERT INTO " + sTable + " (" + sColumns + ") VALUES (" + sValues + ") ON CONFLICT DO NOTHING;";
 
@@ -173,40 +174,8 @@ public class SqlGeneratorMain_insertForTableByCsv {
     	return sReturn;
     }
 
-    // Erzeugt den Spaltenstring, ignoriere die ggfs. vorhandene ID Spalte
-    public String erzeugeColumnsString(Map<String, String> aliasMap) {
-        StringBuilder sb = new StringBuilder();
-        for (String column : aliasMap.keySet()) {
-        	if(!column.equalsIgnoreCase("\"id\"")) {
-        		if (sb.length() > 0) sb.append(", ");
-        		sb.append(column);
-        	}
-        }
-        return sb.toString();
-    }
-
-    // Erzeugt den Wertstring mit SQL-konformen Hochkommata, ignoriere die ggfs. vorhandene ID Spalte
-    public String erzeugeValuesString(Map<String, String> aliasMap) {
-        StringBuilder sb = new StringBuilder();
-        for (String column : aliasMap.keySet()) {
-        	if(!column.equalsIgnoreCase("\"id\"")) {
-	            String value = aliasMap.get(column);
-	            if (sb.length() > 0) sb.append(", ");
-	
-	            // Wenn Wert schon in einfache Hochkommata eingeschlossen ist, nicht doppelt verpacken
-	            if (value.startsWith("'") && value.endsWith("'")) {
-	                sb.append(value);
-	            } else {
-	            	if(value.equalsIgnoreCase("NULL")) {
-	            		sb.append(value);
-	            	}else {
-	            		sb.append("'").append(value).append("'");
-	            	}
-	            }
-        	}
-        }
-        return sb.toString();
-    }
+    
+   
 
     // Wandelt Überschrift + Eintrag in eine Map um
     public static Map<String, String> erzeugeAliasMap(String ueberschrift, String eintrag) {

@@ -1,194 +1,366 @@
-"abschl","stg","abtitelhm","abtitelhw"
-"  ","   ","Diplom-Mathematiker                                         ","Diplom-Mathematiker                                         "
-"  ","039","Master of Science                                           ","Master of Science                                           "
-"  ","9F5","Bachelor of Science                                         ","Bachelor of Science                                         "
-"  ","ACB","Master of Science                                           ","Master of Science                                           "
-"11","012",NULL,NULL
-"11","012","Diplom-Archäologe                                           ","Diplom-Archäologin                                          "
-"11","012","Diplom-Industriearchäologe                                  ","Diplom-Industriearchäologin                                 "
-"11","020",NULL,NULL
-"11","020","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","021",NULL,NULL
-"11","021","Diplom-Kaufmann                                             ","Diplom-Kauffrau                                             "
-"11","030","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","032","Diplom-Chemiker                                             ","Diplom-Chemikerin                                           "
-"11","032","Diplom-Chemiker                                             ","Diplom-Chemiker                                             "
-"11","032",NULL,NULL
-"11","049","Diplom-Naturwissenschaftler                                 ","Diplom-Naturwissenschaftlerin                               "
-"11","049",NULL,NULL
-"11","065","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","065",NULL,NULL
-"11","065","Diplom-Geologe                                              ","Diplom-Geologin                                             "
-"11","065","Diplom-Geologe                                              ","Diplom-Geologe                                              "
-"11","066",NULL,NULL
-"11","066","Diplom-Geophysiker                                          ","Diplom-Geophysikerin                                        "
-"11","072",NULL,NULL
-"11","103",NULL,NULL
-"11","103","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","104","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","104",NULL,NULL
-"11","105","Diplom-Mathematiker                                         ","Diplom-Mathematiker                                         "
-"11","105",NULL,NULL
-"11","111",NULL,NULL
-"11","111","Diplom-Ingenieur                                            ","Diplom-Ingenieur                                            "
-"11","111","Diplom-Mineraloge                                           ","Diplom-Mineralogin                                          "
-"11","123","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","123",NULL,NULL
-"11","157",NULL,NULL
-"11","177",NULL,NULL
-"11","177","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","179",NULL,NULL
-"11","179","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
-"11","184","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
-"11","184",NULL,NULL
-"11","211",NULL,NULL
-"11","216",NULL,NULL
-"11","216","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","226",NULL,NULL
-"11","226","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","235","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","235",NULL,NULL
-"11","283",NULL,NULL
-"11","283","Diplom-Geoökologe                                           ","Diplom-Geoökologin                                          "
-"11","370","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
-"11","457","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","457",NULL,NULL
-"11","601",NULL,NULL
-"11","601","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","603",NULL,NULL
-"11","701","Diplom-Wirtschaftsjurist                                    ","Diplom-Wirtschaftsjuristin                                  "
-"11","840",NULL,NULL
-"11","840","Diplom-Geoinformatiker                                      ","Diplom-Geoinformatikerin                                    "
-"11","868","Industriearchäologe                                         ","Industriearchäologin                                        "
-"11","AFD","Diplom-Kaufmann                                             ","Diplom-Kauffrau                                             "
-"11","B27","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","B4C","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","B95","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","B99","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","C12","Bachelor of Science                                         ","Bachelor of Science                                         "
-"11","C29","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","C2C","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","C42","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","C4F","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"11","C80","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-"82","021","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","021","Diplom-Kaufmann                                             ","Diplom-Kauffrau                                             "
-"82","030","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","032","Bakkalaureus der Chemie                                     ","Bakkalaurea der Chemie                                      "
-"82","032",NULL,NULL
-"82","032","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","049","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","065",NULL,NULL
-"82","065","Bakkalaureus der Geologie                                   ","Bakkalaurea der Geologie                                    "
-"82","066",NULL,NULL
-"82","076","Baccalaureus                                                ","Baccalaureus                                                "
-"82","076",NULL,NULL
-"82","076","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","104","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","123","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","211",NULL,NULL
-"82","211","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","226","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","235","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","276","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","276","Bakkalaureus der Wirtschaftsmathematik                      ","Bakkalaurea der Wirtschaftsmathematik                       "
-"82","283",NULL,NULL
-"82","283","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","370","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","385","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","457","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","601","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","602","Bakkalaureus                                                ","Bakkalaurea                                                 "
-"82","602","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","602",NULL,NULL
-"82","801","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","868","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","942","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","973","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","9F5","Bachelor of Business and Law                                ","Bachelor of Business and Law                                "
-"82","9F5","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","A06","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","B94","Bachelor of Business and Law                                ","Bachelor of Business and Law                                "
-"82","BEC","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","C11","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","C13","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","C17","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","C2A","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","C4F","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","C5E","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","C7A","Bachelor of Science                                         ","Bachelor of Science                                         "
-"82","C9E","Bachelor of Science                                         ","Bachelor of Science                                         "
-"88","020","Master of Laws                                              ","Master of Laws                                              "
-"88","021","Bachelor of Science                                         ","Bachelor of Science                                         "
-"88","030","Master of Science                                           ","Master of Science                                           "
-"88","032","Master of Science                                           ","Master of Science                                           "
-"88","039","Master of Science                                           ","Master of Science                                           "
-"88","049","Master of Science                                           ","Master of Science                                           "
-"88","049","Bachelor of Science                                         ","Bachelor of Science                                         "
-"88","066","Master of Science                                           ","Master of Science                                           "
-"88","076","Master of Science                                           ","Master of Science                                           "
-"88","104","Master of Science                                           ","Master of Science                                           "
-"88","123","Master of Science                                           ","Master of Science                                           "
-"88","179","Master of Science                                           ","Master of Science                                           "
-"88","182",NULL,NULL
-"88","182","Master of Business Administration in Resources and Environme","Master of Business Administration in Resources and Environme"
-"88","211","Master of Science                                           ","Master of Science                                           "
-"88","216","Master of Engineering                                       ","Master of Engineering                                       "
-"88","226","Master of Science                                           ","Master of Science                                           "
-"88","235","Master of Science                                           ","Master of Science                                           "
-"88","276","Master of Science                                           ","Master of Science                                           "
-"88","283","Master of Science                                           ","Master of Science                                           "
-"88","370","Master of Science                                           ","Master of Science                                           "
-"88","385","Master of Science                                           ","Master of Science                                           "
-"88","457","Master of Science                                           ","Master of Science                                           "
-"88","601","Master of Science                                           ","Master of Science                                           "
-"88","602","Magister Scientiarum                                        ","Magister Scientiarum                                        "
-"88","602","Master of Science                                           ","Master of Science                                           "
-"88","603","Magister Scientiarum                                        ","Magister Scientiarum                                        "
-"88","603",NULL,NULL
-"88","734","Master of Science                                           ","Master of Science                                           "
-"88","801","Master of Science                                           ","Master of Science                                           "
-"88","840","Master of Science                                           ","Master of Science                                           "
-"88","868","Master of Science                                           ","Master of Science                                           "
-"88","945","Master of Business Administration                           ","Master of Business Administration                           "
-"88","945",NULL,NULL
-"88","978","Master of Science                                           ","Master of Science                                           "
-"88","9D9","Master of Business Administration in International Business ","Master of Business Administration in International Business "
-"88","9D9","Master of Business Administration                           ","Master of Business Administration                           "
-"88","9F6","Master of Laws                                              ","Master of Laws                                              "
-"88","A06","Master of Science                                           ","Master of Science                                           "
-"88","A07","Master of Science                                           ","Master of Science                                           "
-"88","AB3","Master of Science                                           ","Master of Science                                           "
-"88","AB4","Master of Science                                           ","Master of Science                                           "
-"88","AB8",NULL,NULL
-"88","AB8","Master of Science                                           ","Master of Science                                           "
-"88","ACB","Master of Science                                           ","Master of Science                                           "
-"88","AD0","Master of Business Administration                           ","Master of Business Administration                           "
-"88","AD3","Master of Science                                           ","Master of Science                                           "
-"88","B01","Master of Science                                           ","Master of Science                                           "
-"88","B3B","Master of Science                                           ","Master of Science                                           "
-"88","B5A","Master of Science                                           ","Master of Science                                           "
-"88","B71","Master of Science                                           ","Master of Science                                           "
-"88","B95","Master of Science                                           ","Master of Science                                           "
-"88","B96","Master of Science                                           ","Master of Science                                           "
-"88","B97","Master of Science                                           ","Master of Science                                           "
-"88","B98","Master of Laws                                              ","Master of Laws                                              "
-"88","B99","Master of Science                                           ","Master of Science                                           "
-"88","BA0","Master of Science                                           ","Master of Science                                           "
-"88","BC8","Master of Science                                           ","Master of Science                                           "
-"88","BD5","Master of Science                                           ","Master of Science                                           "
-"88","BE3","Master of Science                                           ","Master of Science                                           "
-"88","BE6","Master of Science                                           ","Master of Science                                           "
-"88","C05","Master of Science                                           ","Master of Science                                           "
-"88","C11","Bachelor of Science                                         ","Bachelor of Science                                         "
-"88","C2B","Master of Business Administration in Resources and Environme","Master of Business Administration in Resources and Environme"
-"88","C2C","Master of Science                                           ","Master of Science                                           "
-"88","C4E","Master of Science                                           ","Master of Science                                           "
-"88","C4F","Bachelor of Science                                         ","Bachelor of Science                                         "
-"88","C5E","Master of Science                                           ","Master of Science                                           "
-"88","C89","Master of Science                                           ","Master of Science                                           "
-"88","C99","Master of Science                                           ","Master of Science                                           "
-"88","C9A","Master of Science                                           ","Master of Science                                           "
-"88","CC9","Master of Master of Science                                 ","Master of Science                                           "
-"97","C13",NULL,NULL
-"97","STG",NULL,NULL
+"abschl","stg","vert","abtitelhm","abtitelhw"
+"  ","   ","   ","Diplom-Mathematiker                                         ","Diplom-Mathematiker                                         "
+"  ","039","   ","Master of Science                                           ","Master of Science                                           "
+"  ","9F5","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"  ","ACB","   ","Master of Science                                           ","Master of Science                                           "
+"11","012","ArM",NULL,NULL
+"11","012","InA","Diplom-Industriearchäologe                                  ","Diplom-Industriearchäologin                                 "
+"11","012","ArM","Diplom-Archäologe                                           ","Diplom-Archäologin                                          "
+"11","012","   ",NULL,NULL
+"11","012","InA",NULL,NULL
+"11","020","Gt ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","020","STb",NULL,NULL
+"11","020","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","020","BF ",NULL,NULL
+"11","020","TBT","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","020","TE ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","020","Gt ",NULL,NULL
+"11","020","BF ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","020","   ",NULL,NULL
+"11","020","STb","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","020","Bb ",NULL,NULL
+"11","020","Bs ",NULL,NULL
+"11","020","Bb ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","020","UWT",NULL,NULL
+"11","021","   ",NULL,NULL
+"11","021","   ","Diplom-Kaufmann                                             ","Diplom-Kauffrau                                             "
+"11","030","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","032","   ","Diplom-Chemiker                                             ","Diplom-Chemiker                                             "
+"11","032","   ",NULL,NULL
+"11","032","   ","Diplom-Chemiker                                             ","Diplom-Chemikerin                                           "
+"11","049","   ","Diplom-Naturwissenschaftler                                 ","Diplom-Naturwissenschaftlerin                               "
+"11","049","   ",NULL,NULL
+"11","065","HyU",NULL,NULL
+"11","065","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","065","GPa",NULL,NULL
+"11","065","   ","Diplom-Geologe                                              ","Diplom-Geologe                                              "
+"11","065","   ","Diplom-Geologe                                              ","Diplom-Geologin                                             "
+"11","065","   ",NULL,NULL
+"11","066","   ",NULL,NULL
+"11","066","   ","Diplom-Geophysiker                                          ","Diplom-Geophysikerin                                        "
+"11","072","   ",NULL,NULL
+"11","103","   ",NULL,NULL
+"11","103","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","104","UMA",NULL,NULL
+"11","104","EnT",NULL,NULL
+"11","104","Mt ",NULL,NULL
+"11","104","KET",NULL,NULL
+"11","104","MAS","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","104","IAM",NULL,NULL
+"11","104","GT ",NULL,NULL
+"11","104","   ",NULL,NULL
+"11","104","ANL","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","104","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","104","MET","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","105","   ",NULL,NULL
+"11","105","   ","Diplom-Mathematiker                                         ","Diplom-Mathematiker                                         "
+"11","111","   ",NULL,NULL
+"11","111","   ","Diplom-Mineraloge                                           ","Diplom-Mineralogin                                          "
+"11","111","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieur                                            "
+"11","123","WEG",NULL,NULL
+"11","123","Man",NULL,NULL
+"11","123","PCG",NULL,NULL
+"11","123","AM ",NULL,NULL
+"11","123","Man","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","123","Geg","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","123","   ",NULL,NULL
+"11","123","AM ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","123","PCG","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","123","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","123","II ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","123","WEG","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","123","II ",NULL,NULL
+"11","157","   ",NULL,NULL
+"11","177","Gi ",NULL,NULL
+"11","177","NE ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","177","Wr ",NULL,NULL
+"11","177","Wt ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","177","Wr ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","177","ANW",NULL,NULL
+"11","177","NE ",NULL,NULL
+"11","177","WW ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","177","Gi ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","177","Wvt",NULL,NULL
+"11","177","Wt ",NULL,NULL
+"11","177","Uft","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","177","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","177","ANW","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","177","   ",NULL,NULL
+"11","177","Me ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","177","Me ",NULL,NULL
+"11","177","Uft",NULL,NULL
+"11","177","St ",NULL,NULL
+"11","177","St ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","179","Wst",NULL,NULL
+"11","179","Roh",NULL,NULL
+"11","179","VTK",NULL,NULL
+"11","179","   ",NULL,NULL
+"11","179","VST",NULL,NULL
+"11","179","   ","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","179","ISM","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","179","MB ","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","179","ISM",NULL,NULL
+"11","179","VTK","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","179","RRG","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","179","Wt ","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","184","   ","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","184","   ",NULL,NULL
+"11","211","PrS",NULL,NULL
+"11","211","   ",NULL,NULL
+"11","211","AnS",NULL,NULL
+"11","216","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","216","   ",NULL,NULL
+"11","226","CBV","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","226","MVT","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","226","AT ",NULL,NULL
+"11","226","BKG",NULL,NULL
+"11","226","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","226","EVT","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","226","CVT","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","226","PaT","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","226","TUN","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","226","UVT","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","226","PaT",NULL,NULL
+"11","226","CE ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","226","AT ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","226","   ",NULL,NULL
+"11","226","UVT",NULL,NULL
+"11","226","CVT",NULL,NULL
+"11","226","EVT",NULL,NULL
+"11","226","NVT","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","235","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","235","   ",NULL,NULL
+"11","283","   ",NULL,NULL
+"11","283","   ","Diplom-Geoökologe                                           ","Diplom-Geoökologin                                          "
+"11","370","ISM","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","370","VTK","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","370","   ","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","370","GUT","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","370","TT ","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","370","UT ","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","370","TE ","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","370","BT ","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","370","VC ","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","370","ET ","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","370","TM ","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","370","MAN","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","370","WSN","Diplom-Wirtschaftsingenieur                                 ","Diplom-Wirtschaftsingenieurin                               "
+"11","457","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","457","   ",NULL,NULL
+"11","601","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","601","   ",NULL,NULL
+"11","603","   ",NULL,NULL
+"11","701","   ","Diplom-Wirtschaftsjurist                                    ","Diplom-Wirtschaftsjuristin                                  "
+"11","840","   ",NULL,NULL
+"11","840","   ","Diplom-Geoinformatiker                                      ","Diplom-Geoinformatikerin                                    "
+"11","868","   ","Industriearchäologe                                         ","Industriearchäologin                                        "
+"11","AFD","   ","Diplom-Kaufmann                                             ","Diplom-Kauffrau                                             "
+"11","B27","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","B4C","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","B95","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","B99","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C12","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"11","C29","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C2C","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C42","Bb ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C42","TE ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C42","Gt ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C42","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C4F","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C4F","Gi ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C4F","Wt ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C4F","Uft","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C4F","WW ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C4F","NE ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C4F","St ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C80","Gt ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C80","GES","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C80","MA ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C80","Bb ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"11","C80","   ","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
+"82","021","   ","Diplom-Kaufmann                                             ","Diplom-Kauffrau                                             "
+"82","021","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","030","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","032","   ",NULL,NULL
+"82","032","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","032","   ","Bakkalaureus der Chemie                                     ","Bakkalaurea der Chemie                                      "
+"82","049","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","065","   ","Bakkalaureus der Geologie                                   ","Bakkalaurea der Geologie                                    "
+"82","065","   ",NULL,NULL
+"82","066","   ",NULL,NULL
+"82","076","   ","Baccalaureus                                                ","Baccalaureus                                                "
+"82","076","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","076","   ",NULL,NULL
+"82","104","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","123","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","211","BAS",NULL,NULL
+"82","211","BPS",NULL,NULL
+"82","211","AnS",NULL,NULL
+"82","211","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","211","PrS",NULL,NULL
+"82","226","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","235","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","276","   ","Bakkalaureus der Wirtschaftsmathematik                      ","Bakkalaurea der Wirtschaftsmathematik                       "
+"82","276","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","283","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","283","   ",NULL,NULL
+"82","370","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","385","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","457","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","601","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","602","   ","Bakkalaureus                                                ","Bakkalaurea                                                 "
+"82","602","   ",NULL,NULL
+"82","602","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","801","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","868","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","942","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","973","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","9F5","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","9F5","   ","Bachelor of Business and Law                                ","Bachelor of Business and Law                                "
+"82","A06","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","B94","   ","Bachelor of Business and Law                                ","Bachelor of Business and Law                                "
+"82","BEC","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C11","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C13","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C17","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C2A","VTC","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C2A","TAN","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C2A","UT ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C2A","MB ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C2A","RPC","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C2A","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C2A","ET ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C4F","Uft","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C4F","NE ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C4F","St ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C4F","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C4F","Gi ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C4F","Wt ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C4F","WW ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C5E","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C7A","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"82","C9E","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"88","020","   ","Master of Laws                                              ","Master of Laws                                              "
+"88","021","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"88","030","   ","Master of Science                                           ","Master of Science                                           "
+"88","032","   ","Master of Science                                           ","Master of Science                                           "
+"88","039","   ","Master of Science                                           ","Master of Science                                           "
+"88","039","MIN","Master of Science                                           ","Master of Science                                           "
+"88","039","HG ","Master of Science                                           ","Master of Science                                           "
+"88","039","ING","Master of Science                                           ","Master of Science                                           "
+"88","039","ETA","Master of Science                                           ","Master of Science                                           "
+"88","039","TS ","Master of Science                                           ","Master of Science                                           "
+"88","039","PS ","Master of Science                                           ","Master of Science                                           "
+"88","039","SP ","Master of Science                                           ","Master of Science                                           "
+"88","039","SV ","Master of Science                                           ","Master of Science                                           "
+"88","039","HI ","Master of Science                                           ","Master of Science                                           "
+"88","039","LSL","Master of Science                                           ","Master of Science                                           "
+"88","039","TG ","Master of Science                                           ","Master of Science                                           "
+"88","049","UNB","Master of Science                                           ","Master of Science                                           "
+"88","049","   ","Master of Science                                           ","Master of Science                                           "
+"88","049","UBA","Master of Science                                           ","Master of Science                                           "
+"88","049","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"88","049","FPH","Master of Science                                           ","Master of Science                                           "
+"88","049","TEM","Master of Science                                           ","Master of Science                                           "
+"88","049","HPH","Master of Science                                           ","Master of Science                                           "
+"88","066","   ","Master of Science                                           ","Master of Science                                           "
+"88","076","   ","Master of Science                                           ","Master of Science                                           "
+"88","104","   ","Master of Science                                           ","Master of Science                                           "
+"88","123","   ","Master of Science                                           ","Master of Science                                           "
+"88","179","   ","Master of Science                                           ","Master of Science                                           "
+"88","182","   ",NULL,NULL
+"88","182","   ","Master of Business Administration in Resources and Environme","Master of Business Administration in Resources and Environme"
+"88","211","   ","Master of Science                                           ","Master of Science                                           "
+"88","216","   ","Master of Engineering                                       ","Master of Engineering                                       "
+"88","226","EVT","Master of Science                                           ","Master of Science                                           "
+"88","226","MVT","Master of Science                                           ","Master of Science                                           "
+"88","226","CVT","Master of Science                                           ","Master of Science                                           "
+"88","226","   ","Master of Science                                           ","Master of Science                                           "
+"88","226","TUN","Master of Science                                           ","Master of Science                                           "
+"88","235","   ","Master of Science                                           ","Master of Science                                           "
+"88","276","   ","Master of Science                                           ","Master of Science                                           "
+"88","283","   ","Master of Science                                           ","Master of Science                                           "
+"88","370","KGB","Master of Science                                           ","Master of Science                                           "
+"88","370","WST","Master of Science                                           ","Master of Science                                           "
+"88","370","RTE","Master of Science                                           ","Master of Science                                           "
+"88","370","   ","Master of Science                                           ","Master of Science                                           "
+"88","370","RTT","Master of Science                                           ","Master of Science                                           "
+"88","370","VT ","Master of Science                                           ","Master of Science                                           "
+"88","370","ISM","Master of Science                                           ","Master of Science                                           "
+"88","370","MB ","Master of Science                                           ","Master of Science                                           "
+"88","385","UG ","Master of Science                                           ","Master of Science                                           "
+"88","385","WB ","Master of Science                                           ","Master of Science                                           "
+"88","385","ÖLM","Master of Science                                           ","Master of Science                                           "
+"88","385","KU ","Master of Science                                           ","Master of Science                                           "
+"88","385","   ","Master of Science                                           ","Master of Science                                           "
+"88","457","   ","Master of Science                                           ","Master of Science                                           "
+"88","601","   ","Master of Science                                           ","Master of Science                                           "
+"88","602","   ","Magister Scientiarum                                        ","Magister Scientiarum                                        "
+"88","602","   ","Master of Science                                           ","Master of Science                                           "
+"88","603","   ",NULL,NULL
+"88","603","   ","Magister Scientiarum                                        ","Magister Scientiarum                                        "
+"88","734","   ","Master of Science                                           ","Master of Science                                           "
+"88","801","   ","Master of Science                                           ","Master of Science                                           "
+"88","840","   ","Master of Science                                           ","Master of Science                                           "
+"88","868","   ","Master of Science                                           ","Master of Science                                           "
+"88","945","   ","Master of Business Administration                           ","Master of Business Administration                           "
+"88","945","   ",NULL,NULL
+"88","978","   ","Master of Science                                           ","Master of Science                                           "
+"88","9D9","   ","Master of Business Administration                           ","Master of Business Administration                           "
+"88","9D9","   ","Master of Business Administration in International Business ","Master of Business Administration in International Business "
+"88","9F6","   ","Master of Laws                                              ","Master of Laws                                              "
+"88","A06","   ","Master of Science                                           ","Master of Science                                           "
+"88","A07","   ","Master of Science                                           ","Master of Science                                           "
+"88","AB3","   ","Master of Science                                           ","Master of Science                                           "
+"88","AB4","   ","Master of Science                                           ","Master of Science                                           "
+"88","AB8","   ",NULL,NULL
+"88","AB8","   ","Master of Science                                           ","Master of Science                                           "
+"88","ACB","   ","Master of Science                                           ","Master of Science                                           "
+"88","AD0","   ","Master of Business Administration                           ","Master of Business Administration                           "
+"88","AD3","   ","Master of Science                                           ","Master of Science                                           "
+"88","AD3","TG ","Master of Science                                           ","Master of Science                                           "
+"88","AD3","HGC","Master of Science                                           ","Master of Science                                           "
+"88","AD3","EG ","Master of Science                                           ","Master of Science                                           "
+"88","AD3","TO ","Master of Science                                           ","Master of Science                                           "
+"88","AD3","HY ","Master of Science                                           ","Master of Science                                           "
+"88","AD3","CMG","Master of Science                                           ","Master of Science                                           "
+"88","B01","   ","Master of Science                                           ","Master of Science                                           "
+"88","B3B","   ","Master of Science                                           ","Master of Science                                           "
+"88","B5A","   ","Master of Science                                           ","Master of Science                                           "
+"88","B71","   ","Master of Science                                           ","Master of Science                                           "
+"88","B95","   ","Master of Science                                           ","Master of Science                                           "
+"88","B96","   ","Master of Science                                           ","Master of Science                                           "
+"88","B97","RMV","Master of Science                                           ","Master of Science                                           "
+"88","B97","   ","Master of Science                                           ","Master of Science                                           "
+"88","B98","   ","Master of Laws                                              ","Master of Laws                                              "
+"88","B99","   ","Master of Science                                           ","Master of Science                                           "
+"88","BA0","   ","Master of Science                                           ","Master of Science                                           "
+"88","BC8","St ","Master of Science                                           ","Master of Science                                           "
+"88","BC8","NE ","Master of Science                                           ","Master of Science                                           "
+"88","BC8","   ","Master of Science                                           ","Master of Science                                           "
+"88","BC8","Gi ","Master of Science                                           ","Master of Science                                           "
+"88","BC8","Uft","Master of Science                                           ","Master of Science                                           "
+"88","BD5","   ","Master of Science                                           ","Master of Science                                           "
+"88","BE3","   ","Master of Science                                           ","Master of Science                                           "
+"88","BE6","   ","Master of Science                                           ","Master of Science                                           "
+"88","C05","MS ","Master of Science                                           ","Master of Science                                           "
+"88","C05","   ","Master of Science                                           ","Master of Science                                           "
+"88","C05","MRM","Master of Science                                           ","Master of Science                                           "
+"88","C11","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"88","C2B","   ","Master of Business Administration in Resources and Environme","Master of Business Administration in Resources and Environme"
+"88","C2C","   ","Master of Science                                           ","Master of Science                                           "
+"88","C4E","   ","Master of Science                                           ","Master of Science                                           "
+"88","C4F","St ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"88","C4F","Wt ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"88","C4F","Gi ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"88","C4F","NE ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"88","C4F","WW ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"88","C4F","Uft","Bachelor of Science                                         ","Bachelor of Science                                         "
+"88","C4F","   ","Bachelor of Science                                         ","Bachelor of Science                                         "
+"88","C5E","   ","Master of Science                                           ","Master of Science                                           "
+"88","C89","   ","Master of Science                                           ","Master of Science                                           "
+"88","C99","   ","Master of Science                                           ","Master of Science                                           "
+"88","C9A","   ","Master of Science                                           ","Master of Science                                           "
+"88","CC9","   ","Master of Master of Science                                 ","Master of Science                                           "
+"97","C13","   ",NULL,NULL
+"97","STG","   ",NULL,NULL
