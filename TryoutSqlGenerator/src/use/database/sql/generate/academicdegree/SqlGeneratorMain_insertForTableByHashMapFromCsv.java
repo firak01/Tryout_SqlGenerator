@@ -239,7 +239,8 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
     		
     		//nun einen uniquename errechnen.
     		String sValue = saValue[4];
-    		String sUniquename = StringZZZ.toShorten(sValue, null, 3, "x"); //Abkürzung per Default Delimiter erstellen
+    		int[]iaPartLength= {4,3};
+    		String sUniquename = StringZZZ.toShorten(sValue, null, iaPartLength, "x"); //Abkürzung per Default Delimiter erstellen
     		sUniquename = sUniquename.toLowerCase();
     		objAcademicDegreeTitle.setUniquename(sUniquename);
     		bReturn = true;
