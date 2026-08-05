@@ -213,10 +213,10 @@ Da du nur wissen möchtest, ob ein uniquename bereits existiert, ist NOT EXISTS 
 		 * @return
 		 * @throws ExceptionZZZ
 		 */
-		public static String createUpdateConditioned(String sTable, String sColumn, String sSingleValue, String sWhereColumn, String sWhereSingleValue) throws ExceptionZZZ {
+		public static String createUpdateConditioned_LIKE(String sTable, String sColumn, String sSingleValue, String sWhereColumn, String sWhereSingleValue) throws ExceptionZZZ {
 			String sReturn = null;
 	    	main:{
-	    		sReturn = "UPDATE " + sTable + " SET " + sColumn + " = " + sSingleValue + " WHERE " + sWhereColumn + " IN ( " + SqlUtilZZZ.toSqlValue(sWhereSingleValue) + " )";
+	    		sReturn = "UPDATE " + sTable + " SET " + sColumn + " = " + sSingleValue + " WHERE " + sWhereColumn + " LIKE " + SqlUtilZZZ.toSqlValue(sWhereSingleValue) + "";
 	    	}
 	    	return sReturn;
 		}

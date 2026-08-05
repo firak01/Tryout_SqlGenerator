@@ -426,7 +426,7 @@ public class SqlGeneratorMain_updateForTableByHashMapFromCsv implements IConstan
 	        sWhereSingleValue = objCourseOfStudy.createUniquenameForSearch();
 	        
 	        //                                    (String sTable, String sColumn, String sSingleValue, String sWhereColumn, String sWhereSingleValue) throws ExceptionZZZ {
-	        sReturn = SqlUtilZZZ.createUpdateConditioned(sTable, sColumn, sSingleValue, sWhereColumn, sWhereSingleValue);
+	        sReturn = SqlUtilZZZ.createUpdateConditioned_LIKE(sTable, sColumn, sSingleValue, sWhereColumn, sWhereSingleValue);
 	        sReturn = sReturn + ";"; //Sonst kann postgre die Anweisungszeilen Zeilen wohl nicht unterscheiden
     	}//end main:
     	return sReturn;
