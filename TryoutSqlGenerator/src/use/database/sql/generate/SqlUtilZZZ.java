@@ -94,7 +94,7 @@ public class SqlUtilZZZ {
 	    public static String createInsert(String sTable, String sColumns, String sValues) throws ExceptionZZZ {
 	    	String sReturn = null;
 	    	main:{
-	    		sReturn = "INSERT INTO " + sTable + " (" + sColumns + ") VALUES (" + sValues + ") ON CONFLICT DO NOTHING;";
+	    		sReturn = "INSERT INTO " + sTable + " (" + sColumns + ") VALUES (" + sValues + ") ON CONFLICT DO NOTHING";
 	    	}
 	    	return sReturn;
 	    }
@@ -177,8 +177,47 @@ Da du nur wissen möchtest, ob ein uniquename bereits existiert, ist NOT EXISTS 
 	    		sReturn = "INSERT INTO " + sTable + " (" + sColumns + ") SELECT " + sValues
 	    				+ " WHERE NOT EXISTS (SELECT 1 FROM " + sTable
 	    				+ " WHERE " + sColumnUnique + " = " + SqlUtilZZZ.toSqlValue(sValueUnique) + " )"
-	    				+ " ON CONFLICT DO NOTHING;";
+	    				+ " ON CONFLICT DO NOTHING";
 	    	}
 	    	return sReturn;
 	    }
+
+		/** z.B. Ergebnis
+		 *  select id from academicdegree where uniquename in ('diplxing')
+		 *  
+		 *  
+		 * @param sSelectColumn
+		 * @param sWhereTable
+		 * @param sWhereColumn
+		 * @param sWhereValue
+		 * @return
+		 * @throws ExceptionZZZ
+		 */
+		public static String createSelectConditioned(String sSelectColumn, String sSelectTable, String sWhereColumn, String sWhereSingleValue) throws ExceptionZZZ {
+			String sReturn = null;
+	    	main:{
+	    		sReturn = "SELECT " + sSelectColumn + " FROM " + sSelectTable + " WHERE " + sWhereColumn + " IN ( " + SqlUtilZZZ.toSqlValue(sWhereSingleValue) + " )";
+	    	}
+	    	return sReturn;
+		}
+
+		/**
+		 *  z.B. Ergebnis
+		 * 	update course_of_study set academicdegree_id = (select id from academicdegree where uniquename in ('diplxing'))
+			where uniquename LIKE '11|032|-|-|H|%|0390|P|V|%|'
+
+		 * @param sTable
+		 * @param sColumns
+		 * @param sValues
+		 * @param sCondition
+		 * @return
+		 * @throws ExceptionZZZ
+		 */
+		public static String createUpdateConditioned(String sTable, String sColumn, String sSingleValue, String sWhereColumn, String sWhereSingleValue) throws ExceptionZZZ {
+			String sReturn = null;
+	    	main:{
+	    		sReturn = "UPDATE " + sTable + " SET " + sColumn + " = " + sSingleValue + " WHERE " + sWhereColumn + " IN ( " + SqlUtilZZZ.toSqlValue(sWhereSingleValue) + " )";
+	    	}
+	    	return sReturn;
+		}
 }

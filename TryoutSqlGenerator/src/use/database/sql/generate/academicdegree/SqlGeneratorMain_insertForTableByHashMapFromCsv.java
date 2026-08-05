@@ -28,6 +28,17 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
     private String sDirectory = null;
     private ArrayList<String> listasInsert = null;
 
+    /** Selektiere die Tabelle parstg im SOSPOS System.
+     *  Hole dabei die akadmischen Grade für den Studiengang (Abschluss, Studiengang, Vertiefung)
+     *  Dies ist die Grundlage für den CSV Export.
+     *  
+     *  Erstelle das SQL diese akademischen Grade in die HISinOne Tabelle 'academicdegree' per Insert einzufügen.
+     *  Dabei wird ein uniquename berechnet. 
+     *  Es wird sichergestellt, dass trotz fehlendem Constraint der Datensatz nur 1x erstellt wird.
+     *  
+     *  Es wird eine objguid berechnet.
+     * 
+     */
     public SqlGeneratorMain_insertForTableByHashMapFromCsv() {
     }
     
@@ -150,16 +161,14 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
 						      	  objAcademicDegreeTitle.setDefaulttext_female(saEntry[4]);
 						      	  objAcademicDegreeTitle.setLongtext(saEntry[3]);             //Defaulttext = Longtext
 						      	  objAcademicDegreeTitle.setLongtext_female(saEntry[4]);      //dito
-						      	  hmAcademicDegreeTitle.put(sKey, objAcademicDegreeTitle);
-				      	        	  
-						      	  boolean bTransformed = erzeuger.transformHashMapToDbInsert(hmAcademicDegreeTitle);
+						      	  hmAcademicDegreeTitle.put(sKey, objAcademicDegreeTitle);				      	        	  						      	  
 				      		  }
 		        		}
 		        	}
 		        }//end for ... listEintrag	
 	            
-	            
-	            
+		        boolean bTransformed = erzeuger.transformHashMapToDbInsert(hmAcademicDegreeTitle);
+	                   
 	            List<String> listInsert = erzeuger.getListInsert();
 	            for(String sInsertTemp : listInsert) {
 	                  	System.out.println(sInsertTemp);
@@ -270,6 +279,7 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
     				String sInsert = transformAcademicDegreeTitleToDbInsert(objAcademicDegreeTitle);
     				this.addInsert(sInsert);
     				System.out.println(sInsert);
+    				System.out.println("sInsert=" + sInsert);
     			}else {
     				System.out.println("Key in Map nicht gefunden. Studiengang '" + sStg + "'");
     			}
@@ -293,11 +303,15 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
 	        String sTable = this.getTable();
 	        String sColumns = SqlUtilZZZ.erzeugeColumnsString(aliasMap);
 	        String sValues = SqlUtilZZZ.erzeugeValues(aliasMap);
+	        
+	        System.out.println("Debugzwecke. Hier sind alle beteiligten Werte vorhanden:");	      
+	        System.out.println("sColumns='" + sColumns +"'");
+	        System.out.println("sValues='" + sValues +"'");
 	       
 	        String sColumnUnique = "uniquename";
 	        String sValueUnique = objAcademicDegreeTitle.getUniquename();
 	        sReturn = SqlUtilZZZ.createInsertUnique(sTable, sColumns, sValues, sColumnUnique, sValueUnique);//"INSERT INTO " + sTable + " (" + sColumns + ") VALUES (" + sValues + ") ON CONFLICT DO NOTHING;";
-		
+	        sReturn = sReturn + ";"; //sonst kann postgre die Anweisungszeilen nicht unterscheiden
     	}//end main:
     	return sReturn;
     }
