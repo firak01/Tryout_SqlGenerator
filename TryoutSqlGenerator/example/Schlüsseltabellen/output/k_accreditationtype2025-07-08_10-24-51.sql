@@ -1,0 +1,1 @@
+INSERT INTO k_accreditationtype ("uniquename", "shorttext", "defaulttext", "longtext", "sortorder", "hiskey_id", "k_language_id", "obj_guid", "lock_version") VALUES ('UE', 'Über', 'Übergangsregelung', NULL, '7', '1000', '12', '99c88b09-8f39-403f-90b4-188c07bad4bc', '0') ON CONFLICT DO NOTHING;

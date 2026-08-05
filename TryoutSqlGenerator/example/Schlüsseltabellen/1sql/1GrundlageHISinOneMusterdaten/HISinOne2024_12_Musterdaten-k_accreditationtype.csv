@@ -1,0 +1,5 @@
+"id","uniquename","shorttext","defaulttext","longtext","sortorder","hiskey_id","k_language_id","obj_guid","lock_version"
+1,"S","Sonstiges","Sonstiges","Sonstiges",1,1000,12,"7ba0062d-a372-4448-9c5c-e80ffdd82886","0"
+2,"HS","Leistung an Hochschule erbracht","Leistung an Hochschule erbracht","Leistung an Hochschule erbracht",2,1001,12,"857b0268-a8fa-4588-94c1-691efd7d1870","0"
+3,"B","Anerkannt aus beruflicher Erfahrung","Anerkannt aus beruflicher Erfahrung","Anerkannt aus beruflicher Erfahrung",3,1002,12,"349bcd42-9f5e-4a8c-9f56-85357cac4908","0"
+4,"UE","Über","Übergangsregelung",NULL,7,1000,12,"99c88b09-8f39-403f-90b4-188c07bad4bc","0"

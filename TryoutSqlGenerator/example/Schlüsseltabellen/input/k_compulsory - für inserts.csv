@@ -1,0 +1,4 @@
+"id","uniquename","shorttext","defaulttext","longtext","k_language_id","sortorder","hiskey_id","obj_guid","lock_version"
+1,"W","Zusatz","Zusatzfach","Zusatzfach",12,NULL,1,"f3837e1f-e671-43e9-9522-99a23268bf68","0"
+3,"P","Pflicht","Pflicht","Pflicht",12,NULL,3,"e5379b07-69a7-476b-92e2-f47264486610","0"
+2,"WP","Wahlpflich","Wahlpflichtfach","Wahlpflicht",12,NULL,2,"099fa1ab-2096-4049-b792-855712de07ee","0"
