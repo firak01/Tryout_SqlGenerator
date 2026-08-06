@@ -6,9 +6,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import basic.zBasic.ExceptionZZZ;
+
 public class TextDateiSchreiber {
 
-    public static boolean schreibeTextdatei(String pfad, String dateiname, ArrayList<String> zeilen) {
+    public static boolean schreibeTextdatei(String pfad, String dateiname, ArrayList<String> zeilen) throws ExceptionZZZ {
     	boolean bReturn = false;
     	main:{
 	        BufferedWriter writer = null;
@@ -24,6 +26,8 @@ public class TextDateiSchreiber {
 	            writer = new BufferedWriter(new FileWriter(datei));
 	
 	            // Schreibe jede Zeile
+	            writer.write(SqlUtilZZZ.createSearchPathStmt("hisinone"));
+	            writer.newLine();
 	            for (String zeile : zeilen) {
 	                writer.write(zeile);
 	                writer.newLine();

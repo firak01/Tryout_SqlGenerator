@@ -2,8 +2,18 @@ package use.database.sql.generate;
 import java.util.Map;
 
 import basic.zBasic.ExceptionZZZ;
+import basic.zBasic.IConstantZZZ;
+import basic.zBasic.ReflectCodeZZZ;
+import basic.zBasic.util.datatype.string.StringZZZ;
 
-public class SqlUtilZZZ {
+public class SqlUtilZZZ implements IConstantZZZ {	
+	public static final String sSTATEMENT_SEPARATOR=";";
+	
+	public enum SEARCH_TYPEZZZ{
+		IN,
+		LIKE
+	}
+	
 	 // Erzeugt den Spaltenstring, ignoriere die ggfs. vorhandene ID Spalte
     public static String erzeugeColumnsString(Map<String, String> aliasMap) {
         StringBuilder sb = new StringBuilder();
@@ -91,10 +101,45 @@ public class SqlUtilZZZ {
 	    	return sReturn;
 	    }
 	    
+	    public static String toStatement(String sCommandLine) throws ExceptionZZZ {
+	    	String sReturn = ";";
+	    	main:{
+	    		if(sCommandLine==null) break main;
+	    		
+	    		sReturn = sCommandLine + sSTATEMENT_SEPARATOR; //setze also keine Hochkommatas drum
+	    	}
+	    	return sReturn;
+	    }
+	    
+	    public static String createSearchPath(String sSchema) throws ExceptionZZZ {
+	    	String sReturn = null;
+	    	main:{
+	    		sReturn = "SET search_path='" + sSchema + "'";
+	    	}
+	    	return sReturn;
+	    }
+	    
+	    public static String createSearchPathStmt(String sSchema) throws ExceptionZZZ {
+	    	String sReturn = null;
+	    	main:{
+	    		sReturn = SqlUtilZZZ.toStatement(SqlUtilZZZ.createSearchPath(sSchema));
+	    	}
+	    	return sReturn;
+	    }
+
+	    
 	    public static String createInsert(String sTable, String sColumns, String sValues) throws ExceptionZZZ {
 	    	String sReturn = null;
 	    	main:{
 	    		sReturn = "INSERT INTO " + sTable + " (" + sColumns + ") VALUES (" + sValues + ") ON CONFLICT DO NOTHING";
+	    	}
+	    	return sReturn;
+	    }
+	    
+	    public static String createInsertStmt(String sTable, String sColumns, String sValues) throws ExceptionZZZ {
+	    	String sReturn = null;
+	    	main:{
+	    		sReturn = SqlUtilZZZ.toStatement(SqlUtilZZZ.createInsert(sTable, sColumns, sValues));
 	    	}
 	    	return sReturn;
 	    }
@@ -181,6 +226,14 @@ Da du nur wissen möchtest, ob ein uniquename bereits existiert, ist NOT EXISTS 
 	    	}
 	    	return sReturn;
 	    }
+	    
+	    public static String createInsertUniqueStmt(String sTable, String sColumns, String sValues, String sColumnUnique, String sValueUnique) throws ExceptionZZZ {
+	    	String sReturn = null;
+	    	main:{
+	    		sReturn = SqlUtilZZZ.toStatement(SqlUtilZZZ.createInsertUnique(sTable, sColumns, sValues, sColumnUnique, sValueUnique));
+	    	}
+	    	return sReturn;
+	    }
 
 		/** z.B. Ergebnis
 		 *  select id from academicdegree where uniquename in ('diplxing')
@@ -201,6 +254,45 @@ Da du nur wissen möchtest, ob ein uniquename bereits existiert, ist NOT EXISTS 
 	    	return sReturn;
 		}
 
+		public static String createSelectConditionedStmt(String sSelectColumn, String sSelectTable, String sWhereColumn, String sWhereSingleValue) throws ExceptionZZZ {
+			String sReturn = null;
+	    	main:{
+	    		sReturn = SqlUtilZZZ.toStatement(SqlUtilZZZ.createSelectConditioned(sSelectColumn, sSelectTable, sWhereColumn, sWhereSingleValue));
+	    	}
+	    	return sReturn;
+		}
+		
+		
+		public static String createUpdateConditioned(SEARCH_TYPEZZZ enumSearchType, String sTable, String sColumn, String sSingleValue, String sWhereColumn, String sWhereSingleValue) throws ExceptionZZZ {
+			String sReturn = null;
+	    	main:{
+				if(enumSearchType == SEARCH_TYPEZZZ.IN) {
+					sReturn = createUpdateConditioned_IN(sTable, sColumn, sSingleValue, sWhereColumn, sWhereSingleValue);
+				}else if(enumSearchType == SEARCH_TYPEZZZ.LIKE) {
+					sReturn = createUpdateConditioned_LIKE(sTable, sColumn, sSingleValue, sWhereColumn, sWhereSingleValue);
+				}else {
+					ExceptionZZZ ez = new ExceptionZZZ("Nicht behandelter SEARCH_TYPEZZZ" + enumSearchType.name(), iERROR_PARAMETER_VALUE, SqlUtilZZZ.class, ReflectCodeZZZ.getPositionCurrent());
+					throw ez;
+				}	    		
+	    	}
+	    	return sReturn;
+		}
+		
+		public static String createUpdateConditionedStmt(SEARCH_TYPEZZZ enumSearchType, String sTable, String sColumn, String sSingleValue, String sWhereColumn, String sWhereSingleValue) throws ExceptionZZZ {
+			String sReturn = null;
+	    	main:{
+				if(enumSearchType == SEARCH_TYPEZZZ.IN) {
+					sReturn = createUpdateConditionedStmt_IN(sTable, sColumn, sSingleValue, sWhereColumn, sWhereSingleValue);
+				}else if(enumSearchType == SEARCH_TYPEZZZ.LIKE) {
+					sReturn = createUpdateConditionedStmt_LIKE(sTable, sColumn, sSingleValue, sWhereColumn, sWhereSingleValue);
+				}else {
+					ExceptionZZZ ez = new ExceptionZZZ("Nicht behandelter SEARCH_TYPEZZZ" + enumSearchType.name(), iERROR_PARAMETER_VALUE, SqlUtilZZZ.class, ReflectCodeZZZ.getPositionCurrent());
+					throw ez;
+				}	    		
+	    	}
+	    	return sReturn;
+		}
+		
 		/**
 		 *  z.B. Ergebnis
 		 * 	update course_of_study set academicdegree_id = (select id from academicdegree where uniquename in ('diplxing'))
@@ -221,11 +313,27 @@ Da du nur wissen möchtest, ob ein uniquename bereits existiert, ist NOT EXISTS 
 	    	return sReturn;
 		}
 		
+		public static String createUpdateConditionedStmt_LIKE(String sTable, String sColumn, String sSingleValue, String sWhereColumn, String sWhereSingleValue) throws ExceptionZZZ {
+			String sReturn = null;
+	    	main:{
+	    		sReturn = SqlUtilZZZ.toStatement(SqlUtilZZZ.createUpdateConditioned_LIKE(sTable, sColumn, sSingleValue, sWhereColumn, sWhereSingleValue));
+	    		}
+	    	return sReturn;
+		}
+		
 		public static String createUpdateConditioned_IN(String sTable, String sColumn, String sSingleValue, String sWhereColumn, String sWhereSingleValue) throws ExceptionZZZ {
 			String sReturn = null;
 	    	main:{
 	    		sReturn = "UPDATE " + sTable + " SET " + sColumn + " = " + sSingleValue + " WHERE " + sWhereColumn + " IN ( " + SqlUtilZZZ.toSqlValue(sWhereSingleValue) + " )";
 	    	}
+	    	return sReturn;
+		}
+		
+		public static String createUpdateConditionedStmt_IN(String sTable, String sColumn, String sSingleValue, String sWhereColumn, String sWhereSingleValue) throws ExceptionZZZ {
+			String sReturn = null;
+	    	main:{
+	    		sReturn = SqlUtilZZZ.toStatement(SqlUtilZZZ.createUpdateConditioned_IN(sTable, sColumn, sSingleValue, sWhereColumn, sWhereSingleValue));
+	    		}
 	    	return sReturn;
 		}
 

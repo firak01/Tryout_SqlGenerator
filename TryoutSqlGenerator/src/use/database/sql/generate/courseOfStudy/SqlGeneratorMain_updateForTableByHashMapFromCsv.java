@@ -249,6 +249,7 @@ public class SqlGeneratorMain_updateForTableByHashMapFromCsv implements IConstan
 		        //###########################################################################
 	            //Auf Update abgeänderter Code für die Ausgabe
 	            List<String> listUpdate = erzeuger.getListUpdate();
+	            SqlUtilZZZ.createSearchPathStmt("hisinone");
 	            for(String sUpdateTemp : listUpdate) {
 	                  	System.out.println(sUpdateTemp);
 	            }    
@@ -428,7 +429,7 @@ public class SqlGeneratorMain_updateForTableByHashMapFromCsv implements IConstan
 	        
 	        //                                    (String sTable, String sColumn, String sSingleValue, String sWhereColumn, String sWhereSingleValue) throws ExceptionZZZ {
 	        sReturn = SqlUtilZZZ.createUpdateConditioned_LIKE(sTable, sColumn, sSingleValue, sWhereColumn, sWhereSingleValue);
-	        sReturn = sReturn + ";"; //Sonst kann postgre die Anweisungszeilen Zeilen wohl nicht unterscheiden
+	        sReturn = SqlUtilZZZ.toStatement(sReturn); //Sonst kann postgre die Anweisungszeilen Zeilen wohl nicht unterscheiden
     	}//end main:
     	return sReturn;
     }

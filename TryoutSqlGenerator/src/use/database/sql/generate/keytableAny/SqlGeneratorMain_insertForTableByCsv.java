@@ -8,6 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import basic.zBasic.ExceptionZZZ;
 import use.database.sql.generate.SqlUtilZZZ;
 import use.database.sql.generate.TextDateiSchreiber;
 import use.database.sql.generate.ZeitstempelErzeuger;
@@ -100,10 +101,12 @@ public class SqlGeneratorMain_insertForTableByCsv {
             		System.out.println("Textdatei nicht erzeugt.");
             	}
             }
-            return;
         } catch (IOException e) {
             System.out.println("Fehler beim Einlesen: " + e.getMessage());
-        }
+        } catch (ExceptionZZZ ez){
+    	   System.out.println("Fehler: " + ez.getMessageLast());
+       }
+       return;       
     }
     
     

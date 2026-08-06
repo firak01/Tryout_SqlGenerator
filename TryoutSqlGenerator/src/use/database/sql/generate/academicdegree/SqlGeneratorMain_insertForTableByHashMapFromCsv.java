@@ -17,6 +17,7 @@ import basic.zBasic.IConstantZZZ;
 import basic.zBasic.ReflectCodeZZZ;
 import basic.zBasic.util.abstractList.ArrayListUniqueZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
+import basic.zBasic.util.system.Syso;
 import use.database.sql.generate.SqlUtilZZZ;
 import use.database.sql.generate.TextDateiSchreiber;
 import use.database.sql.generate.ZeitstempelErzeuger;
@@ -171,6 +172,7 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
 		        boolean bTransformed = erzeuger.transformHashMapToDbInsert(hmAcademicDegreeTitle);
 	                   
 	            List<String> listInsert = erzeuger.getListInsert();
+	            Syso.println(SqlUtilZZZ.createSearchPathStmt("hisinone"));
 	            for(String sInsertTemp : listInsert) {
 	                  	System.out.println(sInsertTemp);
 	            }    
@@ -311,8 +313,8 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
 	       
 	        String sColumnUnique = "uniquename";
 	        String sValueUnique = objAcademicDegreeTitle.getUniquename();
-	        sReturn = SqlUtilZZZ.createInsertUnique(sTable, sColumns, sValues, sColumnUnique, sValueUnique);//"INSERT INTO " + sTable + " (" + sColumns + ") VALUES (" + sValues + ") ON CONFLICT DO NOTHING;";
-	        sReturn = sReturn + ";"; //sonst kann postgre die Anweisungszeilen nicht unterscheiden
+	        sReturn = SqlUtilZZZ.createInsertUnique(sTable, sColumns, sValues, sColumnUnique, sValueUnique);
+	        sReturn = SqlUtilZZZ.toStatement(sReturn); //sonst kann postgreSQL die Anweisungszeilen nicht unterscheiden
     	}//end main:
     	return sReturn;
     }
