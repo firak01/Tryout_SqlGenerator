@@ -6,6 +6,13 @@ import basic.zBasic.IConstantZZZ;
 import basic.zBasic.ReflectCodeZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
 
+/**Merke:
+ * Aus Komfortgründen gibt es für jede Befehlszeile die ...Stmt Variante.
+ * Dies ist eine Befehlszeile mit dem "STATEMENT SEPARATOR".
+ * 
+ * @author Fritz Lindhauer
+ *
+ */
 public class SqlUtilZZZ implements IConstantZZZ {	
 	public static final String sSTATEMENT_SEPARATOR=";";
 	
