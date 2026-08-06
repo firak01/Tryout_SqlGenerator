@@ -220,4 +220,13 @@ Da du nur wissen möchtest, ob ein uniquename bereits existiert, ist NOT EXISTS 
 	    	}
 	    	return sReturn;
 		}
+		
+		public static String createUpdateConditioned_IN(String sTable, String sColumn, String sSingleValue, String sWhereColumn, String sWhereSingleValue) throws ExceptionZZZ {
+			String sReturn = null;
+	    	main:{
+	    		sReturn = "UPDATE " + sTable + " SET " + sColumn + " = " + sSingleValue + " WHERE " + sWhereColumn + " IN ( " + SqlUtilZZZ.toSqlValue(sWhereSingleValue) + " )";
+	    	}
+	    	return sReturn;
+		}
+
 }

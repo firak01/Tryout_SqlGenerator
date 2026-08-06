@@ -13,6 +13,7 @@ import java.util.UUID;
 import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.IConstantZZZ;
 import basic.zBasic.ReflectCodeZZZ;
+import basic.zBasic.util.abstractList.ArrayListUniqueZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
 import use.database.sql.generate.SqlUtilZZZ;
 import use.database.sql.generate.TextDateiSchreiber;
@@ -53,8 +54,8 @@ public class SqlGeneratorMain_updateForTableByHashMapFromCsv implements IConstan
 	
     private String sTable = null;
     private String sDirectory = null;
-    private ArrayList<String> listasInsert = null;
-    private ArrayList<String> listasUpdate = null;
+    private ArrayListUniqueZZZ<String> listasInsert = null;
+    private ArrayListUniqueZZZ<String> listasUpdate = null;
     
     public SqlGeneratorMain_updateForTableByHashMapFromCsv() {
     }
@@ -298,24 +299,24 @@ public class SqlGeneratorMain_updateForTableByHashMapFromCsv implements IConstan
     
     public ArrayList<String> getListInsert(){
     	if(this.listasInsert==null) {
-    		this.listasInsert = new ArrayList<String>();
+    		this.listasInsert = new ArrayListUniqueZZZ<String>();
     	}
     	return this.listasInsert;
     }
     
-    public void setListInsert(ArrayList<String> listasInsert) {
-    	this.listasInsert = listasInsert;
+    public void setListInsert(List<String> listasInsert) {
+    	this.listasInsert = (ArrayListUniqueZZZ<String>) listasInsert;
     }
     
     public ArrayList<String> getListUpdate(){
     	if(this.listasUpdate==null) {
-    		this.listasUpdate = new ArrayList<String>();
+    		this.listasUpdate = new ArrayListUniqueZZZ<String>();
     	}
     	return this.listasUpdate;
     }
     
-    public void setListUpdate(ArrayList<String> listasUpdate) {
-    	this.listasUpdate = listasUpdate;
+    public void setListUpdate(List<String> listasUpdate) {
+    	this.listasUpdate = (ArrayListUniqueZZZ<String>) listasUpdate;
     }
     
     

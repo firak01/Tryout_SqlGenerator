@@ -15,6 +15,7 @@ import java.util.UUID;
 import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.IConstantZZZ;
 import basic.zBasic.ReflectCodeZZZ;
+import basic.zBasic.util.abstractList.ArrayListUniqueZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
 import use.database.sql.generate.SqlUtilZZZ;
 import use.database.sql.generate.TextDateiSchreiber;
@@ -26,7 +27,7 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
 	
     private String sTable = null;
     private String sDirectory = null;
-    private ArrayList<String> listasInsert = null;
+    private ArrayListUniqueZZZ<String> listasInsert = null;
 
     /** Selektiere die Tabelle parstg im SOSPOS System.
      *  Hole dabei die akadmischen Grade für den Studiengang (Abschluss, Studiengang, Vertiefung)
@@ -220,13 +221,13 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
     
     public ArrayList<String> getListInsert(){
     	if(this.listasInsert==null) {
-    		this.listasInsert = new ArrayList<String>();
+    		this.listasInsert = new ArrayListUniqueZZZ<String>();
     	}
     	return this.listasInsert;
     }
     
-    public void setListInsert(ArrayList<String> listasInsert) {
-    	this.listasInsert = listasInsert;
+    public void setListInsert(List<String> listasInsert) {
+    	this.listasInsert = (ArrayListUniqueZZZ<String>) listasInsert;
     }
     
     
