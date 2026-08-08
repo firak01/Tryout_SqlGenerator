@@ -56,12 +56,7 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
 	    	
 	    	//TODOGOON20260803: Im Main die Klasse aufrufen. Das ist dann eine andere Klasse, ohne Klassennamen ...Main ... 
 	    	
-	        String ueberschrift = "";
 	        String tabelle = "";
-	        String directory = "";
-	        String sDirectory = "";
-	        
-	        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 	        SqlGeneratorMain_insertForTableByHashMapFromCsv erzeuger = null;
 	
 	       try {
@@ -70,113 +65,15 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
 	        	}else {
 	        		tabelle = "academicdegree"; //hard coded zum Entwickeln
 	        	}
+	        		        		        	
+	        	SqlGeneratorUI sqlUi = new SqlGeneratorUI();	        	
+	        	List<String> listEintrag = sqlUi.readCsvAsList();
 	        	
 	        	erzeuger = new SqlGeneratorMain_insertForTableByHashMapFromCsv();
 	        	
-	        	//Verzeichnisnamen eingeben
-	        	System.out.print("Bitte geben Sie den Namen des Verzeichnisse ein (Leerstring verwendet default '" + SqlGeneratorMain_insertForTableByHashMapFromCsv.sDIRECTORY_DEFAULT + "'): ");
-	            directory = reader.readLine();
-	            directory = directory.trim();
-	            if (!StringZZZ.isEmpty(directory)) {
-	            	sDirectory = directory;	            	
-	            }else {
-	            	sDirectory = SqlGeneratorMain_insertForTableByHashMapFromCsv.sDIRECTORY_DEFAULT;
-	            }
-	            erzeuger.setDirectory(sDirectory);
-	
-	        	
-	            // Tabellennamen ggfs. eingeben
-	            if(tabelle==null || tabelle.trim().isEmpty()) {
-	            	System.out.print("Bitte geben Sie den Tabellennamen als String ein (Leerstring zum Abbrechen): ");
-	            	tabelle = reader.readLine();
-	            	if (tabelle == null || tabelle.trim().isEmpty()) return;
-	            }
-	        	erzeuger.setTable(tabelle);
-	           
 	        	//Wir müssen nun eine HashMap mit dem entsprechenden AcademicDegree-Objekt füllen
 	            //ausgehend von der csv-Datei
 	            Map<String,AcademicDegreeTitle> hmAcademicDegreeTitle = new LinkedHashMap<String,AcademicDegreeTitle>();
-	
-	            /* Hier ist die Überschrift egal,
-	             * da diese Spaltennamen aus der sospos ausgangstabelle hat.
-	             * In HISinone sind das eh andere Tabellenspalten, der Tabellenname wurde oben angegeben. 
-	             */
-	            /* Nur wenn wir aus dem Gleichen "System" in das gleiche "System" transferieren würden.
-	            // Die Überschrift eingeben, 
-	            System.out.print("Bitte geben Sie die Tabellenspalten als String ein. (Leerstring zum Abbrechen): ");
-	            ueberschrift = reader.readLine();
-	            if (ueberschrift == null || ueberschrift.trim().isEmpty()) return;            
-	            */
-	           
-	            // Wiederholt Einträge verarbeiten
-	            // z.B. "11","012","Diplom-Archäologe                                           ","Diplom-Archäologin                                          "
-	            //      "11","021","Diplom-Kaufmann                                             ","Diplom-Kauffrau                                             "
-	            //		"11","030","Diplom-Ingenieur                                            ","Diplom-Ingenieurin                                          "
-	            //		"11","032","Diplom-Chemiker                                             ","Diplom-Chemikerin                                           "
-	
-	            //Beispiel für die Datei:
-	            //     parstg - Werte der Academicdegrees pro Studiengang.csv
-	            
-	            List<String> listEintrag = new ArrayList<String>();
-	            String eintragOld="";
-	            String eintrag="";
-	            String sEintrag="";
-	            File fileEintrag=null;
-	            boolean bFile = false; boolean bFileChecked=false;
-	            System.out.print("Bitte geben Sie einen Dateipfad oder den Eintrags-String ein (kommagetrennt, auch mehrer Zeilen auf einmal, ggfs. mehrfach ENTER druecken)(Leerstring zum Abbrechen): ");
-	            while (true) {                
-	                eintrag = reader.readLine();
-	                eintrag = eintrag.trim();
-               	    
-	                //erst beim 2ten "ENTER" die Eingabe beenden
-	                if (StringZZZ.isEmptyNull(eintrag) && StringZZZ.isEmptyNull(eintragOld)) {
-	                    System.out.println("Eingabe beendet.");
-	                    break;
-	                }else {	                	
-	                	 if(!bFileChecked) {
-		                	 //Ist der Eintrag ein Dateipfad?
-		                	 bFile = FileEasyZZZ.exists(sDirectory, eintrag);
-		                	 if(bFile) {
-		                		 fileEintrag = new File(sDirectory, eintrag);
-		                		 bFile = FileEasyZZZ.isFileExisting(fileEintrag);
-		                		 if(bFile) {
-		                			sEintrag = eintrag;
-		                			 
-		                			
-		                			System.out.println("Eingabe beendet.");
-		     	                    break;
-		                		 }
-		                	 }
-		                	 bFileChecked=true;	 
-	                	 }
-	                	 
-	                	 
-	                	 sEintrag = eintragOld;
-	                     eintragOld = eintrag;
-	                }                                       
-	            }//end while(true)
-	            
-	            
-	            
-	            
-	            //++++++++++++++++
-	            //Hier als Alternative, das Einlesen der Eintragsliste per Datei
-	            //........
-	            if(bFile) {
-	            	FileCsvReaderZZZ objReaderCsv = new FileCsvReaderZZZ(fileEintrag,',');
-	            	listEintrag = objReaderCsv.getLines(); //Das hat den Vorteil, das es nur Zeilen ohne Kommentar und keine Leerzeilen sind.
-	            }else {
-	            	 // ZUERST: Escape vorhandener einfacher Hochkommata → SQL-konform (z. B. O'Reilly → O''Reilly)
-                    sEintrag = sEintrag.replace("'", "''");
-                                        
-                    String[] saEintrag = sEintrag.split("\n");
-                    for(String sEintragTemp : saEintrag) {
-                    	listEintrag.add(sEintragTemp);
-                    }
-                    
-	            }
-	            
-
 		        for(String sEintragTemp : listEintrag) {
 		        	if(!StringZZZ.isEmpty(sEintragTemp)) {
 				      	  AcademicDegreeTitle objAcademicDegreeTitle = new AcademicDegreeTitle();
@@ -208,6 +105,17 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
 		        	}
 		        }//end for ... listEintrag	
 	            
+		        
+		        
+		        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		        String sTablename;
+		        if(StringZZZ.isEmpty(tabelle)) {
+		        	sTablename = sqlUi.getTablename();
+		        }else {
+		        	sTablename = tabelle;
+		        }
+	        	erzeuger.setTable(sTablename);	 
+	        	
 		        boolean bTransformed = erzeuger.transformHashMapToDbInsert(hmAcademicDegreeTitle);
 	            if(!bTransformed) {
 	            	System.out.println("Keine Transformation zu insert Befehlen. Vermutlich inkorrekte Eingabezeile.");
@@ -217,20 +125,24 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
 	            List<String> listInsert = erzeuger.getListInsert();	           
 	            if(!listInsert.isEmpty()) {
 	            	 Syso.println(SqlUtilZZZ.createSearchPathStmt("hisinone"));
-			            for(String sInsertTemp : listInsert) {
-			                  	System.out.println(sInsertTemp);
-			            }   
+			         for(String sInsertTemp : listInsert) {
+			        	 System.out.println(sInsertTemp);
+			         }   
 			            
-	            	String sDateiname = erzeuger.erstelleDateinamenDefault();
-	            	boolean bSuccess = TextDateiSchreiber.schreibeTextdatei(erzeuger.getDirectory(), sDateiname, erzeuger.getListInsert());
-	            	if(bSuccess) {
-	            		System.out.println("Erzeugte Textdatei kann fuer Inserts verwendet werden.");
-	            	}else{
-	            		System.out.println("Textdatei nicht erzeugt.");
-	            	}
+			            
+			         String sDirectory = sqlUi.getDirectory();
+			         erzeuger.setDirectory(sDirectory);
+			            	                
+			         String sDateiname = erzeuger.erstelleDateinamenDefault();
+			         boolean bSuccess = TextDateiSchreiber.schreibeTextdatei(erzeuger.getDirectory(), sDateiname, erzeuger.getListInsert());
+			         if(bSuccess) {
+			        	 System.out.println("Erzeugte Textdatei kann fuer Inserts verwendet werden.");
+			         }else{
+			        	 System.out.println("Textdatei nicht erzeugt.");
+			         }
 	            }	            	         
-	       } catch (IOException e) {
-	           System.out.println("Fehler beim Einlesen: " + e.getMessage());
+//	       } catch (IOException e) {
+//	           System.out.println("Fehler beim Einlesen: " + e.getMessage());
 	       } catch (ExceptionZZZ ez){
 	    	   System.out.println("Fehler: " + ez.getMessageLast());
 	       }
@@ -238,6 +150,8 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
     	System.out.println("Verarbeitung beendet.");
        	return;     
     }
+    
+    
     
     
     //### GETTER / SETTER
@@ -327,7 +241,8 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
     			}else {
     				System.out.println("Key in Map nicht gefunden. Studiengang '" + sStg + "'");
     			}
-    		}    		    	
+    		} 
+    		bReturn = true;
     	}//end main:
     	return bReturn;
     }
