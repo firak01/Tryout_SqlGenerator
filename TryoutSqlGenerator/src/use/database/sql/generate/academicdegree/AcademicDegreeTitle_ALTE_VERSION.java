@@ -1,6 +1,6 @@
 package use.database.sql.generate.academicdegree;
 
-public class AcademicDegreeTitle {
+public class AcademicDegreeTitle_ALTE_VERSION {
 	private String sTextDefault=null;
 	private String sTextDefault_female=null;
 	

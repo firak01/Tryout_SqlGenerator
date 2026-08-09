@@ -1,4 +1,4 @@
-package use.database.sql.generate.courseOfStudy;
+package use.database.sql.genrate.common;
 
 import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.IConstantZZZ;
@@ -62,7 +62,7 @@ public class CourseOfStudy_with_AcademicDegree implements IConstantZZZ {
 	public String getVertiefung() throws ExceptionZZZ {
 		if(StringZZZ.isEmpty(this.sVert)) {
 			String sVert = this.readVertiefung();
-			if(StringZZZ.isEmpty(sVert.trim())) {
+			if(StringZZZ.isEmptyTrimmed(sVert)) {
 				sVert = "%";
 			}
 			return sVert;

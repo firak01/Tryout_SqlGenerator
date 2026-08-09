@@ -1,4 +1,4 @@
-package use.database.sql.generate.academicdegree;
+package use.database.sql.genrate.common;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,6 +11,7 @@ import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
 import basic.zBasic.util.file.FileEasyZZZ;
 import basic.zBasic.util.file.csv.stream.FileCsvReaderZZZ;
+import use.database.sql.generate.academicdegree.SqlGeneratorMain_insertForTableByHashMapFromCsv;
 
 public class SqlGeneratorUI {
 	

@@ -1,12 +1,6 @@
 package use.database.sql.generate.academicdegree;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,13 +12,33 @@ import basic.zBasic.IConstantZZZ;
 import basic.zBasic.ReflectCodeZZZ;
 import basic.zBasic.util.abstractList.ArrayListUniqueZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
-import basic.zBasic.util.file.FileEasyZZZ;
-import basic.zBasic.util.file.csv.stream.FileCsvReaderZZZ;
 import basic.zBasic.util.system.Syso;
 import use.database.sql.generate.SqlUtilZZZ;
 import use.database.sql.generate.TextDateiSchreiber;
 import use.database.sql.generate.ZeitstempelErzeuger;
+import use.database.sql.genrate.common.AcademicDegreeTitle;
+import use.database.sql.genrate.common.SqlGeneratorUI;
 
+/**Ziel ist das Einlesen einer CSV Datei, mit Daten für die Erstellung von Schlüsseltabellen - Einträgen in HISinOne.
+ * Die CSV Datei wurde zuvor mit einer SQL Abrfrage in pgAdmin erstellt. (hier SOSPOS Tabelle parstg).
+ * Schlüssel für weitere Verwendung ist die Kombination aus Studiengang, Abschluss und Vertiefung (stg, abschl,vert).
+ * Dieser Schlüssel ist den Datensatz der Schlüsseltabelle selbst nicht wichtig, sondern wird später benötigt.
+ * 
+ * Also
+ * Selektiere die Tabelle parstg im SOSPOS System.
+ *  Hole dabei die akadmischen Grade für den Studiengang (Abschluss, Studiengang, Vertiefung)
+ *  Dies ist die Grundlage für den CSV Export.
+ *  
+ *  Erstelle das SQL diese akademischen Grade in die HISinOne Tabelle 'academicdegree' per Insert einzufügen.
+ *  Dabei wird ein uniquename berechnet. 
+ *  Es wird sichergestellt, dass trotz fehlendem Constraint der Datensatz nur 1x erstellt wird.
+ *  
+ *  Es wird eine objguid berechnet.
+ *  
+ * 
+ * @author Fritz Lindhauer
+ *
+ */
 public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstantZZZ {
 	
 	public final static String sDIRECTORY_DEFAULT = "c:\\temp";
@@ -33,17 +47,7 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
     private String sDirectory = null;
     private ArrayListUniqueZZZ<String> listasInsert = null;
 
-    /** Selektiere die Tabelle parstg im SOSPOS System.
-     *  Hole dabei die akadmischen Grade für den Studiengang (Abschluss, Studiengang, Vertiefung)
-     *  Dies ist die Grundlage für den CSV Export.
-     *  
-     *  Erstelle das SQL diese akademischen Grade in die HISinOne Tabelle 'academicdegree' per Insert einzufügen.
-     *  Dabei wird ein uniquename berechnet. 
-     *  Es wird sichergestellt, dass trotz fehlendem Constraint der Datensatz nur 1x erstellt wird.
-     *  
-     *  Es wird eine objguid berechnet.
-     * 
-     */
+
     public SqlGeneratorMain_insertForTableByHashMapFromCsv() {
     }
     
@@ -72,41 +76,9 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
 	        	erzeuger = new SqlGeneratorMain_insertForTableByHashMapFromCsv();
 	        	
 	        	//Wir müssen nun eine HashMap mit dem entsprechenden AcademicDegree-Objekt füllen
-	            //ausgehend von der csv-Datei
-	            Map<String,AcademicDegreeTitle> hmAcademicDegreeTitle = new LinkedHashMap<String,AcademicDegreeTitle>();
-		        for(String sEintragTemp : listEintrag) {
-		        	if(!StringZZZ.isEmpty(sEintragTemp)) {
-				      	  AcademicDegreeTitle objAcademicDegreeTitle = new AcademicDegreeTitle();
-				      	  
-				      	  String[] saEntry = parseCsvLine(sEintragTemp);
-				      	  
-				      	  //Datensatz übernehmen, nur wenn überhaupt ein Wert vollwertiger Eintrag existiert
-				      	  if(saEntry.length>=5) {
-				      		  System.out.println(sEintragTemp);
-		      			  
-				      		  if(!StringZZZ.isEmpty(saEntry[3]) && !StringZZZ.isEmpty(saEntry[4])
-				      				  && !saEntry[3].equalsIgnoreCase("null") && !saEntry[4].equalsIgnoreCase("null")) {
-				      			
-				      			  boolean bSuccess = addStaticCustomValues(objAcademicDegreeTitle, saEntry);
-				      			  if(!bSuccess) {
-				      				  System.out.println("Fehler: Statische Werte nicht erfolgreich hinzugefügt.");
-				      				  break main;
-				      			  }
-				      			  
-						      	  //Schlüssel besteht aus Abschluss | Studiengang | Vertiefunge
-						      	  String sKey = saEntry[0] + "|" + saEntry[1] + "|" + saEntry[2];
-						      	  objAcademicDegreeTitle.setDefaulttext(saEntry[3]);
-						      	  objAcademicDegreeTitle.setDefaulttext_female(saEntry[4]);
-						      	  objAcademicDegreeTitle.setLongtext(saEntry[3]);             //Defaulttext = Longtext
-						      	  objAcademicDegreeTitle.setLongtext_female(saEntry[4]);      //dito
-						      	  hmAcademicDegreeTitle.put(sKey, objAcademicDegreeTitle);				      	        	  						      	  
-				      		  }
-		        		}
-		        	}
-		        }//end for ... listEintrag	
-	            
-		        
-		        
+	        	//ausgehend von der csv-Datei, wichtig: Das Entity AcademicDegreeTitle muss schon zwischen den Klassen identisch sein (package common)
+	            Map<String,AcademicDegreeTitle> hmAcademicDegreeTitle = SqlGeneratorMain_insertForTableByHashMapFromCsv.createMapWithEntityFromCsvEntry(listEintrag);	
+	            	          
 		        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		        String sTablename;
 		        if(StringZZZ.isEmpty(tabelle)) {
@@ -383,4 +355,48 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
         // Rückgabe als Array
         return result.toArray(new String[result.size()]);
     } 
+    
+    public static Map<String,AcademicDegreeTitle> createMapWithEntityFromCsvEntry(List<String> listEintrag) throws ExceptionZZZ {
+    	Map<String,AcademicDegreeTitle> hmReturn = null;    		    			
+    	main:{
+    		if(listEintrag==null) {
+    			ExceptionZZZ ez = new ExceptionZZZ("List<String> eintrag", iERROR_PARAMETER_MISSING, SqlGeneratorMain_insertForTableByHashMapFromCsv.class, ReflectCodeZZZ.getPositionCurrent());
+    			throw ez;
+    		}
+    		
+    		hmReturn = new LinkedHashMap<String,AcademicDegreeTitle>();
+	        for(String sEintragTemp : listEintrag) {
+	        	if(!StringZZZ.isEmpty(sEintragTemp)) {
+			      	  AcademicDegreeTitle objAcademicDegreeTitle = new AcademicDegreeTitle();
+			      	  
+			      	  //TODOGOON20260809: Überprüfe die Anzahl der Spalten in der CSV Datei, vielleicht wurde die falsche Datei angegeben, oder etwas falschen eingefügt.
+			      	  String[] saEntry = parseCsvLine(sEintragTemp);
+			      	  
+			      	  //Datensatz übernehmen, nur wenn überhaupt ein Wert vollwertiger Eintrag existiert
+			      	  if(saEntry.length>=5) {
+			      		  System.out.println(sEintragTemp);
+	      			  
+			      		  if(!StringZZZ.isEmpty(saEntry[3]) && !StringZZZ.isEmpty(saEntry[4])
+			      				  && !saEntry[3].equalsIgnoreCase("null") && !saEntry[4].equalsIgnoreCase("null")) {
+			      			
+			      			  boolean bSuccess = addStaticCustomValues(objAcademicDegreeTitle, saEntry);
+			      			  if(!bSuccess) {
+			      				  ExceptionZZZ ez = new ExceptionZZZ("Fehler: Statische Werte nicht erfolgreich hinzugefügt.", iERROR_RUNTIME, SqlGeneratorMain_insertForTableByHashMapFromCsv.class, ReflectCodeZZZ.getPositionCurrent());
+			      				  throw ez;
+			      			  }
+			      			  
+					      	  //Schlüssel besteht aus Abschluss | Studiengang | Vertiefunge
+					      	  String sKey = saEntry[0] + "|" + saEntry[1] + "|" + saEntry[2];
+					      	  objAcademicDegreeTitle.setDefaulttext(saEntry[3]);
+					      	  objAcademicDegreeTitle.setDefaulttext_female(saEntry[4]);
+					      	  objAcademicDegreeTitle.setLongtext(saEntry[3]);             //Defaulttext = Longtext
+					      	  objAcademicDegreeTitle.setLongtext_female(saEntry[4]);      //dito
+					      	  hmReturn.put(sKey, objAcademicDegreeTitle);				      	        	  						      	  
+			      		  }
+	        		}
+	        	}
+	        }//end for ... listEintrag	
+    	}//end main:
+        return hmReturn;
+    }
 }
