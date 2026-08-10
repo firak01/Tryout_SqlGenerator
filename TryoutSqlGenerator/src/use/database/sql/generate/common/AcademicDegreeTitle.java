@@ -1,4 +1,4 @@
-package use.database.sql.genrate.common;
+package use.database.sql.generate.common;
 
 public class AcademicDegreeTitle {
 	private String sStg = null;

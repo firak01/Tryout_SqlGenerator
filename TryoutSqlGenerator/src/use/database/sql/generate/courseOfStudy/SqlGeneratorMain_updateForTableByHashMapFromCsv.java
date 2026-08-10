@@ -1,12 +1,10 @@
 package use.database.sql.generate.courseOfStudy;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import basic.zBasic.ExceptionZZZ;
@@ -20,9 +18,8 @@ import use.database.sql.generate.TextDateiSchreiber;
 import use.database.sql.generate.ZeitstempelErzeuger;
 import use.database.sql.generate.academicdegree.AcademicDegreeTitle_ALTE_VERSION;
 import use.database.sql.generate.academicdegree.SqlGeneratorMain_insertForTableByHashMapFromCsv;
-import use.database.sql.genrate.common.AcademicDegreeTitle;
-import use.database.sql.genrate.common.CourseOfStudy_with_AcademicDegree;
-import use.database.sql.genrate.common.SqlGeneratorUI;
+import use.database.sql.generate.common.AcademicDegreeTitle;
+import use.database.sql.generate.common.SqlGeneratorConsoleUI;
 
 /**Ziel ist das aktualisieren von Studiengängen im HISinOne-System mit den zugehörigen "akademischen Graden".
  * Die "akademischen Grade" wurden zuvor aus sospos exportiert (Tabelle parstg).
@@ -84,124 +81,34 @@ public class SqlGeneratorMain_updateForTableByHashMapFromCsv implements IConstan
 	        		tabelle = "course_of_study"; //hard coded zum Entwickeln
 	        	}
 	        	
-	        	SqlGeneratorUI sqlUi = new SqlGeneratorUI();	        	
-	        	List<String> listEintrag = sqlUi.readCsvAsList();
-	        	
-	        	
-	        	
-	        	erzeuger = new SqlGeneratorMain_updateForTableByHashMapFromCsv();
-
-	        	
-	        	//Wir müssen nun eine HashMap mit dem entsprechenden AcademicDegree-Objekt füllen
-	            //ausgehend von der csv-Datei, wichtig: Das Entity AcademicDegreeTitle muss schon zwischen den Klassen identisch sein (package common)
+	        	SqlGeneratorConsoleUI sqlConsole = new SqlGeneratorConsoleUI();	        	
+	        	List<String> listEintrag = sqlConsole.readCsvAsList(); //entweder Zeilen aus der Konsole oder aus einer Datei.
+	        		        	
+	        	//Wir müssen nun eine HashMap mit dem entsprechenden AcademicDegree-Objekt füllen, ausgehend von der csv-Datei. 
+	        	//Wichtig: Das Entity AcademicDegreeTitle muss identisch sein (package common) zu dem, das in Course_of_study... verwendet wird.
 	            Map<String,AcademicDegreeTitle> hmAcademicDegreeTitle = SqlGeneratorMain_insertForTableByHashMapFromCsv.createMapWithEntityFromCsvEntry(listEintrag);	
-	            
-	        	
-//	        	//++++++++++++++++++++++++++++++++++++++++++++++
-//	        	//TODOGOON20260809: Das ist identisch zu dem Code aus SqlGeneratorMain_insertForTableByHashMapFromCsv
-//	        	//                  vermeide diese Redundanz, mache also in der genannten Klasse eine MEthode und rufe die hier auf.
-//	        	//Wir müssen nun eine HashMap mit dem entsprechenden AcademicDegree-Objekt füllen
-//	            //ausgehend von der csv-Datei
-//	            Map<String,AcademicDegreeTitle> hmAcademicDegreeTitle = new LinkedHashMap<String,AcademicDegreeTitle>();
-//		        for(String sEintragTemp : listEintrag) {
-//		        	if(!StringZZZ.isEmpty(sEintragTemp)) {
-//				      	  AcademicDegreeTitle objAcademicDegreeTitle = new AcademicDegreeTitle();
-//				
-//				      	//TODOGOON20260809: Überprüfe die Anzahl der Spalten in der CSV Datei, vielleicht wurde die falsche Datei angegeben, oder etwas falschen eingefügt.
-//				      	  String[] saEntry = parseCsvLine(sEintragTemp);
-//				      	  
-//				      	  //Datensatz übernehmen, nur wenn überhaupt ein Wert existiert
-//				      	  if(saEntry.length>=5) {
-//				      		  System.out.println(sEintragTemp);
-//		      			  
-//				      		  if(!StringZZZ.isEmpty(saEntry[3]) && !StringZZZ.isEmpty(saEntry[4])
-//				      				  && !saEntry[3].equalsIgnoreCase("null") && !saEntry[4].equalsIgnoreCase("null")) {
-//				      			
-//				      			  boolean bSuccess = addStaticCustomValues(objAcademicDegreeTitle, saEntry);
-//				      			  if(!bSuccess) {
-//				      				  System.out.println("Fehler: Statische Werte nicht erfolgreich hinzugefügt.");
-//				      				  break main;
-//				      			  }
-//				      			  
-//						      	  //Schlüssel besteht aus Abschluss | Studiengang | Vertiefunge
-//						      	  String sKey = saEntry[0] + "|" + saEntry[1] + "|" + saEntry[2];
-//						      	  objAcademicDegreeTitle.setAbschluss(saEntry[0]);
-//						      	  objAcademicDegreeTitle.setStudiengang(saEntry[1]);
-//						      	  objAcademicDegreeTitle.setVertiefung(saEntry[2]);
-//						      	  
-//						      	  objAcademicDegreeTitle.setDefaulttext(saEntry[3]);
-//						      	  objAcademicDegreeTitle.setDefaulttext_female(saEntry[4]);
-//						      	  objAcademicDegreeTitle.setLongtext(saEntry[3]);             //Defaulttext = Longtext
-//						      	  objAcademicDegreeTitle.setLongtext_female(saEntry[4]);      //dito
-//						      	  hmAcademicDegreeTitle.put(sKey, objAcademicDegreeTitle);
-//				      	        	  
-//						      	  //Nein: Jetzt müssen die Studiengänge selectiert werden.
-//						      	  //boolean bTransformed = erzeuger.transformHashMapToDbInsert(hmAcademicDegreeTitle);
-//				      		  }
-//		        		}
-//		        	}
-//		        }//end for ... listEintrag	
-//	            //++++++++++++++++++++++++++++++++++++++++++
-//		        
-		        
+	           		        
 		        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		        String sTablename;
+	            //Hole aus der Map der AcademicDegreeTitle eben den AcademicDegreeTitle und ordne diesen dem neuen CourseOfStudy_with_AcademicDegree zu 
+	        	Map<String,CourseOfStudy_with_AcademicDegree> hmCourseOfStudy = SqlGeneratorMain_updateForTableByHashMapFromCsv.createMapWithEntityFromCsvEntry(hmAcademicDegreeTitle);
+		       
+	        	 //###########################################################################
+		        //Definiere das erzeuger - Objekt, mit dem die HashMap-Werte in UPDATE - Befehlszeilen umgewandelt werden.
+	        	String sTablename;
 		        if(StringZZZ.isEmpty(tabelle)) {
-		        	sTablename = sqlUi.getTablename();
+		        	sTablename = sqlConsole.getTablename();
 		        }else {
 		        	sTablename = tabelle;
 		        }
+		        	
+		        erzeuger = new SqlGeneratorMain_updateForTableByHashMapFromCsv();
 	        	erzeuger.setTable(sTablename);	 
-	        	
-		        
-		        
-		        //###########################################################################
-		        //Erstelle nun eine HashMap mit course_of_study Objekten.
-		        //Die Course_of_study Objekte werden mit daten aus dem objAcademicDegreeTitle Objekt
-		        //und der Schlüsseltabelle hmAcademicDegreeTitle (hier der Key, aufgeteilt in Abschluss, Studiengang, Verteifung) gefüllt.
-	            Map<String,CourseOfStudy_with_AcademicDegree> hmCourseOfStudy = new LinkedHashMap<String,CourseOfStudy_with_AcademicDegree>();
-
-		        
-		        //Das ist wirklich bewusst so wie oben für AcademicDegreeTitle.
-		        //Wir beziehen uns auf die gleich CSV-Datei als Ursprung.
-		        //Diese gekapselte Struktur erst einmal beibehalten... würde vom Prinzip her ja auch so bleiben, wenn man auf irgendwann mal existierende "Generator-Objekte" und deren Ergebnisse zugreifen würde.
-		        for(String sEintragTemp : listEintrag) {
-		        	if(!StringZZZ.isEmpty(sEintragTemp)) {
-			        	CourseOfStudy_with_AcademicDegree objCourseOfStudy = new CourseOfStudy_with_AcademicDegree();
-			        	
-			        	System.out.println("Verarbeite Zeile: " + sEintragTemp);
-			        	String[] saEntry = parseCsvLine(sEintragTemp);		        	
-			        	String sKey = saEntry[0] + "|" + saEntry[1] + "|" + saEntry[2];
-			        	
-			        	AcademicDegreeTitle objAcademicDegreeTitle = hmAcademicDegreeTitle.get(sKey);
-			        	if(objAcademicDegreeTitle==null) {
-			        		System.out.println("Kein AcademicDegree-Objekt vorhanden für Key: '" + sKey + "'");
-			        	}else {
-				        	objCourseOfStudy.setAcademicDegreeObject(objAcademicDegreeTitle);
-				        	
-				        	hmCourseOfStudy.put(sKey, objCourseOfStudy);
-				        	
-				        	 //Jetzt müssen die Studiengänge selectiert werden.
-					      	 //boolean bTransformed = erzeuger.transformHashMapToDbUpdate(hmCourseOfStudy);			        		
-				        	boolean bTransformed = erzeuger.transformToDbUpdate(objCourseOfStudy);
-			        	}
-		        	}
-		        }//end for ... listEintrag
-		       
-//		        CourseOfStudy_with_AcademicDegree objCourseOfStudy = hmCourseOfStudy.get("11|032|   ");
-//		        String sAbschl = objCourseOfStudy.getAbschluss();
-//		        String sStg = objCourseOfStudy.getStudiengang();
-//		        String sVert = objCourseOfStudy.getVertiefung();
-//		        
-//		        String sSigntureTemplateForSearch = objCourseOfStudy.getSignatureTemplateForSearch();
-//		        String sUniquename = CourseOfStudy_with_AcademicDegree.createUniquenameForSearch(sAbschl, sStg, sVert, sSigntureTemplateForSearch);
-//		        System.out.println("Studiengang uniquename='" + sUniquename + "'");
-//		        
-//		        String sAcademicDegreeUniquename = objCourseOfStudy.getAcademicDegreeUniquename();
-//		        System.out.println("AcademicDegree uniquename='" + sAcademicDegreeUniquename + "'");
-			        
-		        
-	            
+		        boolean bTransformed = erzeuger.transformHashMapToDbUpdate(hmCourseOfStudy);
+	        	if(!bTransformed) {
+	        		System.out.println("Keine Transformation zu insert Befehlen. Vermutlich inkorrekte Eingabezeile.");
+	     	     	break main;
+	     	    }
+	        			
 		        //###########################################################################
 	            //Auf Update abgeänderter Code für die Ausgabe
 	            List<String> listUpdate = erzeuger.getListUpdate();
@@ -211,7 +118,7 @@ public class SqlGeneratorMain_updateForTableByHashMapFromCsv implements IConstan
 	 	                  	System.out.println(sUpdateTemp);
 	 	            }    
 	 	            
-	 	            String sDirectory = sqlUi.getDirectory();
+	 	            String sDirectory = sqlConsole.getDirectory();
 			        erzeuger.setDirectory(sDirectory);
 	            	
 	            	String sDateiname = erzeuger.erstelleDateinamenDefault();
@@ -319,30 +226,24 @@ public class SqlGeneratorMain_updateForTableByHashMapFromCsv implements IConstan
     	return this.getTable() + sDateTime + ".sql";
     }
     
-     
-    //public boolean transformHashMapToDbUpdate(Map<String, CourseOfStudy_with_AcademicDegree> mapCourseOfStudy) throws ExceptionZZZ {
-    public boolean transformToDbUpdate(CourseOfStudy_with_AcademicDegree objCourseOfStudy) throws ExceptionZZZ {
+        
+    public boolean transformHashMapToDbUpdate(Map<String,CourseOfStudy_with_AcademicDegree> mapCourseOfStudy)  throws ExceptionZZZ {
     	boolean bReturn = false;
-    	main:{
-    		/*Anders als bei academicDegree hier nicht die ganze Map durchsehen
-    		Set<String> setStg = mapCourseOfStudy.keySet();    	
-    		for(String sStg : setStg) {
-    			CourseOfStudy_with_AcademicDegree objCourseOfStudy = mapCourseOfStudy.get(sStg);
+    	main:{    	    		
+			Set<String> setStgAbschlVert = mapCourseOfStudy.keySet();    	
+    		for(String sKeyTemp : setStgAbschlVert) {
+    			CourseOfStudy_with_AcademicDegree objCourseOfStudy = mapCourseOfStudy.get(sKeyTemp);
     			if(objCourseOfStudy!=null) {
     				String sUpdate = transformCourseOfStudyToDbUpdate(objCourseOfStudy);
-    				this.addUpdate(sUpdate);
-    				System.out.println("sUpdate=" + sUpdate);
+    				if(!StringZZZ.isEmptyNull(sUpdate)) {
+	    				this.addUpdate(sUpdate);
+	    				System.out.println("sUpdate=" + sUpdate);
+	    			}
     			}else {
-    				System.out.println("Key in Map nicht gefunden. Studiengang '" + sStg + "'");
+    				System.out.println("Key in Map nicht gefunden. Studiengang '" + sKeyTemp + "'");
     			}
-    		}    	
-    		*/	    	
-    		
-    		String sUpdate = transformCourseOfStudyToDbUpdate(objCourseOfStudy);
-    		if(StringZZZ.isEmpty(sUpdate)) break main;
-    		
-			this.addUpdate(sUpdate);
-			System.out.println("sUpdate=" + sUpdate);
+    		} 
+    		bReturn = true;
     	}//end main:    	
     	return bReturn;
     }
@@ -370,7 +271,7 @@ public class SqlGeneratorMain_updateForTableByHashMapFromCsv implements IConstan
 
 	        
 	        
-	        //ZIEL: 
+	        //ZIEL, erstelle SQL wie: 
 	        //update course_of_study set academicdegree_id = (select id from academicdegree where uniquename in ('diplxing'))
 	        //where uniquename LIKE '11|032|-|-|H|%|0390|P|V|%|'
 	        AcademicDegreeTitle objAcademicDegreeTitle = objCourseOfStudy.getAcademicDegreeObject();
@@ -387,7 +288,6 @@ public class SqlGeneratorMain_updateForTableByHashMapFromCsv implements IConstan
 	        sWhereColumn = "uniquename";
 	        sWhereSingleValue = objCourseOfStudy.createUniquenameForSearch();
 	        
-	        //                                    (String sTable, String sColumn, String sSingleValue, String sWhereColumn, String sWhereSingleValue) throws ExceptionZZZ {
 	        sReturn = SqlUtilZZZ.createUpdateConditioned_LIKE(sTable, sColumn, sSingleValue, sWhereColumn, sWhereSingleValue);
 	        sReturn = SqlUtilZZZ.toStatement(sReturn); //Sonst kann postgre die Anweisungszeilen Zeilen wohl nicht unterscheiden
     	}//end main:
@@ -472,31 +372,12 @@ public class SqlGeneratorMain_updateForTableByHashMapFromCsv implements IConstan
     public static Map<String, String> erzeugeAliasMap(CourseOfStudy_with_AcademicDegree objCourseOfStudy) throws ExceptionZZZ {
         Map<String, String> mapReturn = null;
         main:{
-        
-        //TODOGOON20260803 - Hier wird dann aus dem Objekt 
-        //Der Name des Getters als ueberschrift genommen
-        //Der Wert des Getters als value
-        
-        //Das Parsen aus einer CSV Datei passiert hier in dem Fall vorher, beim Aufbauen der HashMap
-        //also nicht:
-//      String[] keys = ueberschrift.split(",");                       
-//      String[] values = parseCsvLine(eintrag);
-//      
-//      int laenge = Math.min(keys.length, values.length);
-//
-//      for (int i = 0; i < laenge; i++) {
-//          String key = keys[i].trim();
-//          String value = values[i].trim();
-//          map.put(key, value);
-//      }
 
-        //sondern ...
         String sColumn = null; //das sind die für den Update mit Suche später verwendebare Spaltennamen
-        String sValue = null; int iValue;
+        String sValue = null;        
         
         
-        
-        //++++
+        //++++ Der Uniquename enthält Studiengang, Abschluss und Vertiefung
         sColumn = "uniquename";
         
         String sAbschl = objCourseOfStudy.getAbschluss();
@@ -572,4 +453,37 @@ public class SqlGeneratorMain_updateForTableByHashMapFromCsv implements IConstan
         // Rückgabe als Array
         return result.toArray(new String[result.size()]);
     } 
+    
+    public static Map<String,CourseOfStudy_with_AcademicDegree> createMapWithEntityFromCsvEntry(Map<String,AcademicDegreeTitle> hmAcademicDegreeTitle) throws ExceptionZZZ {
+    	Map<String,CourseOfStudy_with_AcademicDegree> hmReturn = null;    		    			
+    	main:{
+    		if(hmAcademicDegreeTitle==null) {
+    			ExceptionZZZ ez = new ExceptionZZZ("Map<String,AcademicDegreeTitle> hmAcademicDegreeTitle", iERROR_PARAMETER_MISSING, SqlGeneratorMain_insertForTableByHashMapFromCsv.class, ReflectCodeZZZ.getPositionCurrent());
+    			throw ez;
+    		}
+    		
+	      	//Lies die CSV-Datei mit Werten ein, Zeile für Zeile.    		
+    		hmReturn = new LinkedHashMap<String,CourseOfStudy_with_AcademicDegree>();	
+    		
+    		Set<String> setKey = hmAcademicDegreeTitle.keySet();
+	        for(String sKeyTemp : setKey) {
+	        	if(!StringZZZ.isEmpty(sKeyTemp)) {
+	        		CourseOfStudy_with_AcademicDegree objCourseOfStudy = new CourseOfStudy_with_AcademicDegree();
+
+			      	//TODOGOON20260809: Überprüfe die Anzahl der Spalten in der CSV Datei, vielleicht wurde die falsche Datei angegeben, oder etwas falschen eingefügt.
+	        		System.out.println("Verarbeite Key: " + sKeyTemp);
+		        	     	 
+					AcademicDegreeTitle objAcademicDegreeTitle = hmAcademicDegreeTitle.get(sKeyTemp);
+					if(objAcademicDegreeTitle==null) {
+			     		System.out.println("Kein AcademicDegree-Objekt vorhanden für Key: '" + sKeyTemp + "'");
+			       	}else {
+			        	objCourseOfStudy.setAcademicDegreeObject(objAcademicDegreeTitle);
+			        	
+			        	hmReturn.put(sKeyTemp, objCourseOfStudy);						        			        					        
+			       	}			    
+	        	}//end if(!StringZZZ.isEmpty(sEintragTemp)) {
+	        }//end for ... listEintrag	
+    	}//end main:
+        return hmReturn;
+    }
 }

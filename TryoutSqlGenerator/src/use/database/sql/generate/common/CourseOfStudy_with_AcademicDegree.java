@@ -1,4 +1,4 @@
-package use.database.sql.genrate.common;
+package use.database.sql.generate.common;
 
 import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.IConstantZZZ;

@@ -16,8 +16,8 @@ import basic.zBasic.util.system.Syso;
 import use.database.sql.generate.SqlUtilZZZ;
 import use.database.sql.generate.TextDateiSchreiber;
 import use.database.sql.generate.ZeitstempelErzeuger;
-import use.database.sql.genrate.common.AcademicDegreeTitle;
-import use.database.sql.genrate.common.SqlGeneratorUI;
+import use.database.sql.generate.common.AcademicDegreeTitle;
+import use.database.sql.generate.common.SqlGeneratorConsoleUI;
 
 /**Ziel ist das Einlesen einer CSV Datei, mit Daten für die Erstellung von Schlüsseltabellen - Einträgen in HISinOne.
  * Die CSV Datei wurde zuvor mit einer SQL Abrfrage in pgAdmin erstellt. (hier SOSPOS Tabelle parstg).
@@ -70,7 +70,7 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
 	        		tabelle = "academicdegree"; //hard coded zum Entwickeln
 	        	}
 	        		        		        	
-	        	SqlGeneratorUI sqlUi = new SqlGeneratorUI();	        	
+	        	SqlGeneratorConsoleUI sqlUi = new SqlGeneratorConsoleUI();	        	
 	        	List<String> listEintrag = sqlUi.readCsvAsList();
 	        	
 	        	erzeuger = new SqlGeneratorMain_insertForTableByHashMapFromCsv();
@@ -364,11 +364,12 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
     			throw ez;
     		}
     		
+	      	//Lies die CSV-Datei mit Werten ein, Zeile für Zeile.    		
     		hmReturn = new LinkedHashMap<String,AcademicDegreeTitle>();
 	        for(String sEintragTemp : listEintrag) {
 	        	if(!StringZZZ.isEmpty(sEintragTemp)) {
 			      	  AcademicDegreeTitle objAcademicDegreeTitle = new AcademicDegreeTitle();
-			      	  
+
 			      	  //TODOGOON20260809: Überprüfe die Anzahl der Spalten in der CSV Datei, vielleicht wurde die falsche Datei angegeben, oder etwas falschen eingefügt.
 			      	  String[] saEntry = parseCsvLine(sEintragTemp);
 			      	  
@@ -387,6 +388,10 @@ public class SqlGeneratorMain_insertForTableByHashMapFromCsv implements IConstan
 			      			  
 					      	  //Schlüssel besteht aus Abschluss | Studiengang | Vertiefunge
 					      	  String sKey = saEntry[0] + "|" + saEntry[1] + "|" + saEntry[2];
+					      	  objAcademicDegreeTitle.setAbschluss(saEntry[0]);
+					      	  objAcademicDegreeTitle.setStudiengang(saEntry[1]);
+					      	  objAcademicDegreeTitle.setVertiefung(saEntry[2]);
+					      	  
 					      	  objAcademicDegreeTitle.setDefaulttext(saEntry[3]);
 					      	  objAcademicDegreeTitle.setDefaulttext_female(saEntry[4]);
 					      	  objAcademicDegreeTitle.setLongtext(saEntry[3]);             //Defaulttext = Longtext
