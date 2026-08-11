@@ -16,7 +16,6 @@ import basic.zBasic.util.system.Syso;
 import use.database.sql.generate.SqlUtilZZZ;
 import use.database.sql.generate.TextDateiSchreiber;
 import use.database.sql.generate.ZeitstempelErzeuger;
-import use.database.sql.generate.academicdegree.AcademicDegreeTitle_ALTE_VERSION;
 import use.database.sql.generate.academicdegree.SqlGeneratorMain_insertForTableByHashMapFromCsv;
 import use.database.sql.generate.common.AcademicDegreeTitle;
 import use.database.sql.generate.common.SqlGeneratorConsoleUI;
@@ -186,7 +185,7 @@ public class SqlGeneratorMain_updateForTableByHashMapFromCsv implements IConstan
     
     
     //######################################
-    public static boolean addStaticCustomValues(AcademicDegreeTitle_ALTE_VERSION objAcademicDegreeTitle, String[] saValue) throws ExceptionZZZ {
+    public static boolean addStaticCustomValues(AcademicDegreeTitle objAcademicDegreeTitle, String[] saValue) throws ExceptionZZZ {
     	boolean bReturn = false;
     	main:{
     		if(objAcademicDegreeTitle==null) {
@@ -295,7 +294,7 @@ public class SqlGeneratorMain_updateForTableByHashMapFromCsv implements IConstan
     }
 
     // Wandelt Überschrift + Eintrag in eine Map um
-    public static Map<String, String> erzeugeAliasMap(AcademicDegreeTitle_ALTE_VERSION objAcademicDegreeTitle) throws ExceptionZZZ {
+    public static Map<String, String> erzeugeAliasMap(AcademicDegreeTitle objAcademicDegreeTitle) throws ExceptionZZZ {
         Map<String, String> mapReturn = new LinkedHashMap<String, String>(); // Reihenfolge bewahren
 
         //TODOGOON20260803 - Hier wird dann aus dem Objekt 
