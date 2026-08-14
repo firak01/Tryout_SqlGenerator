@@ -1,5 +1,6 @@
 package use.database.sql.generate;
 import java.util.Map;
+import java.util.UUID;
 
 import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.IConstantZZZ;
@@ -242,6 +243,14 @@ Da du nur wissen möchtest, ob ein uniquename bereits existiert, ist NOT EXISTS 
 	    	return sReturn;
 	    }
 
+	    public static String createObj_guid() throws ExceptionZZZ {
+	    	String sReturn = null;
+	    	main:{
+	    		UUID uuid = UUID.randomUUID();
+	    		sReturn =  uuid.toString();
+	    	}//end main:
+	    	return sReturn;	    	
+	    }
 		/** z.B. Ergebnis
 		 *  select id from academicdegree where uniquename in ('diplxing')
 		 *  

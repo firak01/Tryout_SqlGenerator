@@ -196,8 +196,7 @@ public class SqlGeneratorMain_updateForTableByHashMapFromCsv implements IConstan
     		objAcademicDegreeTitle.setK_language_id(12);
     		objAcademicDegreeTitle.setPosition_of_title(0);
     		    		
-    		UUID uuid = UUID.randomUUID();
-    		String sObj_guid =  uuid.toString();
+    		String sObj_guid = SqlUtilZZZ.createObj_guid();
     		objAcademicDegreeTitle.setObj_guid(sObj_guid);
     		
     		//nun einen uniquename errechnen.
