@@ -11,17 +11,17 @@ import basic.zBasic.util.crypt.thread.KeyPressThreadEncryptZZZ;
 import basic.zBasic.util.datatype.character.CharacterExtendedZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
 
-public abstract class AbstractConsoleUserSqlUtilZZZ extends AbstractConsoleUserZZZ{
-	public AbstractConsoleUserSqlUtilZZZ()  throws ExceptionZZZ {
+public abstract class AbstractConsoleUserSqlGeneratorZZZ extends AbstractConsoleUserZZZ{
+	public AbstractConsoleUserSqlGeneratorZZZ()  throws ExceptionZZZ {
 		super();
 	}
-	public AbstractConsoleUserSqlUtilZZZ(IConsoleZZZ objConsole) throws ExceptionZZZ {
+	public AbstractConsoleUserSqlGeneratorZZZ(IConsoleZZZ objConsole) throws ExceptionZZZ {
 		super(objConsole);		
 	}
-	public AbstractConsoleUserSqlUtilZZZ(IConsoleZZZ objConsole,String sFlag) throws ExceptionZZZ {
+	public AbstractConsoleUserSqlGeneratorZZZ(IConsoleZZZ objConsole,String sFlag) throws ExceptionZZZ {
 		super(objConsole, sFlag);		
 	}
-	public AbstractConsoleUserSqlUtilZZZ(IConsoleZZZ objConsole,String[] saFlag) throws ExceptionZZZ {
+	public AbstractConsoleUserSqlGeneratorZZZ(IConsoleZZZ objConsole,String[] saFlag) throws ExceptionZZZ {
 		super(objConsole, saFlag);	
 	}
 	

@@ -14,20 +14,20 @@ import basic.zBasic.util.datatype.character.CharacterExtendedZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
 import basic.zKernel.flag.IFlagZEnabledZZZ;
 
-public class ConsoleUserSqlUtilZZZ extends AbstractConsoleUserSqlUtilZZZ {
+public class ConsoleUserSqlGeneratorZZZ extends AbstractConsoleUserSqlGeneratorZZZ {
 	private static final long serialVersionUID = 1L;
 
-	public ConsoleUserSqlUtilZZZ() throws ExceptionZZZ {
+	public ConsoleUserSqlGeneratorZZZ() throws ExceptionZZZ {
 		super();
 	}
 	
-	public ConsoleUserSqlUtilZZZ(IConsoleZZZ objConsole) throws ExceptionZZZ {
+	public ConsoleUserSqlGeneratorZZZ(IConsoleZZZ objConsole) throws ExceptionZZZ {
 		super(objConsole);
 	}
-	public ConsoleUserSqlUtilZZZ(IConsoleZZZ objConsole, String sFlag) throws ExceptionZZZ {
+	public ConsoleUserSqlGeneratorZZZ(IConsoleZZZ objConsole, String sFlag) throws ExceptionZZZ {
 		super(objConsole, sFlag);
 	}
-	public ConsoleUserSqlUtilZZZ(IConsoleZZZ objConsole, String[] saFlag) throws ExceptionZZZ {
+	public ConsoleUserSqlGeneratorZZZ(IConsoleZZZ objConsole, String[] saFlag) throws ExceptionZZZ {
 		super(objConsole, saFlag);
 	}
 	
@@ -54,7 +54,7 @@ public class ConsoleUserSqlUtilZZZ extends AbstractConsoleUserSqlUtilZZZ {
 			//       Darum muss man alles in dem KeyPressThread erledigen
 			//Warten auf die fertige Eingabe.			
 			//if(!this.getConsole().isKeyPressThreadFinished()) break main;
-			if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("####### CryptThread START: WARTE AUF FERTIGE KONSOLENEINGABE ######");				
+			if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("####### ConsoleUserSqlGenerator START: WARTE AUF FERTIGE KONSOLENEINGABE ######");				
 			do {
 				 try {				 
 					 Thread.sleep(200);
@@ -64,21 +64,27 @@ public class ConsoleUserSqlUtilZZZ extends AbstractConsoleUserSqlUtilZZZ {
 					e.printStackTrace();
 				}				 
 			}while(!this.getConsole().isInputAllFinished());
-			if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("####### CryptThread ENDE: WARTE AUF FERTIGE KONSOLENEINGABE ######");
+			if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("####### ConsoleUserSqlGenerator ENDE: WARTE AUF FERTIGE KONSOLENEINGABE ######");
 			
 			
 			//this.isOutputAllFinished(false);
 			
 			
 			this.iCounter++;
-			if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("Zähler crypt: " + iCounter);
+			if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("Zähler ConsoleUserSqlGenerator: " + iCounter);
 
 			HashMapZZZ<String,Object>hmVariable=this.getConsole().getVariableHashMap();
 			if(hmVariable!=null) {
 				String sDebug = hmVariable.computeDebugString("<BR>","|");
 				System.out.println(sDebug);
 			}
+
+			//TODOGOON20260816: //In AbstractConsoleUser die Methode start() machen, die den obigen Code ausführt.
+			//TODOGOON20260816; //Darin dann am Schluss die abstrakte Methode .startIt() aufrufen.... Die dann vom Konkreten verwendeten Thread genutzt wird.
+			//this.startit();
 			
+			//TODOGOON20260816; //Nachfolgenden Code in die startit() Methode verlagern...
+			//TODOGOON20260816; //Hier eine allgemeine Methode .reset() aufrufen.... Die dann vom Konkreten verwendeten Thread genutzt wird.
 			if(hmVariable!=null) {
 				//Ausgabewerte zurücksetzen
 				hmVariable.remove(KeyPressThreadEncryptZZZ.sOUTPUT_TEXT_ENCRYPTED);

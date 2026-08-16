@@ -7,8 +7,8 @@ import basic.zBasic.util.console.multithread.IConsoleZZZ;
 import basic.zBasic.util.console.multithread.IKeyPressThreadZZZ;
 import basic.zBasic.util.crypt.thread.ConsoleUserEncryptZZZ;
 import basic.zBasic.util.crypt.thread.KeyPressThreadEncryptZZZ;
-import use.database.sql.console.ConsoleUserSqlUtilZZZ;
-import use.database.sql.console.KeyPressThreadSqlUtilZZZ;
+import use.database.sql.console.ConsoleUserSqlGeneratorZZZ;
+import use.database.sql.console.KeyPressThreadSqlGeneratorZZZ;
 
 public class SqlUtilMainZZZ {
 
@@ -27,7 +27,7 @@ public class SqlUtilMainZZZ {
 			//Der ConsoleUser und die Eingabe so eng miteinander verknüpft, dass man hier den KeyPressCryptThreadZZZ
 			//übergeben wird, der das Verhalten des ...UserCrypt... steuert.
 			//KeyPressThreadEncryptZZZ objKeyPressThread = new KeyPressThreadEncryptZZZ(objConsole);
-			IKeyPressThreadZZZ objKeyPressThread = new KeyPressThreadSqlUtilZZZ(objConsole);
+			IKeyPressThreadZZZ objKeyPressThread = new KeyPressThreadSqlGeneratorZZZ(objConsole);
 			objConsole.setKeyPressThread(objKeyPressThread);
 						
 			//TODOGOON20230203; Übergib die Argumente aus objConsole and objConsoleUser, analog zu KernelKernelZZZ und dort an FileIniZZZ
@@ -50,7 +50,7 @@ public class SqlUtilMainZZZ {
 			
 			//Merke: Ziel ist, dass der ConsoleUser-Thread und der KeyPressThread "Daten" miteinander austauschen können. 
 			//IConsoleUserZZZ objConsoleUser = new ConsoleUserCryptZZZ(objConsole,"DEBUG");
-			IConsoleUserZZZ objConsoleUser = new ConsoleUserSqlUtilZZZ(objConsole);
+			IConsoleUserZZZ objConsoleUser = new ConsoleUserSqlGeneratorZZZ(objConsole);
 			objConsole.setConsoleUserObject(objConsoleUser);
 			objConsole.start();
 			
