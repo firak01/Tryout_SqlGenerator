@@ -378,54 +378,20 @@ import use.database.sql.generate.SqlUtilZZZ;
 //        	}	
 //		}
 		
-	private boolean processObjGuid_(HashMapZZZ hmVariable) throws ExceptionZZZ{		
-		//Ausgabe einer errechneten ObjGuid
-		boolean bReturn = true;
-		main:{
-
-			//In dieser einfachen Methode gibt es keine weiteren Parameter entgegenzunehmen....
-			//eigentlich müsste diese Methode umbenannt werden in irgenwas mit Input...ParameterCustom...
-			
-			
-			TODOGOON20260817;//Dieser Code sollte dann in ConsoleUserSqlGeneratorMain in einer Methode stehen,
-			                 //Die dort im start(), letztendlich ausgeführt wird.
-			                 //Siehe ConsoleUserEncrypt/Decrypt nach while...isInputAllFinished.
-			                 //diese neue Methode müssten dann processit() heissen....
-			
-			String sObjGuid = SqlUtilZZZ.createObj_guid();
-			System.out.println(sObjGuid);
-			
-			this.isCurrentMenue(true);//das Menue erneut aufbauen
-    		this.isCurrentInputFinished(true);
-    		this.isInputAllFinished(true);//das beendet diesen Menuelauf
-    		this.isOutputAllFinished(true);//das bewirkt, das kein anderer Thread eine Ausgabe macht.
-    		
-			System.out.println("Weiter mit der Menueeingabe....");
-		}//end main:
-		return bReturn;	
-	}
+	
 	
 	@Override
 	public boolean initit(HashMapZZZ hmVariable) throws ExceptionZZZ {
 		boolean bReturn = true;
 		main:{
 			
-			String sCallingMethod= (String) hmVariable.get(IKeyPressThreadConstantZZZ.sINPUT_STRING_METHOD_USED);
-			switch(sCallingMethod){
-				case "processObjGuid":
-					processObjGuid_(hmVariable);
-					break;
-				default:
-					ExceptionZZZ ez = new ExceptionZZZ("Nicht behandelte Methode: '" + sCallingMethod + "'", iERROR_PROPERTY_VALUE, this.getClass(), ReflectCodeZZZ.getPositionCurrent());
-					throw ez;
-			}
+			//Die Hier übergebene Methode wird in ConsoleUserSqlGenerator.startit() ausgelesen.
+			//Plus alle anderen INPUT - Variablen.
+			
 			
 		}//end main:
 		return bReturn;
 	}
-			
-			
-	
 }
 
 

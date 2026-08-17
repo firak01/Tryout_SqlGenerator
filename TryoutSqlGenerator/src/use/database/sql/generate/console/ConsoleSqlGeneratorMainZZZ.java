@@ -1,7 +1,8 @@
 package use.database.sql.generate.console;
 
 import basic.zBasic.ExceptionZZZ;
-import basic.zBasic.util.console.multithread.ConsoleZZZ;
+import basic.zBasic.util.console.multithread.ConsoleThreadZZZ;
+import basic.zBasic.util.console.multithread.IConsoleUserStartableZZZ;
 import basic.zBasic.util.console.multithread.IConsoleUserZZZ;
 import basic.zBasic.util.console.multithread.IConsoleZZZ;
 import basic.zBasic.util.console.multithread.IKeyPressThreadZZZ;
@@ -21,7 +22,7 @@ public class ConsoleSqlGeneratorMainZZZ {
 			//aber in dieser Applikation OHNE Kernel, also OHNE ini-Konfiguration auskommen!!!    this.objKernel = new KernelZZZ(objConfig, (String) null); //Damit kann man ueber die Startparameter ein anders konfiguriertes Kernel-Objekt erhalten.
 			//TODOGOON20230203: Daher das objConfig in .getInstance(objConfig) übergeben!!!
 
-			IConsoleZZZ objConsole = ConsoleZZZ.getInstance();
+			IConsoleZZZ objConsole = ConsoleThreadZZZ.getInstance();
 			
 			//Merke: Ziel ist es, das was in DebugRot13ZZZ (oder ähnlichen) gemacht wird in einer Endlosschleife durchzuführen.
 			//Der ConsoleUser und die Eingabe so eng miteinander verknüpft, dass man hier den KeyPressCryptThreadZZZ
@@ -50,8 +51,8 @@ public class ConsoleSqlGeneratorMainZZZ {
 			
 			//Merke: Ziel ist, dass der ConsoleUser-Thread und der KeyPressThread "Daten" miteinander austauschen können. 
 			//IConsoleUserZZZ objConsoleUser = new ConsoleUserCryptZZZ(objConsole,"DEBUG");
-			IConsoleUserZZZ objConsoleUser = new ConsoleUserSqlGeneratorZZZ(objConsole);
-			objConsole.setConsoleUserObject(objConsoleUser);
+			IConsoleUserStartableZZZ objConsoleUserStartable = new ConsoleUserSqlGeneratorZZZ(objConsole);
+			objConsole.setConsoleUserStartableObject(objConsoleUserStartable);
 			objConsole.start();
 			
 			//TODO 20230127: Weitere-Threads anbinden können, d.h. objConsole.setConsoleUserObejects(Array von IConsoleUser) 

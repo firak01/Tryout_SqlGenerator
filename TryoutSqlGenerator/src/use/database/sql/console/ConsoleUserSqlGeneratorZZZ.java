@@ -1,9 +1,11 @@
 package use.database.sql.console;
 
 import basic.zBasic.ExceptionZZZ;
+import basic.zBasic.ReflectCodeZZZ;
 import basic.zBasic.util.abstractList.HashMapZZZ;
-import basic.zBasic.util.console.multithread.AbstractConsoleUserZZZ;
+import basic.zBasic.util.console.multithread.AbstractConsoleUserStartableZZZ;
 import basic.zBasic.util.console.multithread.IConsoleZZZ;
+import basic.zBasic.util.console.multithread.IKeyPressThreadConstantZZZ;
 import basic.zBasic.util.crypt.code.CryptAlgorithmFactoryZZZ;
 import basic.zBasic.util.crypt.code.CryptAlgorithmMaintypeZZZ;
 import basic.zBasic.util.crypt.code.ICharacterPoolEnabledZZZ;
@@ -13,6 +15,7 @@ import basic.zBasic.util.crypt.thread.KeyPressThreadEncryptZZZ;
 import basic.zBasic.util.datatype.character.CharacterExtendedZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
 import basic.zKernel.flag.IFlagZEnabledZZZ;
+import use.database.sql.generate.SqlUtilZZZ;
 
 public class ConsoleUserSqlGeneratorZZZ extends AbstractConsoleUserSqlGeneratorZZZ {
 	private static final long serialVersionUID = 1L;
@@ -37,50 +40,74 @@ public class ConsoleUserSqlGeneratorZZZ extends AbstractConsoleUserSqlGeneratorZ
 		return this.iCounter;
 	}
 	
-	@Override
-	public boolean start() throws ExceptionZZZ {
+//	@Override
+//	public boolean start() throws ExceptionZZZ {
+//		boolean bReturn = false;
+//		try {
+//		main:{
+//			this.getConsole().isConsoleUserThreadRunning(true);
+//			//Merke: Diesen Teil nicht als Schleife ausführen... viel zu kompliziert... es gibt schon genug andere Threads
+//			//while(!this.isStopped()) {
+//			if(this.isStopped()) break main;
+//			if(this.isOutputAllFinished()) break main; //wenn Z.B. schon ein Menuepunkt ausgefuehrt worden ist. Z.B. eine einfache ASCII-Tabelle ausgegeben wurde.
+//			if(!this.isInputAllFinished()) break main; 
+//			String sInput = null;
+//			
+//			//Merke: Man kann keine zweite Scanner Klasse auf den sys.in Stream ansetzen.
+//			//       Darum muss man alles in dem KeyPressThread erledigen
+//			//Warten auf die fertige Eingabe.			
+//			//if(!this.getConsole().isKeyPressThreadFinished()) break main;
+//			if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("####### ConsoleUserSqlGenerator START: WARTE AUF FERTIGE KONSOLENEINGABE ######");				
+//			do {
+//				 try {				 
+//					 Thread.sleep(200);
+//					 //System.out.println("CryptThread wartet auf fertige Konsoleneingabe");
+//				} catch (InterruptedException e) {
+//					System.out.println("KeyPressThread: Wait Error");
+//					e.printStackTrace();
+//				}				 
+//			}while(!this.getConsole().isInputAllFinished());
+//			if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("####### ConsoleUserSqlGenerator ENDE: WARTE AUF FERTIGE KONSOLENEINGABE ######");
+//			
+//			
+//			//this.isOutputAllFinished(false);
+//			
+//			
+//			this.iCounter++;
+//			if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("Zähler ConsoleUserSqlGenerator: " + iCounter);
+//
+//			
+//			//TODOGOON20260816: //In AbstractConsoleUser die Methode start() machen, die den obigen Code ausführt.
+//			//TODOGOON20260816; //Darin dann am Schluss die abstrakte Methode .startIt() aufrufen.... Die dann vom Konkreten verwendeten Thread genutzt wird.
+//			//this.startit();  //Im ConsoleUserSqlGenerator müsste dann vom jeweiligen Thread-Objekt .startit() aufgerufen werden....
+//			
+//			//TODOGOON20260816; //Nachfolgenden Code dann auch in die startit() Methode verlagern...
+//			//TODOGOON20260816; //Hier eine allgemeine Methode .reset() aufrufen.... Die dann vom Konkreten verwendeten Thread genutzt wird.
+//			HashMapZZZ<String,Object>hmVariable=this.getConsole().getVariableHashMap();
+//			this.startit(hmVariable);
+//					
+//			
+//			if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("####### SqlGeneratorThread START: DUMMYWARTEN ALS TEST ######");
+//			 try {				 
+//				 Thread.sleep(4500);
+//			} catch (InterruptedException e) {
+//				System.out.println("KeyPressThread: Wait Error");
+//				e.printStackTrace();
+//			}
+//			 if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("####### SqlGeneratorThread ENDE: DUMMYWARTEN ALS TEST ######");			 
+//			 this.isOutputAllFinished(true);			
+//			//}//end while !isStopped
+//		}//end main:
+//		}catch(ExceptionZZZ ez) {
+//			ez.printStackTrace();
+//		}
+//		this.getConsole().isConsoleUserThreadFinished(true);
+//		return bReturn;
+//	}
+	
+	public boolean startit(HashMapZZZ hmVariable) throws ExceptionZZZ {
 		boolean bReturn = false;
-		try {
-		main:{
-			this.getConsole().isConsoleUserThreadRunning(true);
-			//Merke: Diesen Teil nicht als Schleife ausführen... viel zu kompliziert... es gibt schon genug andere Threads
-			//while(!this.isStopped()) {
-			if(this.isStopped()) break main;
-			if(this.isOutputAllFinished()) break main; //wenn Z.B. schon ein Menuepunkt ausgefuehrt worden ist. Z.B. eine einfache ASCII-Tabelle ausgegeben wurde.
-			if(!this.isInputAllFinished()) break main; 
-			String sInput = null;
-			
-			//Merke: Man kann keine zweite Scanner Klasse auf den sys.in Stream ansetzen.
-			//       Darum muss man alles in dem KeyPressThread erledigen
-			//Warten auf die fertige Eingabe.			
-			//if(!this.getConsole().isKeyPressThreadFinished()) break main;
-			if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("####### ConsoleUserSqlGenerator START: WARTE AUF FERTIGE KONSOLENEINGABE ######");				
-			do {
-				 try {				 
-					 Thread.sleep(200);
-					 //System.out.println("CryptThread wartet auf fertige Konsoleneingabe");
-				} catch (InterruptedException e) {
-					System.out.println("KeyPressThread: Wait Error");
-					e.printStackTrace();
-				}				 
-			}while(!this.getConsole().isInputAllFinished());
-			if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("####### ConsoleUserSqlGenerator ENDE: WARTE AUF FERTIGE KONSOLENEINGABE ######");
-			
-			
-			//this.isOutputAllFinished(false);
-			
-			
-			this.iCounter++;
-			if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("Zähler ConsoleUserSqlGenerator: " + iCounter);
-
-			
-			//TODOGOON20260816: //In AbstractConsoleUser die Methode start() machen, die den obigen Code ausführt.
-			//TODOGOON20260816; //Darin dann am Schluss die abstrakte Methode .startIt() aufrufen.... Die dann vom Konkreten verwendeten Thread genutzt wird.
-			//this.startit();  //Im ConsoleUserSqlGenerator müsste dann vom jeweiligen Thread-Objekt .startit() aufgerufen werden....
-			
-			//TODOGOON20260816; //Nachfolgenden Code dann auch in die startit() Methode verlagern...
-			//TODOGOON20260816; //Hier eine allgemeine Methode .reset() aufrufen.... Die dann vom Konkreten verwendeten Thread genutzt wird.
-			HashMapZZZ<String,Object>hmVariable=this.getConsole().getVariableHashMap();			
+		main:{			
 			if(hmVariable!=null) {
 				//Ausgabewerte zurücksetzen
 				hmVariable.remove(KeyPressThreadEncryptZZZ.sOUTPUT_TEXT_ENCRYPTED);
@@ -93,57 +120,101 @@ public class ConsoleUserSqlGeneratorZZZ extends AbstractConsoleUserSqlGeneratorZ
 				String sDebug = hmVariable.computeDebugString("<BR>","|");
 				System.out.println(sDebug);
 			}
-					
+			
+			
+			//################
+			
 			//Die eingegebenen Variablen über eine HashMap aus der Console für die Steuereung der Verschlüsselung nutzen. 			
-			//String sCipher = (String) hmVariable.get(CryptCipherAlgorithmMappedValueZZZ.CryptCipherTypeZZZ.ROT13.getAbbreviation());
-			String sCipher = (String) hmVariable.get(KeyPressThreadEncryptZZZ.sINPUT_CIPHER);
-			if(!StringZZZ.isEmpty(sCipher)) {
-				ICryptZZZ objCrypt = CryptAlgorithmFactoryZZZ.getInstance().createAlgorithmType(sCipher);
-				boolean bSuccess = this.preProcessing(objCrypt, hmVariable);
-				if(!bSuccess) {					
-					System.out.println("PreProcessing nicht erfolgreich, Abbruch");
-					bReturn=false;
-					break main;
-				}
-								
-				//+++++++++++++++++++++++++++++++++++++++++++++++++
-								
-				sInput = (String) hmVariable.get(KeyPressThreadEncryptZZZ.sINPUT_TEXT_UNCRYPTED);				
-				try {
-					String sOutput = objCrypt.encrypt(sInput);
-					hmVariable.put(KeyPressThreadEncryptZZZ.sOUTPUT_TEXT_ENCRYPTED, sOutput);
-					
-					System.out.println("Verschluesselter Wert:\n"+sOutput);
-					String sOutput2 = objCrypt.decrypt(sOutput);
-					hmVariable.put(KeyPressThreadEncryptZZZ.sOUTPUT_TEXT_DECRYPTED, sOutput2);
-					System.out.println("Wieder entschluesselter Wert:\n"+sOutput2);
-					
-					bReturn = true;
-				}catch( IllegalArgumentException e) {
-					String sError=e.getMessage();
-					System.out.println("Fehler bei der Eingabe.\nText enthaelt fuer die Argumentkombination ungueltige Werte.\nFehler: "+sError +"\nbei Eingabe: "+sInput);
-					bReturn=false;
-				}
-				
-			}else {
-				System.out.println("noch kein Schluesselalgorithmus festgelegt.");
-				bReturn = false;
+			//Die aus KeyPressThreadSqlGenerator eingegegebenen Variablen auslesen. 
+			//aus KeyPressThreadSqlGenerator.processMenueMainArgumentInput() kommt die Methode
+			//aus KeyPressThreadSqlGenerator.processMenuePostArgumentInput() kommen weitere Variablen, die per Consoleneingabe geholt worden sind.
+			
+			String sCallingMethod= (String) hmVariable.get(IKeyPressThreadConstantZZZ.sINPUT_STRING_METHOD_USED);
+			switch(sCallingMethod){
+				case "processObjGuid":
+					processObjGuid_(hmVariable);
+					break;
+				default:
+					ExceptionZZZ ez = new ExceptionZZZ("Nicht behandelte Methode: '" + sCallingMethod + "'", iERROR_PROPERTY_VALUE, this.getClass(), ReflectCodeZZZ.getPositionCurrent());
+					throw ez;
 			}
-			if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("####### CryptThread START: DUMMYWARTEN ALS TEST ######");
-			 try {				 
-				 Thread.sleep(4500);
-			} catch (InterruptedException e) {
-				System.out.println("KeyPressThread: Wait Error");
-				e.printStackTrace();
-			}
-			 if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("####### CryptThread ENDE: DUMMYWARTEN ALS TEST ######");			 
-			 this.isOutputAllFinished(true);			
-			//}//end while !isStopped
+			
+			
+			
+			
+//			String sCipher = (String) hmVariable.get(KeyPressThreadEncryptZZZ.sINPUT_CIPHER);
+//			if(!StringZZZ.isEmpty(sCipher)) {
+//				ICryptZZZ objCrypt = CryptAlgorithmFactoryZZZ.getInstance().createAlgorithmType(sCipher);
+//				boolean bSuccess = this.preProcessing(objCrypt, hmVariable);
+//				if(!bSuccess) {					
+//					System.out.println("PreProcessing nicht erfolgreich, Abbruch");
+//					bReturn=false;
+//					break main;
+//				}
+//								
+//				//+++++++++++++++++++++++++++++++++++++++++++++++++
+//								
+//				sInput = (String) hmVariable.get(KeyPressThreadEncryptZZZ.sINPUT_TEXT_UNCRYPTED);				
+//				try {
+//					String sOutput = objCrypt.encrypt(sInput);
+//					hmVariable.put(KeyPressThreadEncryptZZZ.sOUTPUT_TEXT_ENCRYPTED, sOutput);
+//					
+//					System.out.println("Verschluesselter Wert:\n"+sOutput);
+//					String sOutput2 = objCrypt.decrypt(sOutput);
+//					hmVariable.put(KeyPressThreadEncryptZZZ.sOUTPUT_TEXT_DECRYPTED, sOutput2);
+//					System.out.println("Wieder entschluesselter Wert:\n"+sOutput2);
+//					
+//					bReturn = true;
+//				}catch( IllegalArgumentException e) {
+//					String sError=e.getMessage();
+//					System.out.println("Fehler bei der Eingabe.\nText enthaelt fuer die Argumentkombination ungueltige Werte.\nFehler: "+sError +"\nbei Eingabe: "+sInput);
+//					bReturn=false;
+//				}
+//				
+//			}else {
+//				System.out.println("noch kein Schluesselalgorithmus festgelegt.");
+//				bReturn = false;
+//			}
+			
+			//################
+			
+			bReturn = true;
 		}//end main:
-		}catch(ExceptionZZZ ez) {
-			ez.printStackTrace();
-		}
-		this.getConsole().isConsoleUserThreadFinished(true);
 		return bReturn;
 	}
+	
+	//############################
+	
+	/**Dadurch soll diese Methode aus anderen Threads nutzbar sein
+	 * @param hmVariable
+	 * @return
+	 * @throws ExceptionZZZ
+	 */
+	public boolean processObjGuid(HashMapZZZ hmVariable) throws ExceptionZZZ{
+		return processObjGuid_(hmVariable);
+	}
+		
+	private boolean processObjGuid_(HashMapZZZ hmVariable) throws ExceptionZZZ{		
+		//Ausgabe einer errechneten ObjGuid
+		boolean bReturn = true;
+		main:{
+
+			//In dieser einfachen Methode gibt es keine weiteren Parameter entgegenzunehmen....
+			//eigentlich müsste diese Methode umbenannt werden in irgenwas mit Input...ParameterCustom...
+			
+			
+			//TODOGOON20260817;//Dieser Code sollte dann in ConsoleUserSqlGeneratorMain in einer Methode stehen,
+			                 //Die dort im start(), letztendlich ausgeführt wird.
+			                 //Siehe ConsoleUserEncrypt/Decrypt nach while...isInputAllFinished.
+			                 //diese neue Methode müssten dann processit() heissen....
+			
+			String sObjGuid = SqlUtilZZZ.createObj_guid();
+			System.out.println(sObjGuid);
+			
+			
+		}//end main:
+		return bReturn;	
+	}
+	
+	
 }

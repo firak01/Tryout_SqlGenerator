@@ -2,7 +2,7 @@ package use.database.sql.console;
 
 import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.util.abstractList.HashMapZZZ;
-import basic.zBasic.util.console.multithread.AbstractConsoleUserZZZ;
+import basic.zBasic.util.console.multithread.AbstractConsoleUserStartableZZZ;
 import basic.zBasic.util.console.multithread.IConsoleZZZ;
 import basic.zBasic.util.crypt.code.CryptAlgorithmMaintypeZZZ;
 import basic.zBasic.util.crypt.code.ICharacterPoolEnabledZZZ;
@@ -11,7 +11,7 @@ import basic.zBasic.util.crypt.thread.KeyPressThreadEncryptZZZ;
 import basic.zBasic.util.datatype.character.CharacterExtendedZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
 
-public abstract class AbstractConsoleUserSqlGeneratorZZZ extends AbstractConsoleUserZZZ{
+public abstract class AbstractConsoleUserSqlGeneratorZZZ extends AbstractConsoleUserStartableZZZ{
 	public AbstractConsoleUserSqlGeneratorZZZ()  throws ExceptionZZZ {
 		super();
 	}
