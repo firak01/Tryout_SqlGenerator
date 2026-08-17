@@ -116,7 +116,11 @@ import use.database.sql.generate.SqlUtilZZZ;
 	            	break;
 	            case "6":
 	            	this.isCurrentInputValid(true);
-	            	this.processObjGuid_(hmVariable);
+	            	objKeyPressThreadUsed = this;
+	            	this.setKeyPressThreadUsed(objKeyPressThreadUsed);
+	            	this.setMethodForThreadUsed("processObjGuid");           
+	            	objKeyPressThreadUsed.initit(hmVariable);
+	            	//this.processObjGuid_(hmVariable);
 	            	break;
 	            default:
 	            	System.out.println(ReflectCodeZZZ.getPositionCurrent() + " - default Zweig: sInput = '"+sInput+"'");
@@ -378,10 +382,18 @@ import use.database.sql.generate.SqlUtilZZZ;
 		//Ausgabe einer errechneten ObjGuid
 		boolean bReturn = true;
 		main:{
+
+			//In dieser einfachen Methode gibt es keine weiteren Parameter entgegenzunehmen....
+			//eigentlich müsste diese Methode umbenannt werden in irgenwas mit Input...ParameterCustom...
+			
+			
+			TODOGOON20260817;//Dieser Code sollte dann in ConsoleUserSqlGeneratorMain in einer Methode stehen,
+			                 //Die dort im start(), letztendlich ausgeführt wird.
+			                 //Siehe ConsoleUserEncrypt/Decrypt nach while...isInputAllFinished.
+			                 //diese neue Methode müssten dann processit() heissen....
 			
 			String sObjGuid = SqlUtilZZZ.createObj_guid();
 			System.out.println(sObjGuid);
-			
 			
 			this.isCurrentMenue(true);//das Menue erneut aufbauen
     		this.isCurrentInputFinished(true);
