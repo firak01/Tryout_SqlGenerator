@@ -8,6 +8,7 @@ import basic.zBasic.util.abstractList.HashMapZZZ;
 import basic.zBasic.util.console.multithread.AbstractKeyPressThreadZZZ;
 import basic.zBasic.util.console.multithread.IConsoleZZZ;
 import basic.zBasic.util.console.multithread.IKeyPressConstantZZZ;
+import basic.zBasic.util.console.multithread.IKeyPressThreadConstantZZZ;
 import basic.zBasic.util.console.multithread.IKeyPressThreadZZZ;
 import basic.zBasic.util.console.multithread.KeyPressUtilZZZ;
 import basic.zBasic.util.crypt.code.CryptAlgorithmMappedValueZZZ;
@@ -57,68 +58,73 @@ import use.database.sql.generate.SqlUtilZZZ;
 		public boolean processMenueMainArgumentInput(String sInput, HashMapZZZ hmVariable) throws ExceptionZZZ {
 			boolean bReturn = true;
 			main:{
-			//In the JDK 7 release, you can use a String object in the expression of a switch statement:
-            //Das keine lowercase Methode oder eine Fallunterscheidung in den CASE eingebaut werden kann, 
-            //vorher lowercase
-            this.isCurrentMenue(true);
-            String input = sInput.toLowerCase();			                
-            switch(input) {
-            case "+":
-            	this.isCurrentInputValid(true);					                	
-            	this.setSleepTime(this.getSleepTime()+100);
-            	this.getConsole().setSleepTime(this.getSleepTime());			                	
-            	break;
-            case "-":
-            	this.isCurrentInputValid(true);
-            	this.setSleepTime(this.getSleepTime()-100);
-            	this.getConsole().setSleepTime(this.getSleepTime());			                	
-            	break;
-            case "q":
-            	this.quit();
-            	bReturn=false;
-            	break main; 
-            case "a":
-            	this.isCurrentInputValid(true);            	            	
-            	this.printTableASCII(hmVariable);//Mache eine einfache Print-Ausgabe der ASCII Tabelle
-            	break;
-            case "1a":
-            	this.isCurrentInputValid(true);
-            	IKeyPressThreadZZZ objKeyPressThreadUsed = new KeyPressThreadEncryptZZZ(this.getConsole());
-            	this.setKeyPressThreadUsed(objKeyPressThreadUsed);
-            	this.setMethodForThreadUsed("processROT13");           
-            	objKeyPressThreadUsed.initit(hmVariable);           	            						                						                						                					                		              
-            	break;
-            case "1b":
-            	this.isCurrentInputValid(true);
-            	KeyPressThreadDecryptZZZ.processROT13(hmVariable);            	            						                						                						                					                		              
-            	break;
-            case "2":
-            	this.isCurrentInputValid(true);
-//            	this.processROTascii_(hmVariable);     
-            	break;
-            case "3":
-            	this.isCurrentInputValid(true);
-//            	this.processROTnumeric_(hmVariable);     
-            	break;
-            case "4":
-            	this.isCurrentInputValid(true);
-//            	this.processROTnn_(hmVariable);        					                	
-            	break;
-            case "5":
-            	this.isCurrentInputValid(true);
-//            	this.processVigenereNn_(hmVariable);
-            	break;
-            case "6":
-            	this.isCurrentInputValid(true);
-            	this.processObjGuid_(hmVariable);
-            	break;
-            default:
-            	System.out.println(ReflectCodeZZZ.getPositionCurrent() + " - default Zweig: sInput = '"+sInput+"'");
-            	System.out.println("ungueltige Eingabe");
-            	this.isCurrentMenue(false);//Neue Eingabe OHNE erneut das Menue aufzubauen.
-            	this.isCurrentInputValid(false);					                	
-            	break;
-            }		 		
+				IKeyPressThreadZZZ objKeyPressThreadUsed = null; //Damit kann man auch andere Thread - Klassen nutzen.
+				
+				//In the JDK 7 release, you can use a String object in the expression of a switch statement:
+	            //Das keine lowercase Methode oder eine Fallunterscheidung in den CASE eingebaut werden kann, 
+	            //vorher lowercase
+	            this.isCurrentMenue(true);
+	            String input = sInput.toLowerCase();			                
+	            switch(input) {
+	            case "+":
+	            	this.isCurrentInputValid(true);					                	
+	            	this.setSleepTime(this.getSleepTime()+100);
+	            	this.getConsole().setSleepTime(this.getSleepTime());			                	
+	            	break;
+	            case "-":
+	            	this.isCurrentInputValid(true);
+	            	this.setSleepTime(this.getSleepTime()-100);
+	            	this.getConsole().setSleepTime(this.getSleepTime());			                	
+	            	break;
+	            case "q":
+	            	this.quit();
+	            	bReturn=false;
+	            	break main; 
+	            case "a":
+	            	this.isCurrentInputValid(true);            	            	
+	            	this.printTableASCII(hmVariable);//Mache eine einfache Print-Ausgabe der ASCII Tabelle
+	            	break;
+	            case "1a":
+	            	this.isCurrentInputValid(true);
+	            	objKeyPressThreadUsed = new KeyPressThreadEncryptZZZ(this.getConsole());
+	            	this.setKeyPressThreadUsed(objKeyPressThreadUsed);
+	            	this.setMethodForThreadUsed("processROT13");           
+	            	objKeyPressThreadUsed.initit(hmVariable);           	            						                						                						                					                		              
+	            	break;
+	            case "1b":	            	
+	            	this.isCurrentInputValid(true);
+	            	objKeyPressThreadUsed = new KeyPressThreadDecryptZZZ(this.getConsole());
+	            	this.setKeyPressThreadUsed(objKeyPressThreadUsed);
+	            	this.setMethodForThreadUsed("processROT13");           
+	            	objKeyPressThreadUsed.initit(hmVariable);           	            						                						                						                					                		              
+	            	break;
+	            case "2":
+	            	this.isCurrentInputValid(true);
+	//            	this.processROTascii_(hmVariable);     
+	            	break;
+	            case "3":
+	            	this.isCurrentInputValid(true);
+	//            	this.processROTnumeric_(hmVariable);     
+	            	break;
+	            case "4":
+	            	this.isCurrentInputValid(true);
+	//            	this.processROTnn_(hmVariable);        					                	
+	            	break;
+	            case "5":
+	            	this.isCurrentInputValid(true);
+	//            	this.processVigenereNn_(hmVariable);
+	            	break;
+	            case "6":
+	            	this.isCurrentInputValid(true);
+	            	this.processObjGuid_(hmVariable);
+	            	break;
+	            default:
+	            	System.out.println(ReflectCodeZZZ.getPositionCurrent() + " - default Zweig: sInput = '"+sInput+"'");
+	            	System.out.println("ungueltige Eingabe");
+	            	this.isCurrentMenue(false);//Neue Eingabe OHNE erneut das Menue aufzubauen.
+	            	this.isCurrentInputValid(false);					                	
+	            	break;
+	            }		 		
 		}//end main:
 		return bReturn;
 	}
@@ -385,6 +391,25 @@ import use.database.sql.generate.SqlUtilZZZ;
 			System.out.println("Weiter mit der Menueeingabe....");
 		}//end main:
 		return bReturn;	
+	}
+	
+	@Override
+	public boolean initit(HashMapZZZ hmVariable) throws ExceptionZZZ {
+		boolean bReturn = true;
+		main:{
+			
+			String sCallingMethod= (String) hmVariable.get(IKeyPressThreadConstantZZZ.sINPUT_STRING_METHOD_USED);
+			switch(sCallingMethod){
+				case "processObjGuid":
+					processObjGuid_(hmVariable);
+					break;
+				default:
+					ExceptionZZZ ez = new ExceptionZZZ("Nicht behandelte Methode: '" + sCallingMethod + "'", iERROR_PROPERTY_VALUE, this.getClass(), ReflectCodeZZZ.getPositionCurrent());
+					throw ez;
+			}
+			
+		}//end main:
+		return bReturn;
 	}
 			
 			

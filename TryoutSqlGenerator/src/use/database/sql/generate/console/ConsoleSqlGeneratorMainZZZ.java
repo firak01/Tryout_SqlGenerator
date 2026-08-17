@@ -1,4 +1,4 @@
-package use.database.sql.generate;
+package use.database.sql.generate.console;
 
 import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.util.console.multithread.ConsoleZZZ;
@@ -10,7 +10,7 @@ import basic.zBasic.util.crypt.thread.KeyPressThreadEncryptZZZ;
 import use.database.sql.console.ConsoleUserSqlGeneratorZZZ;
 import use.database.sql.console.KeyPressThreadSqlGeneratorZZZ;
 
-public class SqlUtilMainZZZ {
+public class ConsoleSqlGeneratorMainZZZ {
 
 	public static void main(String[] args) {
 		try {

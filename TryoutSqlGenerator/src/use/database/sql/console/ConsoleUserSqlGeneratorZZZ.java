@@ -73,23 +73,25 @@ public class ConsoleUserSqlGeneratorZZZ extends AbstractConsoleUserSqlGeneratorZ
 			this.iCounter++;
 			if(this.getFlag(IFlagZEnabledZZZ.FLAGZ.DEBUG)) System.out.println("Zähler ConsoleUserSqlGenerator: " + iCounter);
 
-			HashMapZZZ<String,Object>hmVariable=this.getConsole().getVariableHashMap();
-			if(hmVariable!=null) {
-				String sDebug = hmVariable.computeDebugString("<BR>","|");
-				System.out.println(sDebug);
-			}
-
+			
 			//TODOGOON20260816: //In AbstractConsoleUser die Methode start() machen, die den obigen Code ausführt.
 			//TODOGOON20260816; //Darin dann am Schluss die abstrakte Methode .startIt() aufrufen.... Die dann vom Konkreten verwendeten Thread genutzt wird.
-			//this.startit();
+			//this.startit();  //Im ConsoleUserSqlGenerator müsste dann vom jeweiligen Thread-Objekt .startit() aufgerufen werden....
 			
-			//TODOGOON20260816; //Nachfolgenden Code in die startit() Methode verlagern...
+			//TODOGOON20260816; //Nachfolgenden Code dann auch in die startit() Methode verlagern...
 			//TODOGOON20260816; //Hier eine allgemeine Methode .reset() aufrufen.... Die dann vom Konkreten verwendeten Thread genutzt wird.
+			HashMapZZZ<String,Object>hmVariable=this.getConsole().getVariableHashMap();			
 			if(hmVariable!=null) {
 				//Ausgabewerte zurücksetzen
 				hmVariable.remove(KeyPressThreadEncryptZZZ.sOUTPUT_TEXT_ENCRYPTED);
 				hmVariable.remove(KeyPressThreadEncryptZZZ.sOUTPUT_TEXT_UNCRYPTED);
 				hmVariable.remove(KeyPressThreadEncryptZZZ.sOUTPUT_TEXT_DECRYPTED);
+			}
+			
+			//Debugausgabe, ob auch alles leer ist
+			if(hmVariable!=null) {
+				String sDebug = hmVariable.computeDebugString("<BR>","|");
+				System.out.println(sDebug);
 			}
 					
 			//Die eingegebenen Variablen über eine HashMap aus der Console für die Steuereung der Verschlüsselung nutzen. 			
