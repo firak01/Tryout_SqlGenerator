@@ -135,7 +135,7 @@ import use.database.sql.generate.SqlUtilZZZ;
 				
 		@Override
 		public boolean processMenuePostArgumentInput(HashMapZZZ hmVariable) throws ExceptionZZZ {
-			boolean bReturn = true;
+			boolean bReturn = false;
 			main:{
 
 				//BISHER gibt es hier noch keine Input-Argumente
@@ -157,9 +157,36 @@ import use.database.sql.generate.SqlUtilZZZ;
 //            		this.cancelToMenue(hmVariable);
 //            	}
 				
+				bReturn = true;
 			}//end main:
 			return bReturn;
 		}
+		
+		
+		@Override
+		public boolean initit(HashMapZZZ hmVariable) throws ExceptionZZZ {
+			boolean bReturn = false;
+			main:{
+				
+				//Die Hier übergebene Methode wird in ... .startit() ausgelesen.
+				//Plus alle anderen INPUT - Variablen.
+										
+//				String sCallingMethod= (String) hmVariable.get(IKeyPressThreadConstantZZZ.sINPUT_STRING_METHOD_USED);
+//				switch(sCallingMethod){
+//					case "processROT13":
+//						processROT13_(hmVariable);
+//						break;
+//					default:
+//						ExceptionZZZ ez = new ExceptionZZZ("Nicht behandelte Methode: '" + sCallingMethod + "'", iERROR_PROPERTY_VALUE, this.getClass(), ReflectCodeZZZ.getPositionCurrent());
+//						throw ez;
+//				}
+				
+				bReturn = true;
+			}//end main:
+			return bReturn;
+		}
+		
+		//#######################################
 		
 //		private void processROT13_(HashMapZZZ hmVariable) throws ExceptionZZZ{
 //			if(hmVariable!=null) {
@@ -380,18 +407,7 @@ import use.database.sql.generate.SqlUtilZZZ;
 		
 	
 	
-	@Override
-	public boolean initit(HashMapZZZ hmVariable) throws ExceptionZZZ {
-		boolean bReturn = true;
-		main:{
-			
-			//Die Hier übergebene Methode wird in ConsoleUserSqlGenerator.startit() ausgelesen.
-			//Plus alle anderen INPUT - Variablen.
-			
-			
-		}//end main:
-		return bReturn;
-	}
+	
 }
 
 
