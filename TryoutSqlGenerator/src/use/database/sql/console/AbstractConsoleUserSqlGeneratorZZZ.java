@@ -2,8 +2,8 @@ package use.database.sql.console;
 
 import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.util.abstractList.HashMapZZZ;
-import basic.zBasic.util.console.multithread.AbstractConsoleUserStartableZZZ;
-import basic.zBasic.util.console.multithread.IConsoleZZZ;
+import basic.zBasic.util.console.thread.AbstractConsoleUserStartableZZZ;
+import basic.zBasic.util.console.thread.IConsoleZZZ;
 import basic.zBasic.util.crypt.code.CryptAlgorithmMaintypeZZZ;
 import basic.zBasic.util.crypt.code.ICharacterPoolEnabledZZZ;
 import basic.zBasic.util.crypt.code.ICryptZZZ;

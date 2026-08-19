@@ -5,12 +5,12 @@ import java.util.Scanner;
 import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.ReflectCodeZZZ;
 import basic.zBasic.util.abstractList.HashMapZZZ;
-import basic.zBasic.util.console.multithread.AbstractKeyPressThreadZZZ;
-import basic.zBasic.util.console.multithread.IConsoleZZZ;
-import basic.zBasic.util.console.multithread.IKeyPressConstantZZZ;
-import basic.zBasic.util.console.multithread.IKeyPressThreadConstantZZZ;
-import basic.zBasic.util.console.multithread.IKeyPressThreadZZZ;
-import basic.zBasic.util.console.multithread.KeyPressUtilZZZ;
+import basic.zBasic.util.console.thread.AbstractKeyPressThreadZZZ;
+import basic.zBasic.util.console.thread.IConsoleZZZ;
+import basic.zBasic.util.console.thread.IKeyPressConstantZZZ;
+import basic.zBasic.util.console.thread.IKeyPressThreadConstantZZZ;
+import basic.zBasic.util.console.thread.IKeyPressThreadZZZ;
+import basic.zBasic.util.console.thread.KeyPressUtilZZZ;
 import basic.zBasic.util.crypt.code.CryptAlgorithmMappedValueZZZ;
 import basic.zBasic.util.crypt.code.ICharacterPoolEnabledZZZ;
 import basic.zBasic.util.crypt.code.ROTnnZZZ;
@@ -82,20 +82,24 @@ import use.database.sql.generate.SqlUtilZZZ;
 	            	break main; 
 	            case "a":
 	            	this.isCurrentInputValid(true);            	            	
-	            	this.printTableASCII(hmVariable);//Mache eine einfache Print-Ausgabe der ASCII Tabelle
-	            	break;
+	            	//this.printTableASCII(hmVariable);//Mache eine einfache Print-Ausgabe der ASCII Tabelle           	            	
+	            	objKeyPressThreadUsed = this;
+	            	this.setKeyPressThreadUsed(objKeyPressThreadUsed);
+	            	this.setMethodForThreadUsed("ascii");           
+	            	objKeyPressThreadUsed.initit(hmVariable);             	
+	            	break;	            		            	
 	            case "1a":
 	            	this.isCurrentInputValid(true);
 	            	objKeyPressThreadUsed = new KeyPressThreadEncryptZZZ(this.getConsole());
 	            	this.setKeyPressThreadUsed(objKeyPressThreadUsed);
-	            	this.setMethodForThreadUsed("processROT13");           
+	            	this.setMethodForThreadUsed("processEncryptROT13");           
 	            	objKeyPressThreadUsed.initit(hmVariable);           	            						                						                						                					                		              
 	            	break;
 	            case "1b":	            	
 	            	this.isCurrentInputValid(true);
 	            	objKeyPressThreadUsed = new KeyPressThreadDecryptZZZ(this.getConsole());
 	            	this.setKeyPressThreadUsed(objKeyPressThreadUsed);
-	            	this.setMethodForThreadUsed("processROT13");           
+	            	this.setMethodForThreadUsed("processDecryptROT13");           
 	            	objKeyPressThreadUsed.initit(hmVariable);           	            						                						                						                					                		              
 	            	break;
 	            case "2":
@@ -116,9 +120,9 @@ import use.database.sql.generate.SqlUtilZZZ;
 	            	break;
 	            case "6":
 	            	this.isCurrentInputValid(true);
-	            	objKeyPressThreadUsed = this;
+	            	objKeyPressThreadUsed = this.getConsole().getKeyPressThread();
 	            	this.setKeyPressThreadUsed(objKeyPressThreadUsed);
-	            	this.setMethodForThreadUsed("processObjGuid");           
+	            	this.setMethodForThreadUsed("processSqlObjGuid");           
 	            	objKeyPressThreadUsed.initit(hmVariable);
 	            	//this.processObjGuid_(hmVariable);
 	            	break;
@@ -167,24 +171,82 @@ import use.database.sql.generate.SqlUtilZZZ;
 		public boolean initit(HashMapZZZ hmVariable) throws ExceptionZZZ {
 			boolean bReturn = false;
 			main:{
-				
 				//Die Hier übergebene Methode wird in ... .startit() ausgelesen.
 				//Plus alle anderen INPUT - Variablen.
-										
-//				String sCallingMethod= (String) hmVariable.get(IKeyPressThreadConstantZZZ.sINPUT_STRING_METHOD_USED);
-//				switch(sCallingMethod){
-//					case "processROT13":
-//						processROT13_(hmVariable);
-//						break;
-//					default:
-//						ExceptionZZZ ez = new ExceptionZZZ("Nicht behandelte Methode: '" + sCallingMethod + "'", iERROR_PROPERTY_VALUE, this.getClass(), ReflectCodeZZZ.getPositionCurrent());
-//						throw ez;
-//				}
 				
+				String sCallingMethod= (String) hmVariable.get(IKeyPressThreadConstantZZZ.sINPUT_STRING_METHOD_USED);
+				//if(StringZZZ.isEmptyNull(sCallingMethod)) break main;
+				
+				//Nutze auch die nicht startit fähigen Methoden
+				if(!StringZZZ.isEmptyNull(sCallingMethod)) {
+					switch(sCallingMethod){
+						case "ascii":
+							ascii_(hmVariable);
+							break;
+						case "processEncryptROT13":
+							processEncryptROT13_(hmVariable);
+							break;
+						case "processSqlObjGuid":
+							processSqlObjGuid_(hmVariable);
+							break;
+						default:
+							ExceptionZZZ ez = new ExceptionZZZ("Nicht behandelte Methode: '" + sCallingMethod + "'", iERROR_PROPERTY_VALUE, this.getClass(), ReflectCodeZZZ.getPositionCurrent());
+							throw ez;
+					}
+				}else {
+					
+				}
 				bReturn = true;
 			}//end main:
 			return bReturn;
-		}
+	}
+			
+			//####################################################
+			private void ascii_(HashMapZZZ hm) throws ExceptionZZZ {
+				//Hier noch zusätzliche Input Variablen übergebbar.
+			}
+					
+			//###################################################
+			/** Damit wird dieser Thread-Menüpunkt auch von anderen Threads mit Menü nutzbar.
+			 * @param hmVariable
+			 * @throws ExceptionZZZ
+			 */
+			public void processEncryptROT13(HashMapZZZ hmVariable) throws ExceptionZZZ{
+				if(hmVariable!=null) {
+	        		String sCipher = CryptAlgorithmMappedValueZZZ.CipherTypeZZZ.ROT13.getAbbreviation();
+	        		hmVariable.put(KeyPressThreadEncryptZZZ.sINPUT_CIPHER, sCipher);
+	        	}
+			}
+			private void processEncryptROT13_(HashMapZZZ hmVariable) throws ExceptionZZZ{
+				if(hmVariable!=null) {
+	        		String sCipher = CryptAlgorithmMappedValueZZZ.CipherTypeZZZ.ROT13.getAbbreviation();
+	        		hmVariable.put(KeyPressThreadEncryptZZZ.sINPUT_CIPHER, sCipher);
+	        	}
+			}
+			
+			//###################################################
+			/** Damit wird dieser Thread-Menüpunkt auch von anderen Threads mit Menü nutzbar.
+			 * @param hmVariable
+			 * @throws ExceptionZZZ
+			 */
+			public void processDecryptROT13(HashMapZZZ hmVariable) throws ExceptionZZZ{
+				if(hmVariable!=null) {
+	        		String sCipher = CryptAlgorithmMappedValueZZZ.CipherTypeZZZ.ROT13.getAbbreviation();
+	        		hmVariable.put(KeyPressThreadDecryptZZZ.sINPUT_CIPHER, sCipher);
+	        	}
+			}
+			private void processDecryptROT13_(HashMapZZZ hmVariable) throws ExceptionZZZ{
+				if(hmVariable!=null) {
+	        		String sCipher = CryptAlgorithmMappedValueZZZ.CipherTypeZZZ.ROT13.getAbbreviation();
+	        		hmVariable.put(KeyPressThreadDecryptZZZ.sINPUT_CIPHER, sCipher);
+	        	}
+			}
+			
+			
+			//#####################################
+			private void processSqlObjGuid_(HashMapZZZ hm) throws ExceptionZZZ {
+				//Hier noch zusätzliche Input Variablen übergebbar.
+			}
 		
 		//#######################################
 		

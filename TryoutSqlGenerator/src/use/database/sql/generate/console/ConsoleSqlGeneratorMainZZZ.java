@@ -1,11 +1,11 @@
 package use.database.sql.generate.console;
 
 import basic.zBasic.ExceptionZZZ;
-import basic.zBasic.util.console.multithread.ConsoleThreadZZZ;
-import basic.zBasic.util.console.multithread.IConsoleUserStartableZZZ;
-import basic.zBasic.util.console.multithread.IConsoleUserZZZ;
-import basic.zBasic.util.console.multithread.IConsoleZZZ;
-import basic.zBasic.util.console.multithread.IKeyPressThreadZZZ;
+import basic.zBasic.util.console.thread.ConsoleThreadZZZ;
+import basic.zBasic.util.console.thread.IConsoleUserStartableZZZ;
+import basic.zBasic.util.console.thread.IConsoleUserZZZ;
+import basic.zBasic.util.console.thread.IConsoleZZZ;
+import basic.zBasic.util.console.thread.IKeyPressThreadZZZ;
 import basic.zBasic.util.crypt.thread.ConsoleUserEncryptZZZ;
 import basic.zBasic.util.crypt.thread.KeyPressThreadEncryptZZZ;
 import use.database.sql.console.ConsoleUserSqlGeneratorZZZ;

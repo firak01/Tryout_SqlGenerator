@@ -1,6 +1,6 @@
 package use.database.sql.console;
 
-import basic.zBasic.util.console.multithread.IKeyPressThreadConstantZZZ;
+import basic.zBasic.util.console.thread.IKeyPressThreadConstantZZZ;
 import basic.zBasic.util.crypt.code.ICharacterPoolEnabledZZZ;
 import basic.zBasic.util.crypt.code.IROTUserZZZ;
 

@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.util.abstractList.HashMapZZZ;
-import basic.zBasic.util.console.multithread.AbstractKeyPressThreadCommonZZZ;
-import basic.zBasic.util.console.multithread.AbstractKeyPressThreadZZZ;
-import basic.zBasic.util.console.multithread.IConsoleZZZ;
-import basic.zBasic.util.console.multithread.IKeyPressConstantZZZ;
-import basic.zBasic.util.console.multithread.IKeyPressThreadConstantZZZ;
-import basic.zBasic.util.console.multithread.KeyPressUtilZZZ;
+import basic.zBasic.util.console.thread.AbstractKeyPressThreadCommonZZZ;
+import basic.zBasic.util.console.thread.AbstractKeyPressThreadZZZ;
+import basic.zBasic.util.console.thread.IConsoleZZZ;
+import basic.zBasic.util.console.thread.IKeyPressConstantZZZ;
+import basic.zBasic.util.console.thread.IKeyPressThreadConstantZZZ;
+import basic.zBasic.util.console.thread.KeyPressUtilZZZ;
 import basic.zBasic.util.crypt.thread.KeyPressCryptUtilZZZ;
 import basic.zBasic.util.crypt.thread.KeyPressThreadDecryptZZZ;
 import basic.zBasic.util.datatype.booleans.BooleanZZZ;
