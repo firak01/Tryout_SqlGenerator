@@ -1,15 +1,11 @@
 package use.database.sql.generate.common;
 
-/**Das dient auch der Verknüpfung von akademischen Grad zu Studiengang
- * Darum sStg, sAbschl, sVert hier enthalten
+/**Reines Anlegen der Schlüsseltabelleneinträge.
+ * Ohne wie z.b. bei AcademicDegree eine Verknüpfung zu Studiengängen
  * @author Fritz Lindhauer
  *
  */
-public class AcademicDegreeTitle {
-	private String sStg = null;
-	private String sAbschl = null;
-	private String sVert = null;
-	
+public class Title {
 	
 	private String sTextDefault=null;
 	private String sTextDefault_female=null;
@@ -22,32 +18,9 @@ public class AcademicDegreeTitle {
 	private int iK_language_id;	
 	private String sObj_guid;
 	
-	//statische Werte wg. Constrainsts
-	private int iPosition_of_title;
-	
+	private int iSortorder;
 
-	//### GETTER / SETTER
-	public String getStudiengang() {
-		return sStg;
-	}
-	public void setStudiengang(String sStg) {
-		this.sStg = sStg;
-	}
-	
-	public String getAbschluss() {
-		return sAbschl;
-	}
-	public void setAbschluss(String sAbschl) {
-		this.sAbschl = sAbschl;
-	}
-	
-	public String getVertiefung() {
-		return sVert;
-	}
-	public void setVertiefung(String sVert) {
-		this.sVert = sVert;
-	}
-	
+	//### GETTER / SETTER	
 	public String getDefaulttext() {
 		return sTextDefault;
 	}
@@ -99,11 +72,11 @@ public class AcademicDegreeTitle {
 	}
 	
 	//Statische Werte, wg. Constraints
-	public int getPosition_of_title() {
-		return iPosition_of_title;
+	public int getSortorder() {
+		return iSortorder;
 	}
-	public void setPosition_of_title(int iPosition_of_title) {
-		this.iPosition_of_title = iPosition_of_title;
+	public void setSortorder(int iSortorder) {
+		this.iSortorder = iSortorder;
 	}
 
 }

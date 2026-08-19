@@ -178,10 +178,33 @@ public class SqlGeneratorConsoleUI {
 		        if(bFile) {
 			        //Hier als Alternative, das Einlesen der Eintragsliste per Datei
 		        	FileCsvReaderZZZ objReaderCsv = new FileCsvReaderZZZ(fileEintrag,',');
-		        	listasReturn = objReaderCsv.getLines(); //Das hat den Vorteil, das es nur Zeilen ohne Kommentar und keine Leerzeilen sind.
+		        	List<String>listasReturnTemp = objReaderCsv.getLines(); //Das hat den Vorteil, das es nur Zeilen ohne Kommentar und keine Leerzeilen sind.
+		        	for(String sEintragTemp : listasReturnTemp) {
+		        		
+		        		//Ersetze 2x Hochkommata am Anfang durch 1x Hochkomma
+		        		sEintragTemp = StringZZZ.stripDoubleQuoteMarked(sEintragTemp);
+		        		
+		        		
+		        		if(sEintragTemp.startsWith("\"")){		        					        		
+		        			//Ersetze Hochkomma durch einfache Hochkomma
+		        			sEintragTemp = sEintragTemp.replace("\"", "'");
+		        			
+		        			// ZUERST: Escape vorhandener einfacher Hochkommata → SQL-konform (z. B. O'Reilly → O''Reilly)
+				            sEintragTemp = sEintragTemp.replace("'", "''");
+				            
+				            listasReturn.add(sEintragTemp);
+		        		}else {
+		        				        		
+			        		// ZUERST: Escape vorhandener einfacher Hochkommata → SQL-konform (z. B. O'Reilly → O''Reilly)
+				            sEintragTemp = sEintragTemp.replace("'", "''");
+				            
+				            listasReturn.add(sEintragTemp);
+		        		}
+		        	}
+		        	
 		        }else {
 		        	//Hier die Verarbeitung der per Konsole eingegebenen CSV Strings
-		        	 // ZUERST: Escape vorhandener einfacher Hochkommata → SQL-konform (z. B. O'Reilly → O''Reilly)
+		        	// ZUERST: Escape vorhandener einfacher Hochkommata → SQL-konform (z. B. O'Reilly → O''Reilly)
 		            sEintrag = sEintrag.replace("'", "''");
 		                                
 		            String[] saEintrag = sEintrag.split("\n");
