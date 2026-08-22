@@ -5,11 +5,11 @@ import java.util.Scanner;
 import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.ReflectCodeZZZ;
 import basic.zBasic.util.abstractList.HashMapZZZ;
-import basic.zBasic.util.console.thread.AbstractKeyPressThreadZZZ;
+import basic.zBasic.util.console.thread.AbstractKeyPressThreadWithMenueZZZ;
 import basic.zBasic.util.console.thread.IConsoleControllerZZZ;
 import basic.zBasic.util.console.thread.IKeyPressConstantZZZ;
 import basic.zBasic.util.console.thread.IKeyPressThreadConstantZZZ;
-import basic.zBasic.util.console.thread.IKeyPressThreadZZZ;
+import basic.zBasic.util.console.thread.IKeyPressThreadMenueableZZZ;
 import basic.zBasic.util.console.thread.KeyPressUtilZZZ;
 import basic.zBasic.util.crypt.code.CryptAlgorithmMappedValueZZZ;
 import basic.zBasic.util.crypt.code.ICharacterPoolEnabledZZZ;
@@ -58,7 +58,7 @@ import use.database.sql.generate.SqlUtilZZZ;
 		public boolean processMenueMainArgumentInput(String sInput, HashMapZZZ hmVariable) throws ExceptionZZZ {
 			boolean bReturn = true;
 			main:{
-				IKeyPressThreadZZZ objKeyPressThreadUsed = null; //Damit kann man auch andere Thread - Klassen nutzen.
+				IKeyPressThreadMenueableZZZ objKeyPressThreadUsed = null; //Damit kann man auch andere Thread - Klassen nutzen.
 				
 				//In the JDK 7 release, you can use a String object in the expression of a switch statement:
 	            //Das keine lowercase Methode oder eine Fallunterscheidung in den CASE eingebaut werden kann, 
@@ -85,21 +85,21 @@ import use.database.sql.generate.SqlUtilZZZ;
 	            	//this.printTableASCII(hmVariable);//Mache eine einfache Print-Ausgabe der ASCII Tabelle           	            	
 	            	objKeyPressThreadUsed = this;
 	            	this.setKeyPressThread(objKeyPressThreadUsed);
-	            	this.setMethodForThreadUsed("ascii");           
+	            	this.setMethodForConsoleService("ascii");           
 	            	objKeyPressThreadUsed.initit(hmVariable);             	
 	            	break;	            		            	
 	            case "1a":
 	            	this.isCurrentInputValid(true);
 	            	objKeyPressThreadUsed = new KeyPressThreadEncryptZZZ(this.getConsoleController());
 	            	this.setKeyPressThread(objKeyPressThreadUsed);
-	            	this.setMethodForThreadUsed("processEncryptROT13");           
+	            	this.setMethodForConsoleService("processEncryptROT13");           
 	            	objKeyPressThreadUsed.initit(hmVariable);           	            						                						                						                					                		              
 	            	break;
 	            case "1b":	            	
 	            	this.isCurrentInputValid(true);
 	            	objKeyPressThreadUsed = new KeyPressThreadDecryptZZZ(this.getConsoleController());
 	            	this.setKeyPressThread(objKeyPressThreadUsed);
-	            	this.setMethodForThreadUsed("processDecryptROT13");           
+	            	this.setMethodForConsoleService("processDecryptROT13");           
 	            	objKeyPressThreadUsed.initit(hmVariable);           	            						                						                						                					                		              
 	            	break;
 	            case "2":
@@ -120,9 +120,9 @@ import use.database.sql.generate.SqlUtilZZZ;
 	            	break;
 	            case "6":
 	            	this.isCurrentInputValid(true);
-	            	objKeyPressThreadUsed = (IKeyPressThreadZZZ) this.getConsoleController().getKeyPressThread();
+	            	objKeyPressThreadUsed = (IKeyPressThreadMenueableZZZ) this.getConsoleController().getKeyPressThread();
 	            	this.setKeyPressThread(objKeyPressThreadUsed);
-	            	this.setMethodForThreadUsed("processSqlObjGuid");           
+	            	this.setMethodForConsoleService("processSqlObjGuid");           
 	            	objKeyPressThreadUsed.initit(hmVariable);
 	            	//this.processObjGuid_(hmVariable);
 	            	break;

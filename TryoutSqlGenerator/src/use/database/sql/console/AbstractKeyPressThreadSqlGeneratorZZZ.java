@@ -5,7 +5,7 @@ import java.util.Scanner;
 import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.util.abstractList.HashMapZZZ;
 import basic.zBasic.util.console.thread.AbstractKeyPressThreadCommonZZZ;
-import basic.zBasic.util.console.thread.AbstractKeyPressThreadZZZ;
+import basic.zBasic.util.console.thread.AbstractKeyPressThreadWithMenueZZZ;
 import basic.zBasic.util.console.thread.IConsoleControllerZZZ;
 import basic.zBasic.util.console.thread.IKeyPressConstantZZZ;
 import basic.zBasic.util.console.thread.IKeyPressThreadConstantZZZ;
@@ -17,11 +17,11 @@ import basic.zBasic.util.datatype.character.CharacterExtendedZZZ;
 import basic.zBasic.util.datatype.character.ICharacterExtendedZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
 
-public abstract class AbstractKeyPressThreadSqlGeneratorZZZ extends AbstractKeyPressThreadCommonZZZ implements IKeyPressThreadSqlGeneratorConstantZZZ{
-	public AbstractKeyPressThreadSqlGeneratorZZZ(IConsoleControllerZZZ objConsole) {
+public abstract class AbstractKeyPressThreadSqlGeneratorZZZ extends AbstractKeyPressThreadWithMenueZZZ implements IKeyPressThreadSqlGeneratorConstantZZZ{
+	public AbstractKeyPressThreadSqlGeneratorZZZ(IConsoleControllerZZZ objConsole) throws ExceptionZZZ {
     	super(objConsole);
     }
-    public AbstractKeyPressThreadSqlGeneratorZZZ(IConsoleControllerZZZ objConsole, long lSleepTime) {
+    public AbstractKeyPressThreadSqlGeneratorZZZ(IConsoleControllerZZZ objConsole, long lSleepTime) throws ExceptionZZZ {
     	super(objConsole, lSleepTime);
     }
      
