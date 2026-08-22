@@ -6,7 +6,7 @@ import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.ReflectCodeZZZ;
 import basic.zBasic.util.abstractList.HashMapZZZ;
 import basic.zBasic.util.console.thread.AbstractKeyPressThreadZZZ;
-import basic.zBasic.util.console.thread.IConsoleZZZ;
+import basic.zBasic.util.console.thread.IConsoleControllerZZZ;
 import basic.zBasic.util.console.thread.IKeyPressConstantZZZ;
 import basic.zBasic.util.console.thread.IKeyPressThreadConstantZZZ;
 import basic.zBasic.util.console.thread.IKeyPressThreadZZZ;
@@ -28,10 +28,10 @@ import use.database.sql.generate.SqlUtilZZZ;
 	 
 	public class KeyPressThreadSqlGeneratorZZZ extends AbstractKeyPressThreadSqlGeneratorZZZ{	
         //Method that gets called when the object is instantiated
-		public KeyPressThreadSqlGeneratorZZZ(IConsoleZZZ objConsole) {
+		public KeyPressThreadSqlGeneratorZZZ(IConsoleControllerZZZ objConsole) {
         	super(objConsole);
         }
-        public KeyPressThreadSqlGeneratorZZZ(IConsoleZZZ objConsole, long lSleepTime) {
+        public KeyPressThreadSqlGeneratorZZZ(IConsoleControllerZZZ objConsole, long lSleepTime) {
         	super(objConsole, lSleepTime);
         }
 		@Override
@@ -69,12 +69,12 @@ import use.database.sql.generate.SqlUtilZZZ;
 	            case "+":
 	            	this.isCurrentInputValid(true);					                	
 	            	this.setSleepTime(this.getSleepTime()+100);
-	            	this.getConsole().setSleepTime(this.getSleepTime());			                	
+	            	this.getConsoleController().setSleepTime(this.getSleepTime());			                	
 	            	break;
 	            case "-":
 	            	this.isCurrentInputValid(true);
 	            	this.setSleepTime(this.getSleepTime()-100);
-	            	this.getConsole().setSleepTime(this.getSleepTime());			                	
+	            	this.getConsoleController().setSleepTime(this.getSleepTime());			                	
 	            	break;
 	            case "q":
 	            	this.quit();
@@ -90,14 +90,14 @@ import use.database.sql.generate.SqlUtilZZZ;
 	            	break;	            		            	
 	            case "1a":
 	            	this.isCurrentInputValid(true);
-	            	objKeyPressThreadUsed = new KeyPressThreadEncryptZZZ(this.getConsole());
+	            	objKeyPressThreadUsed = new KeyPressThreadEncryptZZZ(this.getConsoleController());
 	            	this.setKeyPressThreadUsed(objKeyPressThreadUsed);
 	            	this.setMethodForThreadUsed("processEncryptROT13");           
 	            	objKeyPressThreadUsed.initit(hmVariable);           	            						                						                						                					                		              
 	            	break;
 	            case "1b":	            	
 	            	this.isCurrentInputValid(true);
-	            	objKeyPressThreadUsed = new KeyPressThreadDecryptZZZ(this.getConsole());
+	            	objKeyPressThreadUsed = new KeyPressThreadDecryptZZZ(this.getConsoleController());
 	            	this.setKeyPressThreadUsed(objKeyPressThreadUsed);
 	            	this.setMethodForThreadUsed("processDecryptROT13");           
 	            	objKeyPressThreadUsed.initit(hmVariable);           	            						                						                						                					                		              
@@ -120,7 +120,7 @@ import use.database.sql.generate.SqlUtilZZZ;
 	            	break;
 	            case "6":
 	            	this.isCurrentInputValid(true);
-	            	objKeyPressThreadUsed = this.getConsole().getKeyPressThread();
+	            	objKeyPressThreadUsed = this.getConsoleController().getKeyPressThread();
 	            	this.setKeyPressThreadUsed(objKeyPressThreadUsed);
 	            	this.setMethodForThreadUsed("processSqlObjGuid");           
 	            	objKeyPressThreadUsed.initit(hmVariable);

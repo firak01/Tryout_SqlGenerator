@@ -6,7 +6,7 @@ import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.util.abstractList.HashMapZZZ;
 import basic.zBasic.util.console.thread.AbstractKeyPressThreadCommonZZZ;
 import basic.zBasic.util.console.thread.AbstractKeyPressThreadZZZ;
-import basic.zBasic.util.console.thread.IConsoleZZZ;
+import basic.zBasic.util.console.thread.IConsoleControllerZZZ;
 import basic.zBasic.util.console.thread.IKeyPressConstantZZZ;
 import basic.zBasic.util.console.thread.IKeyPressThreadConstantZZZ;
 import basic.zBasic.util.console.thread.KeyPressUtilZZZ;
@@ -18,10 +18,10 @@ import basic.zBasic.util.datatype.character.ICharacterExtendedZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
 
 public abstract class AbstractKeyPressThreadSqlGeneratorZZZ extends AbstractKeyPressThreadCommonZZZ implements IKeyPressThreadSqlGeneratorConstantZZZ{
-	public AbstractKeyPressThreadSqlGeneratorZZZ(IConsoleZZZ objConsole) {
+	public AbstractKeyPressThreadSqlGeneratorZZZ(IConsoleControllerZZZ objConsole) {
     	super(objConsole);
     }
-    public AbstractKeyPressThreadSqlGeneratorZZZ(IConsoleZZZ objConsole, long lSleepTime) {
+    public AbstractKeyPressThreadSqlGeneratorZZZ(IConsoleControllerZZZ objConsole, long lSleepTime) {
     	super(objConsole, lSleepTime);
     }
      

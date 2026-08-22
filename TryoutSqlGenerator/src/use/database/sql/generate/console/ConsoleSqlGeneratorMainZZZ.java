@@ -1,14 +1,14 @@
 package use.database.sql.generate.console;
 
 import basic.zBasic.ExceptionZZZ;
-import basic.zBasic.util.console.thread.ConsoleThreadZZZ;
-import basic.zBasic.util.console.thread.IConsoleUserStartableZZZ;
-import basic.zBasic.util.console.thread.IConsoleUserZZZ;
-import basic.zBasic.util.console.thread.IConsoleZZZ;
+import basic.zBasic.util.console.thread.ConsoleControllerZZZ;
+import basic.zBasic.util.console.thread.IConsoleServiceZZZ;
+import basic.zBasic.util.console.thread.IConsoleControllerUserZZZ;
+import basic.zBasic.util.console.thread.IConsoleControllerZZZ;
 import basic.zBasic.util.console.thread.IKeyPressThreadZZZ;
-import basic.zBasic.util.crypt.thread.ConsoleUserEncryptZZZ;
+import basic.zBasic.util.crypt.thread.ConsoleServiceEncryptZZZ;
 import basic.zBasic.util.crypt.thread.KeyPressThreadEncryptZZZ;
-import use.database.sql.console.ConsoleUserSqlGeneratorZZZ;
+import use.database.sql.console.ConsoleServiceSqlGeneratorZZZ;
 import use.database.sql.console.KeyPressThreadSqlGeneratorZZZ;
 
 public class ConsoleSqlGeneratorMainZZZ {
@@ -22,7 +22,7 @@ public class ConsoleSqlGeneratorMainZZZ {
 			//aber in dieser Applikation OHNE Kernel, also OHNE ini-Konfiguration auskommen!!!    this.objKernel = new KernelZZZ(objConfig, (String) null); //Damit kann man ueber die Startparameter ein anders konfiguriertes Kernel-Objekt erhalten.
 			//TODOGOON20230203: Daher das objConfig in .getInstance(objConfig) übergeben!!!
 
-			IConsoleZZZ objConsole = ConsoleThreadZZZ.getInstance();
+			IConsoleControllerZZZ objConsole = ConsoleControllerZZZ.getInstance();
 			
 			//Merke: Ziel ist es, das was in DebugRot13ZZZ (oder ähnlichen) gemacht wird in einer Endlosschleife durchzuführen.
 			//Der ConsoleUser und die Eingabe so eng miteinander verknüpft, dass man hier den KeyPressCryptThreadZZZ
@@ -51,8 +51,8 @@ public class ConsoleSqlGeneratorMainZZZ {
 			
 			//Merke: Ziel ist, dass der ConsoleUser-Thread und der KeyPressThread "Daten" miteinander austauschen können. 
 			//IConsoleUserZZZ objConsoleUser = new ConsoleUserCryptZZZ(objConsole,"DEBUG");
-			IConsoleUserStartableZZZ objConsoleUserStartable = new ConsoleUserSqlGeneratorZZZ(objConsole);
-			objConsole.setConsoleUserStartableObject(objConsoleUserStartable);
+			IConsoleServiceZZZ objConsoleService = new ConsoleServiceSqlGeneratorZZZ(objConsole);
+			objConsole.setConsoleServiceObject(objConsoleService);
 			objConsole.start();
 			
 			//TODO 20230127: Weitere-Threads anbinden können, d.h. objConsole.setConsoleUserObejects(Array von IConsoleUser) 

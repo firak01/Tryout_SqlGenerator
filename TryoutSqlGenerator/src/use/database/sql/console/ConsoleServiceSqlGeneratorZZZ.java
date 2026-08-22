@@ -3,8 +3,8 @@ package use.database.sql.console;
 import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.ReflectCodeZZZ;
 import basic.zBasic.util.abstractList.HashMapZZZ;
-import basic.zBasic.util.console.thread.AbstractConsoleUserStartableZZZ;
-import basic.zBasic.util.console.thread.IConsoleZZZ;
+import basic.zBasic.util.console.thread.AbstractConsoleServiceZZZ;
+import basic.zBasic.util.console.thread.IConsoleControllerZZZ;
 import basic.zBasic.util.console.thread.IKeyPressThreadConstantZZZ;
 import basic.zBasic.util.console.thread.KeyPressThreadUtilZZZ;
 import basic.zBasic.util.crypt.code.CryptAlgorithmFactoryZZZ;
@@ -12,28 +12,28 @@ import basic.zBasic.util.crypt.code.CryptAlgorithmMaintypeZZZ;
 import basic.zBasic.util.crypt.code.ICharacterPoolEnabledZZZ;
 import basic.zBasic.util.crypt.code.ICryptZZZ;
 import basic.zBasic.util.crypt.code.IVigenereNnZZZ;
-import basic.zBasic.util.crypt.thread.ConsoleUserDecryptZZZ;
-import basic.zBasic.util.crypt.thread.ConsoleUserEncryptZZZ;
+import basic.zBasic.util.crypt.thread.ConsoleServiceDecryptZZZ;
+import basic.zBasic.util.crypt.thread.ConsoleServiceEncryptZZZ;
 import basic.zBasic.util.crypt.thread.KeyPressThreadEncryptZZZ;
 import basic.zBasic.util.datatype.character.CharacterExtendedZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
 import basic.zKernel.flag.IFlagZEnabledZZZ;
 import use.database.sql.generate.SqlUtilZZZ;
 
-public class ConsoleUserSqlGeneratorZZZ extends AbstractConsoleUserSqlGeneratorZZZ {
+public class ConsoleServiceSqlGeneratorZZZ extends AbstractConsoleServiceSqlGeneratorZZZ {
 	private static final long serialVersionUID = 1L;
 
-	public ConsoleUserSqlGeneratorZZZ() throws ExceptionZZZ {
+	public ConsoleServiceSqlGeneratorZZZ() throws ExceptionZZZ {
 		super();
 	}
 	
-	public ConsoleUserSqlGeneratorZZZ(IConsoleZZZ objConsole) throws ExceptionZZZ {
+	public ConsoleServiceSqlGeneratorZZZ(IConsoleControllerZZZ objConsole) throws ExceptionZZZ {
 		super(objConsole);
 	}
-	public ConsoleUserSqlGeneratorZZZ(IConsoleZZZ objConsole, String sFlag) throws ExceptionZZZ {
+	public ConsoleServiceSqlGeneratorZZZ(IConsoleControllerZZZ objConsole, String sFlag) throws ExceptionZZZ {
 		super(objConsole, sFlag);
 	}
-	public ConsoleUserSqlGeneratorZZZ(IConsoleZZZ objConsole, String[] saFlag) throws ExceptionZZZ {
+	public ConsoleServiceSqlGeneratorZZZ(IConsoleControllerZZZ objConsole, String[] saFlag) throws ExceptionZZZ {
 		super(objConsole, saFlag);
 	}
 	
@@ -205,7 +205,7 @@ public class ConsoleUserSqlGeneratorZZZ extends AbstractConsoleUserSqlGeneratorZ
 		//Ausgabe einer errechneten ObjGuid
 				boolean bReturn = false;
 				main:{
-					ConsoleUserEncryptZZZ objEncrypter = new ConsoleUserEncryptZZZ();
+					ConsoleServiceEncryptZZZ objEncrypter = new ConsoleServiceEncryptZZZ();
 					bReturn = objEncrypter.startit(hmVariable);
 					
 				}//end main:
@@ -217,7 +217,7 @@ public class ConsoleUserSqlGeneratorZZZ extends AbstractConsoleUserSqlGeneratorZ
 		//Ausgabe einer errechneten ObjGuid
 				boolean bReturn = false;
 				main:{
-					ConsoleUserDecryptZZZ objDecrypter = new ConsoleUserDecryptZZZ();
+					ConsoleServiceDecryptZZZ objDecrypter = new ConsoleServiceDecryptZZZ();
 					bReturn = objDecrypter.startit(hmVariable);
 					
 				}//end main:
