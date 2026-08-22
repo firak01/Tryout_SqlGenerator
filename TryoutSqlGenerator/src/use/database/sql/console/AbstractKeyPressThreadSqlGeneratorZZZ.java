@@ -1,21 +1,8 @@
 package use.database.sql.console;
 
-import java.util.Scanner;
-
 import basic.zBasic.ExceptionZZZ;
-import basic.zBasic.util.abstractList.HashMapZZZ;
-import basic.zBasic.util.console.thread.AbstractKeyPressThreadCommonZZZ;
 import basic.zBasic.util.console.thread.AbstractKeyPressThreadWithMenueZZZ;
 import basic.zBasic.util.console.thread.IConsoleControllerZZZ;
-import basic.zBasic.util.console.thread.IKeyPressConstantZZZ;
-import basic.zBasic.util.console.thread.IKeyPressThreadConstantZZZ;
-import basic.zBasic.util.console.thread.KeyPressUtilZZZ;
-import basic.zBasic.util.crypt.thread.KeyPressCryptUtilZZZ;
-import basic.zBasic.util.crypt.thread.KeyPressThreadDecryptZZZ;
-import basic.zBasic.util.datatype.booleans.BooleanZZZ;
-import basic.zBasic.util.datatype.character.CharacterExtendedZZZ;
-import basic.zBasic.util.datatype.character.ICharacterExtendedZZZ;
-import basic.zBasic.util.datatype.string.StringZZZ;
 
 public abstract class AbstractKeyPressThreadSqlGeneratorZZZ extends AbstractKeyPressThreadWithMenueZZZ implements IKeyPressThreadSqlGeneratorConstantZZZ{
 	public AbstractKeyPressThreadSqlGeneratorZZZ(IConsoleControllerZZZ objConsole) throws ExceptionZZZ {
@@ -26,7 +13,10 @@ public abstract class AbstractKeyPressThreadSqlGeneratorZZZ extends AbstractKeyP
     }
      
    
-	
+	//Beispiele für Abfrage weiterer Eingabe-Variablen: 
+    //siehe AbstractKeyPressThreadCryptZZZ
+    
+    
 //	protected void questionNumericKey(HashMapZZZ hmVariable) throws ExceptionZZZ {
 //		//######################################################################
 //    	//### Frage nach dem Numeric-Key (um den dann die Rotation stattfindet

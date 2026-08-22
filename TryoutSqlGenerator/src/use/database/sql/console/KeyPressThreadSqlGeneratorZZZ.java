@@ -1,46 +1,35 @@
 package use.database.sql.console;
 
-import java.util.Scanner;
-
 import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.ReflectCodeZZZ;
 import basic.zBasic.util.abstractList.HashMapZZZ;
-import basic.zBasic.util.console.thread.AbstractKeyPressThreadWithMenueZZZ;
 import basic.zBasic.util.console.thread.IConsoleControllerZZZ;
-import basic.zBasic.util.console.thread.IKeyPressConstantZZZ;
 import basic.zBasic.util.console.thread.IKeyPressThreadConstantZZZ;
 import basic.zBasic.util.console.thread.IKeyPressThreadMenueableZZZ;
-import basic.zBasic.util.console.thread.KeyPressUtilZZZ;
 import basic.zBasic.util.crypt.code.CryptAlgorithmMappedValueZZZ;
-import basic.zBasic.util.crypt.code.ICharacterPoolEnabledZZZ;
-import basic.zBasic.util.crypt.code.ROTnnZZZ;
-import basic.zBasic.util.crypt.thread.KeyPressCryptUtilZZZ;
 import basic.zBasic.util.crypt.thread.KeyPressThreadDecryptZZZ;
 import basic.zBasic.util.crypt.thread.KeyPressThreadEncryptZZZ;
-import basic.zBasic.util.datatype.booleans.BooleanZZZ;
-import basic.zBasic.util.datatype.character.CharZZZ;
-import basic.zBasic.util.datatype.character.CharacterExtendedZZZ;
-import basic.zBasic.util.datatype.character.ICharacterExtendedZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
-import use.database.sql.generate.SqlUtilZZZ;
 
 
 	 
 	public class KeyPressThreadSqlGeneratorZZZ extends AbstractKeyPressThreadSqlGeneratorZZZ{	
-        //Method that gets called when the object is instantiated
-		public KeyPressThreadSqlGeneratorZZZ(IConsoleControllerZZZ objConsole) {
+		public KeyPressThreadSqlGeneratorZZZ(IConsoleControllerZZZ objConsole) throws ExceptionZZZ {
         	super(objConsole);
         }
-        public KeyPressThreadSqlGeneratorZZZ(IConsoleControllerZZZ objConsole, long lSleepTime) {
+        public KeyPressThreadSqlGeneratorZZZ(IConsoleControllerZZZ objConsole, long lSleepTime) throws ExceptionZZZ {
         	super(objConsole, lSleepTime);
         }
+        
+        
+        
 		@Override
 		public void makeMenueMain() throws InterruptedException {
 			System.out.println();//Leerzeile zum ggfs. vorherigen Consolentext
 			System.out.println("#######################################################################################################");
 			System.out.println("# TOOL ZUM ARBEITEN MIT SQL & ZUM VERSCHLUESSELN MIT EINFACHEN ALGORITHMEN");
 			System.out.println("# ");
-			System.out.println("# Eingaben: + - zur Console-Threadgeschwindigkeit | Q zum Abbruch | A für die Ausgabe der ASCII-Tabelle");
+			System.out.println("# Eingaben: + - zur Console-Threadgeschwindigkeit | Q zum Abbruch | M zurueck zum Menue | A für die Ausgabe der ASCII-Tabelle");
 			System.out.println("# Bitte wählen Sie den Algorithmus:");
 			System.out.println("# 1a: CRYPT: Rot13, Verschlüssen");
 			System.out.println("# 1b: CRYPT: Rot13, Entschlüsseln");
@@ -104,18 +93,22 @@ import use.database.sql.generate.SqlUtilZZZ;
 	            	break;
 	            case "2":
 	            	this.isCurrentInputValid(true);
+	            	//braucht noch ServiceStruktur
 	//            	this.processROTascii_(hmVariable);     
 	            	break;
 	            case "3":
 	            	this.isCurrentInputValid(true);
+	            	//braucht noch ServiceStruktur
 	//            	this.processROTnumeric_(hmVariable);     
 	            	break;
 	            case "4":
 	            	this.isCurrentInputValid(true);
+	            	//braucht noch ServiceStruktur
 	//            	this.processROTnn_(hmVariable);        					                	
 	            	break;
 	            case "5":
 	            	this.isCurrentInputValid(true);
+	            	//braucht noch ServiceStruktur
 	//            	this.processVigenereNn_(hmVariable);
 	            	break;
 	            case "6":
