@@ -22,14 +22,14 @@ public class ConsoleSqlGeneratorMainZZZ {
 			//aber in dieser Applikation OHNE Kernel, also OHNE ini-Konfiguration auskommen!!!    this.objKernel = new KernelZZZ(objConfig, (String) null); //Damit kann man ueber die Startparameter ein anders konfiguriertes Kernel-Objekt erhalten.
 			//TODOGOON20230203: Daher das objConfig in .getInstance(objConfig) übergeben!!!
 
-			IConsoleControllerZZZ objConsole = ConsoleControllerZZZ.getInstance();
+			IConsoleControllerZZZ objConsoleController = ConsoleControllerZZZ.getInstance();
 			
 			//Merke: Ziel ist es, das was in DebugRot13ZZZ (oder ähnlichen) gemacht wird in einer Endlosschleife durchzuführen.
 			//Der ConsoleUser und die Eingabe so eng miteinander verknüpft, dass man hier den KeyPressCryptThreadZZZ
 			//übergeben wird, der das Verhalten des ...UserCrypt... steuert.
 			//KeyPressThreadEncryptZZZ objKeyPressThread = new KeyPressThreadEncryptZZZ(objConsole);
-			IKeyPressThreadZZZ objKeyPressThread = new KeyPressThreadSqlGeneratorZZZ(objConsole);
-			objConsole.setKeyPressThread(objKeyPressThread);
+			IKeyPressThreadZZZ objKeyPressThread = new KeyPressThreadSqlGeneratorZZZ(objConsoleController);
+			objConsoleController.setKeyPressThread(objKeyPressThread);
 						
 			//TODOGOON20230203; Übergib die Argumente aus objConsole and objConsoleUser, analog zu KernelKernelZZZ und dort an FileIniZZZ
 			//siehe.....
@@ -51,9 +51,9 @@ public class ConsoleSqlGeneratorMainZZZ {
 			
 			//Merke: Ziel ist, dass der ConsoleUser-Thread und der KeyPressThread "Daten" miteinander austauschen können. 
 			//IConsoleUserZZZ objConsoleUser = new ConsoleUserCryptZZZ(objConsole,"DEBUG");
-			IConsoleServiceZZZ objConsoleService = new ConsoleServiceSqlGeneratorZZZ(objConsole);
-			objConsole.setConsoleServiceObject(objConsoleService);
-			objConsole.start();
+			IConsoleServiceZZZ objConsoleService = new ConsoleServiceSqlGeneratorZZZ(objConsoleController);
+			objConsoleController.setConsoleServiceObject(objConsoleService);
+			objConsoleController.start();
 			
 			//TODO 20230127: Weitere-Threads anbinden können, d.h. objConsole.setConsoleUserObejects(Array von IConsoleUser) 
 			//               Aber: Zu bedenken ist, das wohl immer nur 1 Thread per Scanner - Klasse auf die Eingaben hören kann. 

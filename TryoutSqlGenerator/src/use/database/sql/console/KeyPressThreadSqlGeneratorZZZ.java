@@ -84,21 +84,21 @@ import use.database.sql.generate.SqlUtilZZZ;
 	            	this.isCurrentInputValid(true);            	            	
 	            	//this.printTableASCII(hmVariable);//Mache eine einfache Print-Ausgabe der ASCII Tabelle           	            	
 	            	objKeyPressThreadUsed = this;
-	            	this.setKeyPressThreadUsed(objKeyPressThreadUsed);
+	            	this.setKeyPressThread(objKeyPressThreadUsed);
 	            	this.setMethodForThreadUsed("ascii");           
 	            	objKeyPressThreadUsed.initit(hmVariable);             	
 	            	break;	            		            	
 	            case "1a":
 	            	this.isCurrentInputValid(true);
 	            	objKeyPressThreadUsed = new KeyPressThreadEncryptZZZ(this.getConsoleController());
-	            	this.setKeyPressThreadUsed(objKeyPressThreadUsed);
+	            	this.setKeyPressThread(objKeyPressThreadUsed);
 	            	this.setMethodForThreadUsed("processEncryptROT13");           
 	            	objKeyPressThreadUsed.initit(hmVariable);           	            						                						                						                					                		              
 	            	break;
 	            case "1b":	            	
 	            	this.isCurrentInputValid(true);
 	            	objKeyPressThreadUsed = new KeyPressThreadDecryptZZZ(this.getConsoleController());
-	            	this.setKeyPressThreadUsed(objKeyPressThreadUsed);
+	            	this.setKeyPressThread(objKeyPressThreadUsed);
 	            	this.setMethodForThreadUsed("processDecryptROT13");           
 	            	objKeyPressThreadUsed.initit(hmVariable);           	            						                						                						                					                		              
 	            	break;
@@ -120,8 +120,8 @@ import use.database.sql.generate.SqlUtilZZZ;
 	            	break;
 	            case "6":
 	            	this.isCurrentInputValid(true);
-	            	objKeyPressThreadUsed = this.getConsoleController().getKeyPressThread();
-	            	this.setKeyPressThreadUsed(objKeyPressThreadUsed);
+	            	objKeyPressThreadUsed = (IKeyPressThreadZZZ) this.getConsoleController().getKeyPressThread();
+	            	this.setKeyPressThread(objKeyPressThreadUsed);
 	            	this.setMethodForThreadUsed("processSqlObjGuid");           
 	            	objKeyPressThreadUsed.initit(hmVariable);
 	            	//this.processObjGuid_(hmVariable);
