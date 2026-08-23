@@ -201,27 +201,23 @@ public class ConsoleServiceSqlGeneratorZZZ extends AbstractConsoleServiceSqlGene
 	
 	
 	//#################################
-	public boolean processEncryptROT13_(HashMapZZZ hmVariable) throws ExceptionZZZ {
-		//Ausgabe einer errechneten ObjGuid
-				boolean bReturn = false;
-				main:{
-					ConsoleServiceEncryptZZZ objEncrypter = new ConsoleServiceEncryptZZZ();
-					bReturn = objEncrypter.startit(hmVariable);
-					
-				}//end main:
-				return bReturn;	
+	public boolean processEncryptROT13_(HashMapZZZ hmVariable) throws ExceptionZZZ {		
+		boolean bReturn = false;
+		main:{
+			ConsoleServiceEncryptZZZ objEncrypterService = new ConsoleServiceEncryptZZZ();
+			bReturn = objEncrypterService.startit(hmVariable);		
+		}//end main:
+		return bReturn;	
 	}
 	
 	//#################################
-	public boolean processDecryptROT13_(HashMapZZZ hmVariable) throws ExceptionZZZ {
-		//Ausgabe einer errechneten ObjGuid
-				boolean bReturn = false;
-				main:{
-					ConsoleServiceDecryptZZZ objDecrypter = new ConsoleServiceDecryptZZZ();
-					bReturn = objDecrypter.startit(hmVariable);
-					
-				}//end main:
-				return bReturn;	
+	public boolean processDecryptROT13_(HashMapZZZ hmVariable) throws ExceptionZZZ {		
+		boolean bReturn = false;
+		main:{
+			ConsoleServiceDecryptZZZ objDecrypterService = new ConsoleServiceDecryptZZZ();
+			bReturn = objDecrypterService.startit(hmVariable);			
+		}//end main:
+		return bReturn;	
 	}
 	
 	
@@ -235,13 +231,11 @@ public class ConsoleServiceSqlGeneratorZZZ extends AbstractConsoleServiceSqlGene
 		return processSqlObjGuid_(hmVariable);
 	}
 		
-	private boolean processSqlObjGuid_(HashMapZZZ hmVariable) throws ExceptionZZZ{		
-		//Ausgabe einer errechneten ObjGuid
+	private boolean processSqlObjGuid_(HashMapZZZ hmVariable) throws ExceptionZZZ{				
 		boolean bReturn = true;
 		main:{
-
 			//In dieser einfachen Methode gibt es keine weiteren Parameter entgegenzunehmen....
-			//eigentlich müsste diese Methode umbenannt werden in irgenwas mit Input...ParameterCustom...
+			//Es gibt auch (noch) keinen Service dafür, da diese Methode (noch) nicht von anderer Stelle aus aufgerufen wird.
 			
 			String sObjGuid = SqlUtilZZZ.createObj_guid();
 			System.out.println(sObjGuid);

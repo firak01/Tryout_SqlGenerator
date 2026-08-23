@@ -69,6 +69,9 @@ import basic.zBasic.util.datatype.string.StringZZZ;
 	            	this.quit();
 	            	bReturn=false;
 	            	break main; 
+	            case "m":
+	            	bReturn = true;
+	            	break main; //Das Menü ist ja schon da...
 	            case "a":
 	            	this.isCurrentInputValid(true);            	            	
 	            	//this.printTableASCII(hmVariable);//Mache eine einfache Print-Ausgabe der ASCII Tabelle           	            	
