@@ -118,16 +118,16 @@ public class ConsoleServiceSqlGeneratorZZZ extends AbstractConsoleServiceSqlGene
 			if(!StringZZZ.isEmptyNull(sCallingMethod)) {
 				switch(sCallingMethod){	
 					case "ascii":
-						ascii_(hmVariable);
+						startAscii_(hmVariable);
 						break;
 					case "processSqlObjGuid":
-						processSqlObjGuid_(hmVariable);
+						startSqlObjGuid_(hmVariable);
 						break;
 					case "processEncryptROT13":
-						processEncryptROT13_(hmVariable);						
+						startEncryptROT13_(hmVariable);						
 						break;
 					case "processDecryptROT13":
-						processDecryptROT13_(hmVariable);						
+						startDecryptROT13_(hmVariable);						
 						break;
 					default:
 						ExceptionZZZ ez = new ExceptionZZZ("Nicht behandelte Methode: '" + sCallingMethod + "'", iERROR_PROPERTY_VALUE, this.getClass(), ReflectCodeZZZ.getPositionCurrent());
@@ -191,7 +191,7 @@ public class ConsoleServiceSqlGeneratorZZZ extends AbstractConsoleServiceSqlGene
 	}
 	
 	//########################################
-		private boolean ascii_(HashMapZZZ hmVariable) throws ExceptionZZZ {
+		private boolean startAscii_(HashMapZZZ hmVariable) throws ExceptionZZZ {
 			KeyPressThreadUtilZZZ.printTableAscii();		
 			return true;
 		}
@@ -201,7 +201,7 @@ public class ConsoleServiceSqlGeneratorZZZ extends AbstractConsoleServiceSqlGene
 	
 	
 	//#################################
-	public boolean processEncryptROT13_(HashMapZZZ hmVariable) throws ExceptionZZZ {		
+	public boolean startEncryptROT13_(HashMapZZZ hmVariable) throws ExceptionZZZ {		
 		boolean bReturn = false;
 		main:{
 			ConsoleServiceEncryptZZZ objEncrypterService = new ConsoleServiceEncryptZZZ();
@@ -211,7 +211,7 @@ public class ConsoleServiceSqlGeneratorZZZ extends AbstractConsoleServiceSqlGene
 	}
 	
 	//#################################
-	public boolean processDecryptROT13_(HashMapZZZ hmVariable) throws ExceptionZZZ {		
+	public boolean startDecryptROT13_(HashMapZZZ hmVariable) throws ExceptionZZZ {		
 		boolean bReturn = false;
 		main:{
 			ConsoleServiceDecryptZZZ objDecrypterService = new ConsoleServiceDecryptZZZ();
@@ -227,11 +227,11 @@ public class ConsoleServiceSqlGeneratorZZZ extends AbstractConsoleServiceSqlGene
 	 * @return
 	 * @throws ExceptionZZZ
 	 */
-	public boolean processSqlObjGuid(HashMapZZZ hmVariable) throws ExceptionZZZ{
-		return processSqlObjGuid_(hmVariable);
+	public boolean startSqlObjGuid(HashMapZZZ hmVariable) throws ExceptionZZZ{
+		return startSqlObjGuid_(hmVariable);
 	}
 		
-	private boolean processSqlObjGuid_(HashMapZZZ hmVariable) throws ExceptionZZZ{				
+	private boolean startSqlObjGuid_(HashMapZZZ hmVariable) throws ExceptionZZZ{				
 		boolean bReturn = true;
 		main:{
 			//In dieser einfachen Methode gibt es keine weiteren Parameter entgegenzunehmen....

@@ -177,13 +177,13 @@ import basic.zBasic.util.datatype.string.StringZZZ;
 				if(!StringZZZ.isEmptyNull(sCallingMethod)) {
 					switch(sCallingMethod){
 						case "ascii":
-							ascii_(hmVariable);
+							initAscii_(hmVariable);
 							break;
 						case "processEncryptROT13":
-							processEncryptROT13_(hmVariable);
+							initEncryptROT13_(hmVariable);
 							break;
 						case "processSqlObjGuid":
-							processSqlObjGuid_(hmVariable);
+							initSqlObjGuid_(hmVariable);
 							break;
 						default:
 							ExceptionZZZ ez = new ExceptionZZZ("Nicht behandelte Methode: '" + sCallingMethod + "'", iERROR_PROPERTY_VALUE, this.getClass(), ReflectCodeZZZ.getPositionCurrent());
@@ -198,7 +198,7 @@ import basic.zBasic.util.datatype.string.StringZZZ;
 	}
 			
 			//####################################################
-			private void ascii_(HashMapZZZ hm) throws ExceptionZZZ {
+			private void initAscii_(HashMapZZZ hm) throws ExceptionZZZ {
 				//Hier noch zusätzliche Input Variablen übergebbar.
 			}
 					
@@ -207,13 +207,13 @@ import basic.zBasic.util.datatype.string.StringZZZ;
 			 * @param hmVariable
 			 * @throws ExceptionZZZ
 			 */
-			public void processEncryptROT13(HashMapZZZ hmVariable) throws ExceptionZZZ{
+			public void initEncryptROT13(HashMapZZZ hmVariable) throws ExceptionZZZ{
 				if(hmVariable!=null) {
 	        		String sCipher = CryptAlgorithmMappedValueZZZ.CipherTypeZZZ.ROT13.getAbbreviation();
 	        		hmVariable.put(KeyPressThreadEncryptZZZ.sINPUT_CIPHER, sCipher);
 	        	}
 			}
-			private void processEncryptROT13_(HashMapZZZ hmVariable) throws ExceptionZZZ{
+			private void initEncryptROT13_(HashMapZZZ hmVariable) throws ExceptionZZZ{
 				if(hmVariable!=null) {
 	        		String sCipher = CryptAlgorithmMappedValueZZZ.CipherTypeZZZ.ROT13.getAbbreviation();
 	        		hmVariable.put(KeyPressThreadEncryptZZZ.sINPUT_CIPHER, sCipher);
@@ -225,13 +225,13 @@ import basic.zBasic.util.datatype.string.StringZZZ;
 			 * @param hmVariable
 			 * @throws ExceptionZZZ
 			 */
-			public void processDecryptROT13(HashMapZZZ hmVariable) throws ExceptionZZZ{
+			public void initDecryptROT13(HashMapZZZ hmVariable) throws ExceptionZZZ{
 				if(hmVariable!=null) {
 	        		String sCipher = CryptAlgorithmMappedValueZZZ.CipherTypeZZZ.ROT13.getAbbreviation();
 	        		hmVariable.put(KeyPressThreadDecryptZZZ.sINPUT_CIPHER, sCipher);
 	        	}
 			}
-			private void processDecryptROT13_(HashMapZZZ hmVariable) throws ExceptionZZZ{
+			private void initDecryptROT13_(HashMapZZZ hmVariable) throws ExceptionZZZ{
 				if(hmVariable!=null) {
 	        		String sCipher = CryptAlgorithmMappedValueZZZ.CipherTypeZZZ.ROT13.getAbbreviation();
 	        		hmVariable.put(KeyPressThreadDecryptZZZ.sINPUT_CIPHER, sCipher);
@@ -240,7 +240,7 @@ import basic.zBasic.util.datatype.string.StringZZZ;
 			
 			
 			//#####################################
-			private void processSqlObjGuid_(HashMapZZZ hm) throws ExceptionZZZ {
+			private void initSqlObjGuid_(HashMapZZZ hm) throws ExceptionZZZ {
 				//Hier noch zusätzliche Input Variablen übergebbar.
 			}
 		
