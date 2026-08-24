@@ -24,7 +24,7 @@ import basic.zBasic.util.datatype.string.StringZZZ;
         
         
 		@Override
-		public void makeMenueMain() throws InterruptedException {
+		public void makeMenueMain() throws ExceptionZZZ {
 			System.out.println();//Leerzeile zum ggfs. vorherigen Consolentext
 			System.out.println("#######################################################################################################");
 			System.out.println("# TOOL ZUM ARBEITEN MIT SQL & ZUM VERSCHLUESSELN MIT EINFACHEN ALGORITHMEN");
@@ -39,8 +39,15 @@ import basic.zBasic.util.datatype.string.StringZZZ;
 			System.out.println("# 5: VigenereNn");
 			System.out.println("# 6: SQL Generator: Erstelle eine Object_GUID");
 			System.out.println("#####################################################################################################");
+			try {
+				Thread.sleep(this.getSleepTime());					
+			} catch (InterruptedException e) {
+				System.out.println("KeyPressThread: 1. Wait Error");
+				e.printStackTrace();
+				ExceptionZZZ ez = new ExceptionZZZ(e);
+				throw ez;	
+			} 
          	System.out.println("Warte auf Eingabe SQLGenerator...");                 	
-			Thread.sleep(this.getSleepTime()); 
 		}
 		
 		@Override
