@@ -12,8 +12,9 @@ import basic.zBasic.util.crypt.thread.KeyPressThreadEncryptZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
 
 
-	 
 	public class KeyPressThreadSqlGeneratorZZZ extends AbstractKeyPressThreadSqlGeneratorZZZ{	
+		private static final long serialVersionUID = -4274223060862611362L;
+
 		public KeyPressThreadSqlGeneratorZZZ(IConsoleControllerZZZ objConsole) throws ExceptionZZZ {
         	super(objConsole);
         }
@@ -249,6 +250,16 @@ import basic.zBasic.util.datatype.string.StringZZZ;
 			//#####################################
 			private void initSqlObjGuid_(HashMapZZZ hm) throws ExceptionZZZ {
 				//Hier noch zusätzliche Input Variablen übergebbar.
+			}
+			
+			//########################
+			/* (non-Javadoc)
+			 * @see basic.zBasic.AbstractObjectWithStatusLocalZZZ#queryOfferStatusLocalCustom()
+			 */
+			@Override
+			public boolean queryOfferStatusLocalCustom() throws ExceptionZZZ {
+				// TODO Auto-generated method stub
+				return false;
 			}
 		
 		//#######################################
