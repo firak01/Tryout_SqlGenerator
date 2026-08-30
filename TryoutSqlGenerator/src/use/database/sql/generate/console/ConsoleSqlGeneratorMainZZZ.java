@@ -5,7 +5,7 @@ import basic.zBasic.util.console.thread.ConsoleControllerZZZ;
 import basic.zBasic.util.console.thread.IConsoleServiceZZZ;
 import basic.zBasic.util.console.thread.IConsoleControllerUserZZZ;
 import basic.zBasic.util.console.thread.IConsoleControllerZZZ;
-import basic.zBasic.util.console.thread.IKeyPressThreadMenueableZZZ;
+import basic.zBasic.util.console.thread.IKeyPressThreadMenuableZZZ;
 import basic.zBasic.util.crypt.thread.ConsoleServiceEncryptZZZ;
 import basic.zBasic.util.crypt.thread.KeyPressThreadEncryptZZZ;
 import use.database.sql.console.ConsoleServiceSqlGeneratorZZZ;
@@ -28,7 +28,7 @@ public class ConsoleSqlGeneratorMainZZZ {
 			//Der ConsoleUser und die Eingabe so eng miteinander verknüpft, dass man hier den KeyPressCryptThreadZZZ
 			//übergeben wird, der das Verhalten des ...UserCrypt... steuert.
 			//KeyPressThreadEncryptZZZ objKeyPressThread = new KeyPressThreadEncryptZZZ(objConsole);
-			IKeyPressThreadMenueableZZZ objKeyPressThread = new KeyPressThreadSqlGeneratorZZZ(objConsoleController);
+			IKeyPressThreadMenuableZZZ objKeyPressThread = new KeyPressThreadSqlGeneratorZZZ(objConsoleController);
 			objConsoleController.setKeyPressThread(objKeyPressThread);
 						
 			//TODOGOON20230203; Übergib die Argumente aus objConsole and objConsoleUser, analog zu KernelKernelZZZ und dort an FileIniZZZ

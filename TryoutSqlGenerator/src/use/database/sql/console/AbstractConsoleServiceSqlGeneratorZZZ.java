@@ -10,8 +10,11 @@ import basic.zBasic.util.crypt.code.ICryptZZZ;
 import basic.zBasic.util.crypt.thread.KeyPressThreadEncryptZZZ;
 import basic.zBasic.util.datatype.character.CharacterExtendedZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
+import debug.zBasic.util.console.thread.multi.menu03.IMenuPointZZZ;
 
-public abstract class AbstractConsoleServiceSqlGeneratorZZZ extends AbstractConsoleServiceZZZ{
+public abstract class AbstractConsoleServiceSqlGeneratorZZZ<T> extends AbstractConsoleServiceZZZ<T>{
+	private static final long serialVersionUID = 7309159729954887743L;
+
 	public AbstractConsoleServiceSqlGeneratorZZZ()  throws ExceptionZZZ {
 		super();
 	}
@@ -121,4 +124,6 @@ public abstract class AbstractConsoleServiceSqlGeneratorZZZ extends AbstractCons
 		}//end main:
 		return bReturn;
 	}
+	
+	//###########################
 }

@@ -18,6 +18,7 @@ import basic.zBasic.util.crypt.thread.KeyPressThreadEncryptZZZ;
 import basic.zBasic.util.datatype.character.CharacterExtendedZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
 import basic.zKernel.flag.IFlagZEnabledZZZ;
+import debug.zBasic.util.console.thread.multi.menu03.IMenuPointZZZ;
 import use.database.sql.generate.SqlUtilZZZ;
 
 public class ConsoleServiceSqlGeneratorZZZ extends AbstractConsoleServiceSqlGeneratorZZZ {
@@ -242,5 +243,7 @@ public class ConsoleServiceSqlGeneratorZZZ extends AbstractConsoleServiceSqlGene
 		}//end main:
 		return bReturn;	
 	}
+
+	
 	
 }
