@@ -81,7 +81,9 @@ import basic.zBasic.util.datatype.string.StringZZZ;
 	            	bReturn = true;
 	            	break main; //Das Menü ist ja schon da...
 	            case "a":
-	            	this.isCurrentInputValid(true);            	            	
+	            	this.isCurrentInputValid(true);  
+	            	this.getConsoleController().resetStatus();
+	            	
 	            	//this.printTableASCII(hmVariable);//Mache eine einfache Print-Ausgabe der ASCII Tabelle           	            	
 	            	objKeyPressThreadUsed = this;
 	            	this.setKeyPressThread(objKeyPressThreadUsed);
@@ -90,6 +92,8 @@ import basic.zBasic.util.datatype.string.StringZZZ;
 	            	break;	            		            	
 	            case "1a":
 	            	this.isCurrentInputValid(true);
+	            	this.getConsoleController().resetStatus();
+	            	
 	            	objKeyPressThreadUsed = new KeyPressThreadEncryptZZZ(this.getConsoleController());
 	            	this.setKeyPressThread(objKeyPressThreadUsed);
 	            	this.setMethodForConsoleService("processEncryptROT13");           
@@ -97,6 +101,8 @@ import basic.zBasic.util.datatype.string.StringZZZ;
 	            	break;
 	            case "1b":	            	
 	            	this.isCurrentInputValid(true);
+	            	this.getConsoleController().resetStatus();
+	            	
 	            	objKeyPressThreadUsed = new KeyPressThreadDecryptZZZ(this.getConsoleController());
 	            	this.setKeyPressThread(objKeyPressThreadUsed);
 	            	this.setMethodForConsoleService("processDecryptROT13");           
@@ -104,26 +110,32 @@ import basic.zBasic.util.datatype.string.StringZZZ;
 	            	break;
 	            case "2":
 	            	this.isCurrentInputValid(true);
+	            	this.getConsoleController().resetStatus();
 	            	//braucht noch ServiceStruktur
 	//            	this.processROTascii_(hmVariable);     
 	            	break;
 	            case "3":
 	            	this.isCurrentInputValid(true);
+	            	this.getConsoleController().resetStatus();
 	            	//braucht noch ServiceStruktur
 	//            	this.processROTnumeric_(hmVariable);     
 	            	break;
 	            case "4":
 	            	this.isCurrentInputValid(true);
+	            	this.getConsoleController().resetStatus();
 	            	//braucht noch ServiceStruktur
 	//            	this.processROTnn_(hmVariable);        					                	
 	            	break;
 	            case "5":
 	            	this.isCurrentInputValid(true);
+	            	this.getConsoleController().resetStatus();
 	            	//braucht noch ServiceStruktur
 	//            	this.processVigenereNn_(hmVariable);
 	            	break;
 	            case "6":
 	            	this.isCurrentInputValid(true);
+	            	this.getConsoleController().resetStatus();
+	            	
 	            	objKeyPressThreadUsed = (IKeyPressThreadMenuableZZZ) this.getConsoleController().getKeyPressThread();
 	            	this.setKeyPressThread(objKeyPressThreadUsed);
 	            	this.setMethodForConsoleService("processSqlObjGuid");           
