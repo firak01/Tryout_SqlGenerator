@@ -30,7 +30,7 @@ import basic.zBasic.util.datatype.string.StringZZZ;
 			System.out.println("#######################################################################################################");
 			System.out.println("# TOOL ZUM ARBEITEN MIT SQL & ZUM VERSCHLUESSELN MIT EINFACHEN ALGORITHMEN");
 			System.out.println("# ");
-			System.out.println("# Eingaben: + - zur Console-Threadgeschwindigkeit | Q zum Abbruch | M zurueck zum Menue | A für die Ausgabe der ASCII-Tabelle");
+			System.out.println("# Eingaben: + - zur Console-Threadgeschwindigkeit | Q zum Abbruch | M Menue anzeigen | A für die Ausgabe der ASCII-Tabelle");
 			System.out.println("# Bitte wählen Sie den Algorithmus:");
 			System.out.println("# 1a: CRYPT: Rot13, Verschlüssen");
 			System.out.println("# 1b: CRYPT: Rot13, Entschlüsseln");
