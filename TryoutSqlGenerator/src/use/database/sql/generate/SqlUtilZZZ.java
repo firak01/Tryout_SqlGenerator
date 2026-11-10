@@ -251,6 +251,12 @@ Da du nur wissen möchtest, ob ein uniquename bereits existiert, ist NOT EXISTS 
 	    	}//end main:
 	    	return sReturn;	    	
 	    }
+	    
+	    
+	    public static String createObj_guidStmt() throws ExceptionZZZ{
+	    	//PostgresSQL eingebaute Syntax
+	    	return "gen_random_uuid()";
+	    }
 		/** z.B. Ergebnis
 		 *  select id from academicdegree where uniquename in ('diplxing')
 		 *  
