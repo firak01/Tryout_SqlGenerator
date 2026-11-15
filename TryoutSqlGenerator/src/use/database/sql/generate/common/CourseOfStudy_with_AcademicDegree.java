@@ -2,7 +2,7 @@ package use.database.sql.generate.common;
 
 import basic.zBasic.ExceptionZZZ;
 import basic.zBasic.IConstantZZZ;
-import basic.zBasic.ReflectCodeZZZ;
+import basic.zBasic.reflection.ReflectCodeZZZ;
 import basic.zBasic.util.datatype.string.StringZZZ;
 
 public class CourseOfStudy_with_AcademicDegree implements IConstantZZZ {
